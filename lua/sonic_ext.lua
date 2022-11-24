@@ -1,10 +1,10 @@
---- authorname_modulename_ext
+--- sonic_ext
 --
--- See `authorname_modulename.lua`.
+-- See `sonic.lua`.
 -- This script includes more features from `pshy_merge`.
 --
 -- @author TFM:authorname#0000 DC:authorname#8263
-pshy.require("authorname_modulename")
+pshy.require("sonic")
 pshy.require("pshy.essentials_plus")
 
 

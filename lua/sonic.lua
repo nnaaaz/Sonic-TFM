@@ -1,4 +1,4 @@
---- authorname_modulename
+--- sonic
 --
 -- Module description.
 --
