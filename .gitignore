@@ -15,3 +15,5 @@ deps/
 
 # Thirdparty scripts:
 pshy_merge/lua/other/
+
+generated_*.lua

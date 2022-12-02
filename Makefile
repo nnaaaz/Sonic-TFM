@@ -18,6 +18,9 @@ test: $(ALL_TESTS)
 
 -include $(DEPS_DIR)/*.tfm.lua.txt.d
 
+lua/generated_levels.lua: maps/*.xml
+	python tools/parse_maps.py
+
 $(OUT_DIR)/%.tfm.lua.txt: | $(OUT_DIR)/ $(DEPS_DIR)/
 	@printf "\e[92m Generating %s\n" $@ || true
 	@printf "\e[94m" || true
@@ -38,6 +41,7 @@ $(TEST_RESULTS_DIR)/%.stdout.txt: $(OUT_DIR)/%.tfm.lua.txt $(NAME_TFMEMULATOR) |
 .PHONY: clean
 clean:
 	@printf "\e[91m" || true
+	rm lua/generated_levels.lua
 	rm -rf $(DEPS_DIR)/*.tfm.lua.txt.d
 	rmdir $(DEPS_DIR) || true
 	rm -rf $(TEST_RESULTS_DIR)/*.stdout.txt
