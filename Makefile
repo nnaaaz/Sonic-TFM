@@ -5,7 +5,7 @@ DEPS_DIR				= deps
 # Modulepacks names:
 NAME_MAIN				= $(OUT_DIR)/sonic.tfm.lua.txt
 NAME_MAIN_EXT			= $(OUT_DIR)/sonic_ext.tfm.lua.txt
-ALL_NAMES				= $(NAME_MAIN) $(NAME_MAIN_EXT)
+ALL_NAMES				= lua/generated_levels.lua $(NAME_MAIN) $(NAME_MAIN_EXT)
 ALL_TESTS				= $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(TEST_RESULTS_DIR)/%.stdout.txt, $(ALL_NAMES))
 
 # Rules:
@@ -41,7 +41,7 @@ $(TEST_RESULTS_DIR)/%.stdout.txt: $(OUT_DIR)/%.tfm.lua.txt $(NAME_TFMEMULATOR) |
 .PHONY: clean
 clean:
 	@printf "\e[91m" || true
-	rm lua/generated_levels.lua
+	rm -f lua/generated_levels.lua
 	rm -rf $(DEPS_DIR)/*.tfm.lua.txt.d
 	rmdir $(DEPS_DIR) || true
 	rm -rf $(TEST_RESULTS_DIR)/*.stdout.txt
