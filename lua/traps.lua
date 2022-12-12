@@ -90,6 +90,7 @@ do
   local RESERVED_START = 10000
 
   local _grounds = {}
+  local _imgIds = {}
   local _reservedLast
 
   local function _reserve(self)
@@ -107,9 +108,9 @@ do
     local id = options.lua
 
     if options.hide then
-      if options._imgId then
-        TFM.removeImage(options._imgId)
-        options._imgId = nil
+      if _imgIds[id] then
+        TFM.removeImage(_imgIds[id])
+        _imgIds[id] = nil
       end
 
       TFM.removePhysicObject(id)
@@ -124,14 +125,14 @@ do
     end
 
     if options.image then
-      if options._imgId then
-        TFM.removeImage(options._imgId)
-        options._imgId = nil
+      if _imgIds[id] then
+        TFM.removeImage(_imgIds[id])
+        _imgIds[id] = nil
       end
 
       local img = options.image
 
-      options._imgId = TFM.addImage(
+      _imgIds[id] = TFM.addImage(
         img[1],
         "+" .. id,
         img[2] or 0, img[3] or 0,
