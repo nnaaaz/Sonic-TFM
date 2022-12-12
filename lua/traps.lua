@@ -104,7 +104,40 @@ do
       options.contactListener = true
     end
 
+    if options.hide then
+      TFM.removePhysicObject(options.lua)
+
+      if options._imgId then
+        TFM.removeImage(options._imgId)
+      end
+
+      return
+    end
+
     TFM.addPhysicObject(options.lua, options.x, options.y, options)
+
+    if options.move then
+      TFM.movePhysicObject(options.lua, unpack(options.move))
+    end
+
+    if options.image then
+      if options._imgId then
+        TFM.removeImage(options._imgId)
+      end
+
+      local img = options.image
+
+      options._imgId = TFM.addImage(
+        img[1],
+        "+" .. options.lua,
+        img[2] or 0, img[3] or 0,
+        nil,
+        img[4] or 1, img[5] or 1,
+        img[6] or 0, img[7] or 1,
+        img[8] or 0.5, img[9] or 0.5,
+        img[10]
+      )
+    end
   end
 
   GroundSystem = {
@@ -124,12 +157,7 @@ do
       end
 
       _grounds[id] = options
-
-      if options.hide then
-        TFM.removePhysicObject(id)
-      else
-        _createGround(options)
-      end
+      _createGround(options)
 
       return id
     end,
@@ -150,15 +178,7 @@ do
       options.x = options.x or ground.x
       options.y = options.y or ground.y
 
-      if options.hide then
-        TFM.removePhysicObject(id)
-      else
-        _createGround(options)
-      end
-
-      if options.move then
-        TFM.movePhysicObject(id, unpack(options.move))
-      end
+      _createGround(options)
     end,
 
     revert = function(self, id)
@@ -172,11 +192,7 @@ do
         return
       end
 
-      if ground.hide then
-        TFM.removePhysicObject(id)
-      else
-        _createGround(ground)
-      end
+      _createGround(ground)
     end,
 
     remove = function(self, id)

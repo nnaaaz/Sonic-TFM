@@ -125,6 +125,35 @@ def parse_groups(text):
 
     return ret
 
+def parse_image(image, params):
+    if not image:
+        return None
+
+    parts = image.split(',')
+    if len(parts) < 3:
+        return None
+
+    x = tonumber(parts[0])
+    y = tonumber(parts[1])
+    url = parts[2]
+
+    if x is None or y is None or len(url) < 12:
+        return None
+
+    ret = [url, str(x), str(y)]
+
+    if not params:
+        return ret
+
+    parts = params.split(',')
+    if len(parts) == 0:
+        return ret
+
+    parts = [tonumber(part) or 'nil' for part in parts]
+    parts = [str(part) for part in parts]
+
+    return ret + parts
+
 
 def read_xmls():
     for name in os.listdir("maps/"):
@@ -156,6 +185,7 @@ def parse_traps():
                         "ondeactivate": parse_trap_commands(ground.get("ondeactivate")),
                         "ontouch": parse_trap_commands(ground.get("ontouch")),
                         "ground": parse_ground_tag(ground),
+                        "image": parse_image(ground.get("i") or "", ground.get("imgp") or ""),
                         "duration": ground.get("duration") and tonumber(ground.get("duration")) or "TRAP_DURATION",
                         "reload": ground.get("reload") and tonumber(ground.get("reload")) or "TRAP_RELOAD",
                     }
@@ -163,11 +193,11 @@ def parse_traps():
                 lua_id += 1
                 ground_root.remove(ground)
 
-        print(f'Traps found in {name}: {len(traps[name])}')
+        print(f'Trap Grounds found in {name}: {len(traps[name])}')
 
 def concat_command_params(params):
     if not params:
-        return ""
+        return
 
     return ', '.join([
         param
@@ -230,6 +260,16 @@ def generate_code(lines):
             lines += [f'          type = {ground["type"]},']
             lines += [f'          width = {ground["width"]},']
             lines += [f'          height = {ground["height"]},']
+
+            if "image" in trap and trap["image"]:
+                image = trap["image"]
+                params = ','.join(image[1:9])
+
+                if len(image) >= 10:
+                    params += ',' + (params[9] == '1' and 'true' or 'false')
+
+                lines += [f'          image = {{"{image[0]}",{params}}},']
+
             lines += [f'          color = {ground["color"] is None and "nil" or hex(ground["color"])},']
             lines += [f'          miceCollision = {ground["miceCollision"]},']
             lines += [f'          groundCollision = {ground["groundCollision"]},']
