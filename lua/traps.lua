@@ -104,32 +104,36 @@ do
       options.contactListener = true
     end
 
-    if options.hide then
-      TFM.removePhysicObject(options.lua)
+    local id = options.lua
 
+    if options.hide then
       if options._imgId then
         TFM.removeImage(options._imgId)
+        options._imgId = nil
       end
+
+      TFM.removePhysicObject(id)
 
       return
     end
 
-    TFM.addPhysicObject(options.lua, options.x, options.y, options)
+    TFM.addPhysicObject(id, options.x, options.y, options)
 
     if options.move then
-      TFM.movePhysicObject(options.lua, unpack(options.move))
+      TFM.movePhysicObject(id, unpack(options.move))
     end
 
     if options.image then
       if options._imgId then
         TFM.removeImage(options._imgId)
+        options._imgId = nil
       end
 
       local img = options.image
 
       options._imgId = TFM.addImage(
         img[1],
-        "+" .. options.lua,
+        "+" .. id,
         img[2] or 0, img[3] or 0,
         nil,
         img[4] or 1, img[5] or 1,
@@ -798,6 +802,8 @@ do
       if trap.ground then
         local callbacks = trap.callbacks.contact
         local callbacks2 = trap.callbacks.contact2
+
+        trap.ground.lua = id
 
         if trap.ontouch then
           local touchCallbacks = trap.callbacks.touch
