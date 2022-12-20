@@ -73,9 +73,14 @@ rotations["sonic"] = Rotation:New({items = {}, autoskip = false, is_random = fal
 local sonic_maps = rotations["sonic"].items
 
 
+--- Trap Test map
+maps["test"] = {author = "Lays#1146", xml = levels["level-0"].xml, duration = 8 * 60}
+maps["test"].traps = levels["level-0"].traps
+
 --- Level 1
 maps["level 1"] = {author = "Nnaaaz#0000", xml = levels["level-1"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 1"].traps = levels["level-1"].traps
+--[[
 maps["level 1"].grounds = {
 	{
 		interval = 1, -- must be multiples of 0.5
@@ -155,6 +160,7 @@ maps["level 1"].grounds = {
 		},
 	},
 }
+--]]
 table.insert(sonic_maps, "level 1")
 
 
