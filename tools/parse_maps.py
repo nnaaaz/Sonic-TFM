@@ -6,32 +6,6 @@ from os.path import splitext
 
 
 OUTPUT_FILE = 'lua/generated_levels.lua'
-TRAP_TYPES = [
-    'activate',
-    'gravitywind',
-    'aie',
-    'cheese',
-    'object',
-    'hide',
-    'move',
-    'speed',
-    'teleport',
-    'height',
-    'width',
-    'damping',
-    'color',
-    'foreground',
-    'fixed',
-    'mass',
-    'restitution',
-    'friction',
-    'kill',
-    'collision',
-    'angle',
-    'dynamic',
-    'type',
-    'image', # NOT IMPLEMENTED YET
-]
 
 
 levelXML = {}
@@ -173,8 +147,14 @@ def parse_traps():
                 elm.tail = elm.tail.strip()
 
         ground_root = root.find('Z').find('S')
+        ground_index_mapping = {}
+        ground_index = 0
+        ground_current_index = 0
 
         for ground in ground_root.findall('S'):
+            ground_index_mapping[str(ground_index)] = str(ground_current_index)
+            ground_index += 1
+
             if ground.get("lua") or ground.get("onactivate") or ground.get("ondeactivate") or ground.get("ontouch"):
                 traps[name] += [
                     {
@@ -188,10 +168,26 @@ def parse_traps():
                         "image": parse_image(ground.get("i") or "", ground.get("imgp") or ""),
                         "duration": ground.get("duration") and tonumber(ground.get("duration")) or "TRAP_DURATION",
                         "reload": ground.get("reload") and tonumber(ground.get("reload")) or "TRAP_RELOAD",
+                        "vanish": ground.get("v") and tonumber(ground.get("v")) or "nil"
                     }
                 ]
                 lua_id += 1
                 ground_root.remove(ground)
+            else:
+                ground_current_index += 1
+
+        # We need to fix joint target platforms
+        joint_root = root.find('Z').find('L')
+
+        for joint in joint_root.findall('.//*'):
+            m1 = joint.get("M1")
+            m2 = joint.get("M2")
+
+            if m1 and m1 in ground_index_mapping:
+                joint.set("M1", ground_index_mapping[m1])
+
+            if m2 and m2 in ground_index_mapping:
+                joint.set("M2", ground_index_mapping[m2])
 
         print(f'Trap Grounds found in {name}: {len(traps[name])}')
 
@@ -205,10 +201,7 @@ def concat_command_params(params):
     ])
 
 def generate_command_code(lines, cmd):
-    if cmd["type"] in TRAP_TYPES:
-        lines += [f'          TRAP_TYPES["{cmd["type"]}"]({concat_command_params(cmd["params"])}),']
-    else:
-        print(f'Trap type not found: {cmd["type"]}')
+    lines += [f'          TRAP_TYPES["{cmd["type"]}"]({concat_command_params(cmd["params"])}),']
 
 def generate_code(lines):
     lines += ['local traps = pshy.require("traps")']
