@@ -324,7 +324,7 @@
       <S T="13" X="5505" Y="731" L="57" P="1,9999999,999,0.2,0,0,0,0" o="324650" c="3"/>
       <S T="12" X="5373" Y="583" L="62" H="25" P="0,400,0.3,0.2,0,1,0,0" c="3" nosync="" i="-1,-6,1848a05026b.png" onactivate="hide" ontouch="activate@b" lua="a" />
       <S T="12" X="5443" Y="583" L="62" H="25" P="0,400,0.3,0.2,0,1,0,0" c="3" nosync="" i="-1,-6,1848a05026b.png" onactivate="hide" ontouch="activate@a" lua="b" />
-    <S T="12" X="446" Y="1070" L="40" H="25" P="0,0,0.3,0.2,0,0,0,0" o="324650" lua="jump" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png;height46;speed,-100"/>
+      <S T="12" X="446" Y="1070" L="40" H="25" P="0,0,0.3,0.2,0,0,0,0" o="324650" lua="jump" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png;height46;speed,-100"/>
     </S>
     <D>
       <DS X="5363" Y="811"/>
