@@ -1,9 +1,9 @@
 <C>
-  <P G="0.01,10" MEDATA="19,1;;;;-0;0::0:1-"/>
+  <P G="0.01,10" MEDATA=";;;;-0;0::0:1-"/>
   <Z>
     <S>
       <S T="0" X="398" Y="382" L="806" H="42" P="0,0,0.3,0.2,0,0,0,0" groups="bottom" onactivate="friction 5;restitution 5; "/>
-      <S T="5" X="155" Y="349" L="40" H="23" P="0,0,0.3,0.2,0,0,0,0" lua="jump" i="0,0,1848a18b16c.png" ontouch="image1848a1585ba.png;height46;speed,-50"/>
+      <S T="5" X="155" Y="349" L="40" H="23" P="0,0,0.3,0.2,0,0,0,0" lua="jump" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png;height46;speed,-50"/>
       <S T="0" X="257" Y="337" L="53" H="46" P="0,0,0.3,0.2,0,0,0,0" ontouch="cheese;activate" onactivate="type 1"/>
       <S T="4" X="312" Y="338" L="58" H="47" P="0,0,20,0.2,0,0,0,0" ontouch="cheese no"/>
       <S T="5" X="408" Y="185" L="62" H="57" P="0,0,0.3,0.2,0,0,0,0" ontouch="dynamic;angle 20; fixed yes" onactivate="mass 500; fixed no"/>
@@ -20,8 +20,7 @@
       <S T="3" X="304" Y="160" L="10" H="10" P="0,0,0,20,0,0,0,0"/>
       <S T="13" X="242" Y="142" L="10" P="0,0,0.3,0.2,0,0,0,0" o="324650" ontouch="aie"/>
       <S T="12" X="-6" Y="32" L="60" H="10" P="0,0,0.3,0.2,0,0,0,0" o="324650" ontouch="gravitywind -1"/>
-      <S T="13" X="73" Y="273" L="10" P="0,0,0.3,0.2,0,0,0,0" o="324650" ontouch="activate@jump"/>
-      <S T="13" X="507" Y="329" L="10" P="0,0,0.3,0.2,0,0,0,0" o="324650" template="jump" />
+      <S T="13" X="507" Y="329" L="10" P="0,0,0.3,0.2,0,0,0,0" o="324650" template="jump"/>
     </S>
     <D>
       <F X="255" Y="344" D=""/>

@@ -18,8 +18,10 @@
 
 ## Trap Commands
 
-- activate(@trap/#group)
+- activate[@trap/#group]
     - activates a trap or a group of traps
+    - Defaults:
+        - trap = self
 - gravitywind[gravityFactor,windFactor]
     - changes gravity **and** wind factor on contact
     - Defaults:

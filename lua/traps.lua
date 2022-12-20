@@ -819,17 +819,26 @@ do
     end,
 
     activate = function(target) -- activate a trap or a group: @trap/#group
-      local trap, ready
+      local trapId, ready
 
       return {
-        enable = function()
+        enable = function(ground)
           if not ready then
-            trap = getTrap(target)
+            if target ~= "" then
+              local trap = getTrap(target)
+
+              if trap then
+                trapId = trap.id
+              end
+            else
+              trapId = ground.lua
+            end
+
             ready = true
           end
 
-          if trap then
-            TrapSystem:activate(trap.id)
+          if trapId then
+            TrapSystem:activate(trapId)
           end
         end,
       }
