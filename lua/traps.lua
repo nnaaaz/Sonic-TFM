@@ -289,7 +289,7 @@ do
           onactivate = {
             _len = 1,
             {
-              activate = function()
+              enable = function()
                 local randomTraps = { _len = 0 }
                 local randomSingleTraps = { _len = 0 }
                 local behaviour
@@ -325,8 +325,8 @@ do
                 end
               end,
 
-              deactivate = function()
-                for i=1, group._len do
+              disable = function()
+                for i=group._len, 1, -1 do
                   TrapSystem:deactivate(group[i])
                 end
               end,
@@ -378,308 +378,473 @@ do
     end
   end
 
+  local function tobool(value, default)
+    if value == nil or value == "" then
+      return default
+    end
+
+    value = value:lower()
+
+    return value == "yes" or value == "true" or value == "1"
+  end
+
   local types = {
-    type = function(params) -- change type
-      local value = tonumber(params)
-
-      if not value then
-        return
-      end
-
+    type = function(value) -- change type
+      local _prev
+      value = tonumber(value)
       return {
-        activate = function(ground)
+        enable = function(ground)
+          _prev = ground.type
           ground.type = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.type = _prev
+          return true
         end,
       }
     end,
-    dynamic = function(params) -- change dynamic
-      local value = params ~= '0'
 
+    dynamic = function(enabled) -- change dynamic
+      local _prev
+      enabled = tobool(enabled, true)
       return {
-        activate = function(ground)
-          ground.dynamic = value
+        enable = function(ground)
+          _prev = ground.dynamic
+          ground.dynamic = enabled
+          return true
+        end,
+
+        disable = function(ground)
+          ground.dynamic = _prev
+          return true
         end,
       }
     end,
-    angle = function(params) -- change angle
-      local value = tonumber(params)
 
+    angle = function(value) -- change angle
+      local _prev
+      value = tonumber(value)
       return {
-        activate = function(ground)
+        enable = function(ground)
+          _prev = ground.angle
           ground.angle = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.angle = _prev
+          return true
         end,
       }
     end,
-    collision = function(params) -- change mice collision
-      local args = string_split(params)
-      local mice = args[1] ~= '0'
-      local ground = args[2] ~= '0'
+
+    collision = function(miceCol, groundCol) -- change collision
+      local _prevMiceCol, _prevGroundCol
+
+      miceCol = tobool(miceCol, nil)
+      groundCol = tobool(groundCol, nil)
 
       return {
-        activate = function(ground)
-          if args[1] then
-            ground.miceCollision = mice
+        enable = function(ground)
+          if miceCol ~= nil then
+            _prevMiceCol = ground.miceCollision
+            ground.miceCollision = miceCol
           end
 
-          if args[2] then
-            ground.groundCollision = ground
+          if groundCol ~= nil then
+            _prevGroundCol = ground.groundCollision
+            ground.groundCollision = groundCol
           end
+
+          return miceCol ~= nil or groundCol ~= nil
+        end,
+
+        disable = function(ground)
+          if miceCol ~= nil then
+            ground.miceCollision = _prevMiceCol
+          end
+
+          if groundCol ~= nil then
+            ground.groundCollision = _prevGroundCol
+          end
+
+          return miceCol ~= nil or groundCol ~= nil
         end,
       }
     end,
-    kill = function(params) -- kill on touch
-      local function activate(name, contact)
-        TFM.killPlayer(name)
-      end
 
+    kill = function() -- kill on touch
       return {
-        contact = activate,
-        touch = activate,
+        contact = function(name, contact)
+          TFM.killPlayer(name)
+        end,
       }
     end,
-    friction = function(params) -- change friction
-      local value = tonumber(params)
+
+    friction = function(value) -- change friction
+      local _prev
+      value = tonumber(value)
       return {
-        activate = function(ground)
+        enable = function(ground)
+          _prev = ground.friction
           ground.friction = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.friction = _prev
+          return true
         end,
       }
     end,
-    restitution = function(params) -- change restitution
-      local value = tonumber(params)
+
+    restitution = function(value) -- change restitution
+      local _prev
+      value = tonumber(value)
       return {
-        activate = function(ground)
+        enable = function(ground)
+          _prev = ground.restitution
           ground.restitution = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.restitution = _prev
+          return true
         end,
       }
     end,
-    mass = function(params) -- change mass
-      local value = tonumber(params)
+
+    mass = function(value) -- change mass
+      local _prev
+      value = tonumber(value)
       return {
-        activate = function(ground)
+        enable = function(ground)
+          _prev = ground.mass
           ground.mass = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.mass = _prev
+          return true
         end,
       }
     end,
-    fixed = function(params) -- change fixed rotation
-      local value = params ~= '0'
+
+    fixed = function(enabled) -- change fixed rotation
+      local _prev
+      enabled = tobool(enabled, true)
       return {
-        activate = function(ground)
-          ground.fixedRotation = value
+        enable = function(ground)
+          _prev = ground.fixedRotation
+          ground.fixedRotation = enabled
+          return true
+        end,
+
+        disable = function(ground)
+          ground.fixedRotation = _prev
+          return true
         end,
       }
     end,
-    foreground = function(params) -- change foreground
-      local value = params ~= '0'
+
+    foreground = function(enabled) -- change foreground
+      local _prev
+      enabled = tobool(enabled, true)
       return {
-        activate = function(ground)
-          ground.foreground = value
+        enable = function(ground)
+          _prev = ground.foreground
+          ground.foreground = enabled
+          return true
+        end,
+
+        disable = function(ground)
+          ground.foreground = _prev
+          return true
         end,
       }
     end,
-    color = function(params) -- change color
-      local value = tonumber(params, 16)
+
+    color = function(value) -- change color
+      local _prev
+      value = tonumber(value, 16)
       return {
-        activate = function(ground)
+        enable = function(ground)
+          _prev = ground.color
           ground.color = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.color = _prev
+          return true
         end,
       }
     end,
-    damping = function(params) -- change linear/angular damping
-      local args = string_split(params)
-      local linear = tonumber(args[1])
-      local angular = tonumber(args[2])
+
+    damping = function(linear, angular) -- change linear/angular damping
+      local _prevLinear, _prevAngular
+
+      linear = tonumber(linear)
+      angular = tonumber(angular)
 
       return {
-        activate = function(ground)
-          if args[1] then
+        enable = function(ground)
+          if linear then
+            _prevLinear = ground.linearDamping
             ground.linearDamping = linear
           end
 
-          if args[2] then
+          if angular then
+            _prevAngular = ground.angularDamping
             ground.angularDamping = angular
+          end
+
+          return linear or angular
+        end,
+
+        disable = function(ground)
+          if linear then
+            ground.linearDamping = _prevLinear
+          end
+
+          if angular then
+            ground.angularDamping = _prevAngular
+          end
+
+          return linear or angular
+        end,
+      }
+    end,
+
+    width = function(value) -- change width
+      local _prev
+      value = tonumber(value) or 10
+      return {
+        enable = function(ground)
+          _prev = ground.width
+          ground.width = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.width = _prev
+          return true
+        end,
+      }
+    end,
+
+    height = function(value) -- change height
+      local _prev
+      value = tonumber(value) or 10
+      return {
+        enable = function(ground)
+          _prev = ground.height
+          ground.height = value
+          return true
+        end,
+
+        disable = function(ground)
+          ground.height = _prev
+          return true
+        end,
+      }
+    end,
+
+    teleport = function(tx, ty, relative) -- teleport: x,y,relative (default x,y,false)
+      local x, y, ready
+
+      relative = tobool(relative, false)
+
+      return {
+        contact = function(name, contact)
+          if not ready then
+            x, y = getCoords(tx, ty)
+            x = x or (relative and 0)
+            y = y or (relative and 0)
+            ready = true
+          end
+  
+          if x or y then
+            TFM.movePlayer(name, x or contact.playerX, y or contact.playerY, relative)
           end
         end,
       }
     end,
-    width = function(params) -- change width
-      local value = tonumber(params) or 10
+
+    speed = function(x, y, relative) -- speed/velocity: x,y,relative (default: 0,0,true)
+      x, y = tonumber(x) or 0, tonumber(y) or 0
+      relative = tobool(relative, true)
+
       return {
-        activate = function(ground)
-          ground.width = value
+        contact = function(name, contact)
+          TFM.movePlayer(name, 0, 0, true, x, y, relative)
         end,
       }
     end,
-    height = function(params) -- change height
-      local value = tonumber(params) or 10
-      return {
-        activate = function(ground)
-          ground.height = value
-        end,
-      }
-    end,
-    teleport = function(params) -- teleport: x,y,relative (default x,y,false)
-      local args = string_split(params)
-      local relative = args[3] == '1'
+
+    move = function(cx, cy, prel, xs, ys, vrel, a, arel) -- move ground: x,y,rel,xs,ys,rels,a,rela (default: 0,0,true,0,0,true,0,true)
+      prel = tobool(prel, true)
+      vx, vy = tonumber(vx) or 0, tonumber(vy) or 0
+      vrel = tobool(vrel, true)
+      a = tonumber(a) or 0
+      arel = tobool(arel, true)
+
       local x, y, ready
-
-      local function activate(name, contact)
-        if not ready then
-          x, y = getCoords(args[1], args[2])
-          x = x or (relative and 0)
-          y = y or (relative and 0)
-          ready = true
-        end
-
-        if x or y then
-          TFM.movePlayer(name, x or contact.playerX, y or contact.playerY, relative)
-        end
-      end
+      local _prev
 
       return {
-        contact = activate,
-        touch = activate,
-      }
-    end,
-    speed = function(params) -- speed/velocity: x,y,relative (default: 0,0,true)
-      local args = string_split(params)
-      local x, y = tonumber(args[1]), tonumber(args[2])
-      local relative = args[3] ~= '0'
-
-      local function activate(name, contact)
-        TFM.movePlayer(name, 0, 0, true, x or 0, y or 0, relative)
-      end
-
-      return {
-        contact = activate,
-        touch = activate,
-      }
-    end,
-    move = function(params) -- move ground: x,y,rel,xs,ys,rels,a,rela (default: 0,0,true,0,0,true,0,true)
-      local args = string_split(params)
-      local prel = args[3] ~= '0'
-      local vx, vy = tonumber(args[4]) or 0, tonumber(args[5]) or 0
-      local vrel = args[6] ~= '0'
-      local a = tonumber(args[7]) or 0
-      local arel = args[8] ~= '0'
-      local x, y, ready
-
-      return {
-        activate = function(ground)
+        enable = function(ground)
           if not ready then
-            x, y = getCoords(args[1], args[2])
+            x, y = getCoords(cx, cy)
             x, y = x or 0, y or 0
             ready = true
           end
 
+          _prev = ground.move
           ground.move = { x, y, prel, vx, vy, vrel, a, arel }
+          return true
         end,
-        deactivate = function(ground)
-          ground.move = nil
+        disable = function(ground)
+          ground.move = _prev
+          return true
         end,
       }
     end,
-    hide = function(params) -- hide/remove the ground
+
+    hide = function() -- hide/remove the ground
+      local _prev
+
       return {
-        activate = function(ground)
+        enable = function(ground)
+          _prev = ground.hide
           ground.hide = true
+          return true
         end,
-        deactivate = function(ground)
-          ground.hide = nil
+        disable = function(ground)
+          ground.hide = _prev
+          return true
         end,
       }
     end,
-    object = function(params) -- create shaman object: typ,x,y,ghost,angle,vx,vy,fx,fy (default: 1,0,0,false,0,0,0,,)
-      local args = string_split(params)
-      local typ = tonumber(args[1]) or 1
-      local ghost = args[4] == '1'
-      local angle = tonumber(args[5]) or 0
-      local vx = tonumber(args[6]) or 0
-      local vy = tonumber(args[7]) or 0
-      local options = (args[8] or args[9]) and {
-        fixedXSpeed = tonumber(args[8]) or 0,
-        fixedYSpeed = tonumber(args[9]) or 0
+
+    object = function(typ, ox, oy, ghost, angle, vx, vy, fx, fy) -- create shaman object: typ,x,y,ghost,angle,vx,vy,fx,fy (default: 1,0,0,false,0,0,0,,)
+      typ = tonumber(type) or 1
+      ghost = tobool(ghost, false)
+      angle = tonumber(angle) or 0
+      vx = tonumber(vx) or 0
+      vy = tonumber(vy) or 0
+
+      local options = (fx or fy) and {
+        fixedXSpeed = tonumber(fx) or 0,
+        fixedYSpeed = tonumber(fy) or 0
       } or nil
       local lastObjId
       local x, y, ready
 
       return {
-        activate = function(ground)
+        enable = function(ground)
           if not ready then
-            x, y = getCoords(args[2], args[3])
+            x, y = getCoords(ox, oy)
             x, y = x or 0, y or 0
             ready = true
           end
 
           lastObjId = TFM.addShamanObject(typ, x, y, angle, vx, vy, ghost, options)
         end,
-        deactivate = function(ground)
+        disable = function(ground)
           TFM.removeObject(lastObjId)
         end,
       }
     end,
-    cheese = function(params) -- give/take cheese: give (default: 1)
-      local args = string_split(params)
-      local give = args[1] ~= '0'
 
-      local function activate(name, contact)
-        if give then
-          TFM.giveCheese(name)
-        else
-          TFM.removeCheese(name)
-        end
-      end
+    cheese = function(give) -- give/take cheese: give (default: 1)
+      local give = tobool(give, true)
 
       return {
-        contact = activate,
-        touch = activate,
+        contact = function(name, contact)
+          if give then
+            TFM.giveCheese(name)
+          else
+            TFM.removeCheese(name)
+          end
+        end,
       }
     end,
-    aie = function(params) -- enable/disable aie mode: enable,sensitivity (default: 1,1)
-      local args = string_split(params)
-      local enable = args[1] ~= '0'
-      local sensitivity = tonumber(args[2]) or 1
 
-      local function activate(name, contact)
-        TFM.setAieMode(enable, sensitivity, name)
-      end
+    aie = function(enable, sensitivity) -- enable/disable aie mode: enable,sensitivity (default: 1,1)
+      enable = tobool(enable, true)
+      sensitivity = tonumber(sensitivity) or 1
 
       return {
-        contact = activate,
-        touch = activate,
+        contact = function(name, contact)
+          TFM.setAieMode(enable, sensitivity, name)
+        end,
       }
     end,
-    gravitywind = function(params) -- set gravity and wind scale: gravity,wind (default: 1,1)
-      local args = string_split(params)
-      local gravity = tonumber(args[1]) or 1
-      local wind = tonumber(args[2]) or 1
 
-      local function activate(name, contact)
-        TFM.setPlayerGravityScale(name, gravity, wind)
-      end
+    gravitywind = function(gravity, wind) -- set gravity and wind scale: gravity,wind (default: 1,1)
+      gravity = tonumber(gravity) or 1
+      wind = tonumber(wind) or 1
 
       return {
-        contact = activate,
-        touch = activate,
+        contact = function(name, contact)
+          TFM.setPlayerGravityScale(name, gravity, wind)
+        end,
       }
     end,
-    activate = function(params) -- activate a trap or a group: @trap/#group
+
+    activate = function(target) -- activate a trap or a group: @trap/#group
       local trap, ready
 
-      local function activate()
-        if not ready then
-          trap = getTrap(params)
-          ready = true
-        end
-        
-        if trap then
-          TrapSystem:activate(trap.id)
-        end
-      end
+      return {
+        enable = function()
+          if not ready then
+            trap = getTrap(target)
+            ready = true
+          end
+
+          if trap then
+            TrapSystem:activate(trap.id)
+          end
+        end,
+      }
+    end,
+
+    image = function(image, x, y, scalex, scaley, rotation, alpha, anchorx, anchory, fadeIn) -- change ground image
+      x = tonumber(x) or 0
+      y = tonumber(y) or 0
+      scalex = tonumber(scalex) or 1
+      scaley = tonumber(scaley) or 1
+      rotation = tonumber(rotation) or 0
+      alpha = tonumber(alpha) or 1
+      anchorx = tonumber(anchorx) or 0.5
+      anchory = tonumber(anchory) or 0.5
+      fadeIn = tobool(fadeIn, false)
+
+      local img = {
+        image,
+        x, y,
+        scalex, scaley,
+        rotation, alpha,
+        anchorx, anchory,
+        fadeIn
+      }
+      local _prevImage
 
       return {
-        activate = activate,
-        touch = activate,
+        enable = function(ground)
+          _prevImage = ground.image
+          ground.image = img
+          return true
+        end,
+        disable = function(ground)
+          ground.image = _prevImage
+          return true
+        end,
       }
     end,
   }
@@ -735,23 +900,6 @@ do
     return ret
   end
 
-  -- e.g. groups="group1name,behaviour;group2,behaviour;robots,random"
-  local function parseGroups(str)
-    local groupParams = string_split(str, ";")
-    local groups = { _len = groupParams._len }
-    local grp
-
-    for i=1, groupParams._len do
-      grp = string_split(groupParams[i], ",")
-      groups[i] = {
-        name = grp[1],
-        behaviour = grp[2]
-      }
-    end
-
-    return groups
-  end
-
   TrapSystem = {
     reset = function()
       _traps = {}
@@ -774,15 +922,17 @@ do
       end
 
       trap.callbacks = {
-        contact = scanCallback(trap.onactivate, "contact"),
-        activate = scanCallback(trap.onactivate, "activate"),
-        deactivate = scanCallback(trap.onactivate, "deactivate"),
+        activateContact = scanCallback(trap.onactivate, "contact"),
+        activateEnable = scanCallback(trap.onactivate, "enable"),
+        activateDisable = scanCallback(trap.onactivate, "disable"),
 
-        contact2 = scanCallback(trap.ondeactive, "contact"),
-        activate2 = scanCallback(trap.ondeactive, "activate"),
-        deactivate2 = scanCallback(trap.ondeactive, "deactivate"),
+        deactivateContact = scanCallback(trap.ondeactive, "contact"),
+        deactivateEnable = scanCallback(trap.ondeactive, "enable"),
+        deactivateDisable = scanCallback(trap.ondeactive, "disable"),
 
-        touch = scanCallback(trap.ontouch, "touch"),
+        touchContact = scanCallback(trap.ontouch, "contact"),
+        touchEnable = scanCallback(trap.ontouch, "enable"),
+        touchDisable = scanCallback(trap.ontouch, "disable"),
       }
 
       if trap.groups then
@@ -794,6 +944,8 @@ do
             behaviour = TrapGroupSystem.ENABLE_RANDOM
           elseif group.behaviour == 'randomone' then
             behaviour = TrapGroupSystem.ENABLE_RANDOM_SINGLE
+          elseif group.behaviour == 'always' then
+            behaviour = TrapGroupSystem.ENABLE_ALWAYS
           end
 
           TrapGroupSystem:add(trap, group.name, behaviour)
@@ -801,35 +953,49 @@ do
       end
 
       if trap.ground then
-        local callbacks = trap.callbacks.contact
-        local callbacks2 = trap.callbacks.contact2
+        local activateContact = trap.callbacks.activateContact
+        local deactivateContact = trap.callbacks.deactivateContact
 
         trap.ground.lua = id
 
         if trap.ontouch then
-          local touchCallbacks = trap.callbacks.touch
+          local touchEnable = trap.callbacks.touchEnable
+          local touchContact = trap.callbacks.touchContact
 
-          callbacks._len = 1 + callbacks._len
-          callbacks[callbacks._len] = function(name, contact)
-            for i=1, touchCallbacks._len do
-              touchCallbacks[i](name, contact)
+          local function callback(name, contact)
+            local shouldUpdate = false
+
+            for i=1, touchContact._len do
+              touchContact[i](name, contact)
+            end
+
+            for i=1, touchEnable._len do
+              shouldUpdate = touchEnable[i](trap.ground) or shouldUpdate
+            end
+
+            if shouldUpdate then
+              GroundSystem:update(trap.ground)
             end
           end
-          callbacks2._len = 1 + callbacks2._len
-          callbacks2[callbacks2._len] = callbacks[callbacks._len]
+
+          activateContact._len = 1 + activateContact._len
+          activateContact[activateContact._len] = callback
+
+          deactivateContact._len = 1 + deactivateContact._len
+          deactivateContact[deactivateContact._len] = callback
         end
 
-        if callbacks._len > 0 or callbacks2._len > 0 then
+        if activateContact._len > 0 or deactivateContact._len > 0 then
           trap.ground.onContact = function(name, contact)
             local active = _active[id] and true or false
 
             if active then
-              for i=1, callbacks._len do
-                callbacks[i](name, contact)
+              for i=1, activateContact._len do
+                activateContact[i](name, contact)
               end
             else
-              for i=1, callbacks2._len do
-                callbacks2[i](name, contact)
+              for i=1, deactivateContact._len do
+                deactivateContact[i](name, contact)
               end
             end
           end
@@ -838,10 +1004,15 @@ do
         GroundSystem:add(table_clone(trap.ground))
       end
 
-      local activate2 = trap.callbacks.activate2
+      local deactivateEnable = trap.callbacks.deactivateEnable
+      local shouldUpdate = false
 
-      for i=1, activate2._len do
-        activate2[i](trap.ground)
+      for i=1, deactivateEnable._len do
+        shouldUpdate = deactivateEnable[i](trap.ground) or shouldUpdate
+      end
+
+      if shouldUpdate then
+        GroundSystem:update(trap.ground)
       end
     end,
 
@@ -884,18 +1055,25 @@ do
       _reloadtime[trapId] = _deactivatetime[trapId] + trap.reload
       _active[trapId] = true
 
-      local callbacks = trap.callbacks.activate
-      local callbacks2 = trap.callbacks.deactivate2
+      local activateEnable = trap.callbacks.activateEnable
+      local deactivateDisable = trap.callbacks.deactivateDisable
+      local touchDisable = trap.callbacks.touchDisable
+      local shouldUpdate = false
 
-      for i=1, callbacks._len do
-        callbacks[i](trap.ground)
+      -- Disable commands in reverse order to remove effects in correct order
+      for i=touchDisable._len, 1, -1 do
+        shouldUpdate = touchDisable[i](trap.ground) or shouldUpdate
       end
 
-      for i=1, callbacks2._len do
-        callbacks2[i](trap.ground)
+      for i=deactivateDisable._len, 1, -1 do
+        shouldUpdate = deactivateDisable[i](trap.ground) or shouldUpdate
       end
 
-      if trap.ground then
+      for i=1, activateEnable._len do
+        shouldUpdate = activateEnable[i](trap.ground) or shouldUpdate
+      end
+
+      if shouldUpdate then
         GroundSystem:update(trap.ground)
       end
     end,
@@ -921,19 +1099,30 @@ do
       local trap = _traps[trapId]
 
       if trap then
-        if trap.ground then
-          GroundSystem:revert(trapId)
+        -- if trap.ground then
+        --   GroundSystem:revert(trapId)
+        -- end
+
+        local activateDisable = trap.callbacks.activateDisable
+        local deactivateEnable = trap.callbacks.deactivateEnable
+        local touchDisable = trap.callbacks.touchDisable
+        local shouldUpdate = false
+
+        -- Disable commands in reverse order to remove effects in correct order
+        for i=touchDisable._len, 1, -1 do
+          shouldUpdate = touchDisable[i](trap.ground) or shouldUpdate
         end
 
-        local callbacks = trap.callbacks.deactivate
-        local callbacks2 = trap.callbacks.activate2
-
-        for i=1,callbacks._len do
-          callbacks[i](trap.ground)
+        for i=activateDisable._len, 1, -1 do
+          shouldUpdate = activateDisable[i](trap.ground) or shouldUpdate
         end
 
-        for i=1,callbacks2._len do
-          callbacks2[i](trap.ground)
+        for i=1, deactivateEnable._len do
+          shouldUpdate = deactivateEnable[i](trap.ground) or shouldUpdate
+        end
+
+        if shouldUpdate then
+          GroundSystem:update(trap.ground)
         end
       end
     end,

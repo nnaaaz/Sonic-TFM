@@ -91,7 +91,7 @@ def parse_trap_commands(text):
     ret = []
 
     for cmd in commands:
-        match = re.match(r'^([a-zA-Z]+)(.*)$', cmd)
+        match = re.match(r'^([a-zA-Z]+)(.*)$', cmd.strip())
 
         if match:
             trap_type = match.group(1)
@@ -99,7 +99,7 @@ def parse_trap_commands(text):
             ret += [
                 {
                     "type": trap_type,
-                    "params": params is not None and params.split(","),
+                    "params": params is not None and params.lstrip().split(","),
                 }
             ]
         else:
@@ -200,9 +200,6 @@ def concat_command_params(params):
         return
 
     return ', '.join([
-        param
-        if tonumber(param)
-        else
         f'"{param}"'
         for param in params
     ])
