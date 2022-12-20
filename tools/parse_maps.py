@@ -155,7 +155,7 @@ def parse_traps():
             ground_index_mapping[str(ground_index)] = str(ground_current_index)
             ground_index += 1
 
-            if ground.get("lua") or ground.get("onactivate") or ground.get("ondeactivate") or ground.get("ontouch"):
+            if ground.get("lua") or ground.get("onactivate") or ground.get("ondeactivate") or ground.get("ontouch") or ground.get("template"):
                 traps[name] += [
                     {
                         "id": lua_id,
@@ -168,7 +168,8 @@ def parse_traps():
                         "image": parse_image(ground.get("i") or "", ground.get("imgp") or ""),
                         "duration": ground.get("duration") and tonumber(ground.get("duration")) or "TRAP_DURATION",
                         "reload": ground.get("reload") and tonumber(ground.get("reload")) or "TRAP_RELOAD",
-                        "vanish": ground.get("v") and tonumber(ground.get("v")) or "nil"
+                        "vanish": ground.get("v") and tonumber(ground.get("v")) or None,
+                        "template": ground.get("template") or None,
                     }
                 ]
                 lua_id += 1
@@ -200,6 +201,12 @@ def concat_command_params(params):
         for param in params
     ])
 
+def find_trap(traps, name):
+    for trap in traps:
+        if trap["name"] == name:
+            return trap
+    return None
+
 def generate_command_code(lines, cmd):
     lines += [f'          TRAP_TYPES["{cmd["type"]}"]({concat_command_params(cmd["params"])}),']
 
@@ -215,7 +222,41 @@ def generate_code(lines):
         lines += [f'    xml = [[{ET.tostring(xml.getroot(), encoding="unicode")}]],']
         lines += ['    traps = {']
 
-        for trap in traps[name]:
+        for original_trap in traps[name]:
+            trap = original_trap
+
+            if trap["template"] is not None:
+                template_trap = find_trap(traps[name], trap["template"])
+                if template_trap is not None:
+                    new_trap = dict(template_trap)
+                    new_trap["id"] = trap["id"]
+                    new_trap["name"] = trap["name"]
+                    new_trap["ground"]["x"] = trap["ground"]["x"]
+                    new_trap["ground"]["y"] = trap["ground"]["y"]
+
+                    if trap["groups"]:
+                        new_trap["groups"] = trap["groups"]
+
+                    if trap["onactivate"]:
+                        new_trap["onactivate"] = trap["onactivate"]
+
+                    if trap["ondeactivate"]:
+                        new_trap["ondeactivate"] = trap["ondeactivate"]
+
+                    if trap["ontouch"]:
+                        new_trap["ontouch"] = trap["ontouch"]
+
+                    if trap["image"]:
+                        new_trap["image"] = trap["image"]
+
+                    if trap["duration"]:
+                        new_trap["duration"] = trap["duration"]
+
+                    if trap["reload"]:
+                        new_trap["reload"] = trap["reload"]
+
+                    trap = new_trap
+
             lines += ['      {']
             lines += [f'        id = {trap["id"]},']
             lines += [f'        name = "{trap["name"].replace("#", "")}",']
