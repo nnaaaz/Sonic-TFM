@@ -90,6 +90,7 @@ do
   local RESERVED_START = 10000
 
   local _grounds = {}
+  local _lastOpts = {}
   local _imgIds = {}
   local _reservedLast
 
@@ -106,6 +107,8 @@ do
     end
 
     local id = options.lua
+
+    _lastOpts[id] = options
 
     if options.hide then
       if _imgIds[id] then
@@ -149,6 +152,24 @@ do
     reset = function(self)
       _grounds = {}
       _reservedLast = nil
+    end,
+
+    reload = function(self)
+      local opt
+      for id, ground in pairs(_grounds) do
+        opt = _lastOpts[id]
+        if opt then
+          if not opt.dynamic or (opt.mass and opt.mass < 0) or opt.hide then
+            if opt.hide then
+              TFM.removePhysicObject(id)
+            else
+              _createGround(opt)
+            end
+          end
+        else
+          TFM.removePhysicObject(id)
+        end
+      end
     end,
 
     add = function(self, options)
@@ -1155,6 +1176,10 @@ end
 
 function eventLoop(elapsed, remaining)
   TrapSystem:onLoop()
+end
+
+function eventNewPlayer(name)
+  GroundSystem:reload()
 end
 
 function eventPlayerRespawn(name)
