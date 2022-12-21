@@ -25,6 +25,7 @@ jobs:
       if: github.event_name != 'pull_request'
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest-build"
         prerelease: true
         title: "Development Build"
         files: |
