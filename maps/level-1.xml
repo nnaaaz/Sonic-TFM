@@ -332,7 +332,7 @@
       <S T="12" X="4000" Y="637" L="42" H="34" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="2960" Y="887" L="42" H="34" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="2512" Y="887" L="42" H="34" P="0,0,0.3,0.2,0,0,0,0"/>
-      <S T="12" X="446" Y="1070" L="40" H="25" P="0,0,0.3,0.2,0,0,0,0" o="324650" lua="jump" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png;height46;speed,-300" duration="1" reload="1"/>
+      <S T="12" X="446" Y="1070" L="40" H="25" P="0,0,0.3,0.2,0,0,0,0" o="324650" lua="jump" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png;height60;speed,-120" duration="1" reload="1"/>
     </S>
     <D>
       <DS X="204" Y="1068"/>
