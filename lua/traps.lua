@@ -310,7 +310,7 @@ do
           onactivate = {
             _len = 1,
             {
-              enable = function()
+              enable = function(_, player)
                 local randomTraps = { _len = 0 }
                 local randomSingleTraps = { _len = 0 }
                 local behaviour
@@ -319,7 +319,7 @@ do
                   behaviour = group._behaviour[group[i]]
 
                   if behaviour == self.ENABLE_ALWAYS then
-                    TrapSystem:activate(group[i])
+                    TrapSystem:activate(group[i], player)
                   elseif behaviour == self.ENABLE_RANDOM then
                     randomTraps._len = 1 + randomTraps._len
                     randomTraps[randomTraps._len] = group[i]
@@ -334,7 +334,7 @@ do
 
                   for i=1,randomTraps._len do
                     if btest(enabledmask, lshift(1, i - 1)) then
-                      TrapSystem:activate(randomTraps[i])
+                      TrapSystem:activate(randomTraps[i], player)
                     end
                   end
                 end
@@ -342,13 +342,13 @@ do
                 if randomSingleTraps._len > 0 then
                   local idx = random(1, randomSingleTraps._len)
 
-                  TrapSystem:activate(randomSingleTraps[idx])
+                  TrapSystem:activate(randomSingleTraps[idx], player)
                 end
               end,
 
-              disable = function()
+              disable = function(_, player)
                 for i=group._len, 1, -1 do
-                  TrapSystem:deactivate(group[i])
+                  TrapSystem:deactivate(group[i], player)
                 end
               end,
             }
@@ -675,36 +675,65 @@ do
       }
     end,
 
-    teleport = function(tx, ty, relative) -- teleport: x,y,relative (default x,y,false)
+    teleport = function(tx, ty, relative, indirect) -- teleport: x,y,relative,indirect (default x,y,false)
       local x, y, ready
 
       relative = tobool(relative, false)
+      indirect = tobool(indirect, false)
 
-      return {
-        contact = function(name, contact)
-          if not ready then
-            x, y = getCoords(tx, ty)
-            x = x or (relative and 0)
-            y = y or (relative and 0)
-            ready = true
-          end
-  
-          if x or y then
-            TFM.movePlayer(name, x or contact.playerX, y or contact.playerY, relative)
-          end
-        end,
-      }
+      if indirect then
+        return {
+          enable = function(ground, player)
+            if not ready then
+              x, y = getCoords(tx, ty)
+              x = x or (relative and 0)
+              y = y or (relative and 0)
+              ready = true
+            end
+
+            if player then
+              TFM.movePlayer(player, x or 0, y or 0, relative)
+            end
+          end,
+        }
+      else
+        return {
+          contact = function(name, contact)
+            if not ready then
+              x, y = getCoords(tx, ty)
+              x = x or (relative and 0)
+              y = y or (relative and 0)
+              ready = true
+            end
+    
+            if x or y then
+              TFM.movePlayer(name, x or contact.playerX, y or contact.playerY, relative)
+            end
+          end,
+        }
+      end
     end,
 
-    speed = function(x, y, relative) -- speed/velocity: x,y,relative (default: 0,0,true)
+    speed = function(x, y, relative, indirect) -- speed/velocity: x,y,relative,indirect (default: 0,0,true,false)
       x, y = tonumber(x) or 0, tonumber(y) or 0
       relative = tobool(relative, true)
+      indirect = tobool(indirect, false)
 
-      return {
-        contact = function(name, contact)
-          TFM.movePlayer(name, 0, 0, true, x, y, relative)
-        end,
-      }
+      if indirect then
+        return {
+          enable = function(ground, player)
+            if player then
+              TFM.movePlayer(player, 0, 0, true, x, y, relative)
+            end
+          end,
+        }
+      else
+        return {
+          contact = function(name, contact)
+            TFM.movePlayer(name, 0, 0, true, x, y, relative)
+          end,
+        }
+      end
     end,
 
     move = function(cx, cy, prel, xs, ys, vrel, a, arel) -- move ground: x,y,rel,xs,ys,rels,a,rela (default: 0,0,true,0,0,true,0,true)
@@ -822,7 +851,7 @@ do
       local trapId, ready
 
       return {
-        enable = function(ground)
+        enable = function(ground, player)
           if not ready then
             if target ~= "" then
               local trap = getTrap(target)
@@ -838,7 +867,7 @@ do
           end
 
           if trapId then
-            TrapSystem:activate(trapId)
+            TrapSystem:activate(trapId, player)
           end
         end,
       }
@@ -1000,7 +1029,7 @@ do
             end
 
             for i=1, touchEnable._len do
-              shouldUpdate = touchEnable[i](trap.ground) or shouldUpdate
+              shouldUpdate = touchEnable[i](trap.ground, name) or shouldUpdate
             end
 
             if shouldUpdate then
@@ -1065,7 +1094,7 @@ do
       }
     end,
 
-    activate = function(self, trapId)
+    activate = function(self, trapId, player)
       if _active[trapId] then
         return
       end
@@ -1092,15 +1121,15 @@ do
 
       -- Disable commands in reverse order to remove effects in correct order
       for i=touchDisable._len, 1, -1 do
-        shouldUpdate = touchDisable[i](trap.ground) or shouldUpdate
+        shouldUpdate = touchDisable[i](trap.ground, player) or shouldUpdate
       end
 
       for i=deactivateDisable._len, 1, -1 do
-        shouldUpdate = deactivateDisable[i](trap.ground) or shouldUpdate
+        shouldUpdate = deactivateDisable[i](trap.ground, player) or shouldUpdate
       end
 
       for i=1, activateEnable._len do
-        shouldUpdate = activateEnable[i](trap.ground) or shouldUpdate
+        shouldUpdate = activateEnable[i](trap.ground, player) or shouldUpdate
       end
 
       if shouldUpdate then
@@ -1108,7 +1137,7 @@ do
       end
     end,
 
-    deactivate = function(self, trapId)
+    deactivate = function(self, trapId, player)
       if not _active[trapId] then
         return
       end
@@ -1140,15 +1169,15 @@ do
 
         -- Disable commands in reverse order to remove effects in correct order
         for i=touchDisable._len, 1, -1 do
-          shouldUpdate = touchDisable[i](trap.ground) or shouldUpdate
+          shouldUpdate = touchDisable[i](trap.ground, player) or shouldUpdate
         end
 
         for i=activateDisable._len, 1, -1 do
-          shouldUpdate = activateDisable[i](trap.ground) or shouldUpdate
+          shouldUpdate = activateDisable[i](trap.ground, player) or shouldUpdate
         end
 
         for i=1, deactivateEnable._len do
-          shouldUpdate = deactivateEnable[i](trap.ground) or shouldUpdate
+          shouldUpdate = deactivateEnable[i](trap.ground, player) or shouldUpdate
         end
 
         if shouldUpdate then

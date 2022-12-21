@@ -170,6 +170,7 @@ def parse_traps():
                         "reload": ground.get("reload") and tonumber(ground.get("reload")) or "TRAP_RELOAD",
                         "vanish": ground.get("v") and tonumber(ground.get("v")) or None,
                         "template": ground.get("template") or None,
+                        "invisible": ground.get("m", None) is not None or False,
                     }
                 ]
                 lua_id += 1
@@ -288,7 +289,15 @@ def generate_code(lines):
             lines += ['        ground = {']
             lines += [f'          x = {ground["x"]},']
             lines += [f'          y = {ground["y"]},']
-            lines += [f'          type = {ground["type"]},']
+
+            if trap["invisible"]:
+                if ground["type"] == 14:
+                    lines += [f'          type = 14,']
+                else:
+                    lines += ['          type = 12,']
+            else:
+                lines += [f'          type = {ground["type"]},']
+
             lines += [f'          width = {ground["width"]},']
             lines += [f'          height = {ground["height"]},']
 
@@ -301,7 +310,11 @@ def generate_code(lines):
 
                 lines += [f'          image = {{"{image[0]}",{params}}},']
 
-            lines += [f'          color = {ground["color"] is None and "nil" or hex(ground["color"])},']
+            if trap["invisible"]:
+                lines += ['          color = 0,']
+            else:
+                lines += [f'          color = {ground["color"] is None and "nil" or hex(ground["color"])},']
+
             lines += [f'          miceCollision = {ground["miceCollision"]},']
             lines += [f'          groundCollision = {ground["groundCollision"]},']
             lines += [f'          dynamic = {ground["dynamic"]},']

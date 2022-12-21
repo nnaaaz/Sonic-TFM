@@ -6,7 +6,7 @@
 
 - Trap commands can be used in `onactivate`, `ondeactivate` and `ontouch` attributes.
 - Any ground that has `lua`, `onactivate`, `ondeactivate` or `ontouch` attributes will be removed from the xml and recreated by the script.
-- You can change trap timings using `duration` and `reload` attributes.
+- You can change trap timings using `duration` and `reload` attributes. (milliseconds)
 - You can use `i="x,y,image"` and `imgp="scalex,scaley,rotation,alpha,anchorx,anchory,fadeIn"` attributes to replace the ground texture.
 - You can name grounds using `lua="name"` attribute.
 - You can clone traps using `template="name"` attribute.
@@ -61,18 +61,20 @@
         - x = 0, y = 0, relative = 1
         - vx = 0, vy = 0, relative = 1
         - angle = 0, relative = 1
-- speed[x,y,relative]
+- speed[x,y,relative,indirect]
     - changes the player's speed on touch
     - Defaults:
         - x = 0
         - y = 0
-        - relative = 1
-- teleport[x,y,relative]
+        - relative = yes
+        - indirect = no
+- teleport[x,y,relative,indirect]
     - teleports the player on touch
     - Defaults:
         - x = 0
         - y = 0
-        - relative = 1
+        - relative = yes
+        - indirect = no
 - height[value]
     - changes ground height
     - Defaults:
