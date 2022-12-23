@@ -88,6 +88,11 @@ maps["level 2"].traps = levels["level-2"].traps
 --- Level 3
 maps["level 3"] = {author = "Nnaaaz#0000", xml = levels["level-3"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 3"].traps = levels["level-3"].traps
+
+--- Level 4
+maps["level 4"] = {author = "Nnaaaz#0000", xml = levels["level-4"].xml, background_color = "#5c94fc", duration = 8 * 60}
+maps["level 4"].traps = levels["level-4"].traps
+
 --[[
 maps["level 1"].grounds = {
 	{
