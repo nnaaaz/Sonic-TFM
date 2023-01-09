@@ -19,7 +19,7 @@ test: $(ALL_TESTS)
 -include $(DEPS_DIR)/*.tfm.lua.txt.d
 
 lua/generated_levels.lua: maps/*.xml
-	python tools/parse_maps.py
+	python3 tools/parse_maps.py
 
 $(OUT_DIR)/%.tfm.lua.txt: | $(OUT_DIR)/ $(DEPS_DIR)/
 	@printf "\e[92m Generating %s\n" $@ || true
