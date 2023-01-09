@@ -26,6 +26,7 @@ local maps = pshy.require("pshy.maps.list")
 local grounds = pshy.require("grounds")
 local traps = pshy.require("traps")
 local levels = pshy.require("generated_levels")
+pshy.require("bonus_score10")
 
 
 ---
