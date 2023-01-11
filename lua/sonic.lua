@@ -15,6 +15,7 @@
 pshy.require("pshy.essentials")
 pshy.require("pshy.events")
 pshy.require("pshy.rotations.mapinfo")
+pshy.require("pshy.commands.list.all")
 
 local perms = pshy.require("pshy.perms")
 local version = pshy.require("pshy.bases.version")
