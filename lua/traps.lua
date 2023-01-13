@@ -736,7 +736,7 @@ do
       end
     end,
 
-    move = function(cx, cy, prel, xs, ys, vrel, a, arel) -- move ground: x,y,rel,xs,ys,rels,a,rela (default: 0,0,true,0,0,true,0,true)
+    move = function(cx, cy, prel, vx, vy, vrel, a, arel) -- move ground: x,y,rel,xs,ys,rels,a,rela (default: 0,0,true,0,0,true,0,true)
       prel = tobool(prel, true)
       vx, vy = tonumber(vx) or 0, tonumber(vy) or 0
       vrel = tobool(vrel, true)
