@@ -781,6 +781,38 @@ do
       }
     end,
 
+    show = function() -- show the ground
+      local _prev
+
+      return {
+        enable = function(ground)
+          _prev = ground.hide
+          ground.hide = nil
+          return true
+        end,
+        disable = function(ground)
+          ground.hide = _prev
+          return true
+        end,
+      }
+    end,
+
+    toggle = function() -- toggle the ground
+      local _prev
+
+      return {
+        enable = function(ground)
+          _prev = ground.hide
+          ground.hide = not ground.hide
+          return true
+        end,
+        disable = function(ground)
+          ground.hide = _prev
+          return true
+        end,
+      }
+    end,
+
     object = function(typ, ox, oy, ghost, angle, vx, vy, fx, fy) -- create shaman object: typ,x,y,ghost,angle,vx,vy,fx,fy (default: 1,0,0,false,0,0,0,,)
       typ = tonumber(type) or 1
       ghost = tobool(ghost, false)
@@ -940,9 +972,11 @@ end
 do
   local _traps = {}
   local _active = {}
+  local _timed = {}
   local _deactivatetime = {}
   local _reloadtime = {}
   local nameMapping = {}
+  local timerTick = 0
 
   local function scanCallback(arr, name)
     local ret = { _len=0 }
@@ -963,9 +997,11 @@ do
     reset = function()
       _traps = {}
       _active = {}
+      _timed = {}
       _deactivatetime = {}
       _reloadtime = {}
       nameMapping = {}
+      timerTick = 0
     end,
 
     register = function(self, trap)
@@ -992,6 +1028,10 @@ do
         touchContact = scanCallback(trap.ontouch, "contact"),
         touchEnable = scanCallback(trap.ontouch, "enable"),
         touchDisable = scanCallback(trap.ontouch, "disable"),
+
+        timerContact = scanCallback(trap.ontimer, "contact"),
+        timerEnable = scanCallback(trap.ontimer, "enable"),
+        timerDisable = scanCallback(trap.ontimer, "disable"),
       }
 
       if trap.groups then
@@ -1009,6 +1049,10 @@ do
 
           TrapGroupSystem:add(trap, group.name, behaviour)
         end
+      end
+
+      if trap.ontimer then
+        _timed[id] = trap.delay or 0
       end
 
       if trap.ground then
@@ -1092,6 +1136,27 @@ do
         x = trap.ground and trap.ground.x,
         y = trap.ground and trap.ground.y,
       }
+    end,
+
+    tick = function(self, trapId)
+      local trap = _traps[trapId]
+
+      if not trap then
+        return
+      end
+
+      local timerEnable = trap.callbacks.timerEnable
+      local shouldUpdate = false
+
+      for i=1, timerEnable._len do
+        shouldUpdate = timerEnable[i](trap.ground, nil) or shouldUpdate
+      end
+
+      if shouldUpdate then
+        GroundSystem:update(trap.ground)
+      end
+
+      _timed[trapId] = _timed[trapId] + trap.interval
     end,
 
     activate = function(self, trapId, player)
@@ -1187,9 +1252,17 @@ do
     end,
 
     onLoop = function(self)
-      for trapId in pairs(_active) do
+      for trapId in next, _active do
         self:deactivate(trapId)
       end
+
+      for trapId, tick in next, _timed do
+        if timerTick == tick then
+          self:tick(trapId)
+        end
+      end
+
+      timerTick = 0.5 + timerTick
     end,
   }
 end

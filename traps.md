@@ -4,9 +4,10 @@
 
 ## XML
 
-- Trap commands can be used in `onactivate`, `ondeactivate` and `ontouch` attributes.
-- Any ground that has `lua`, `onactivate`, `ondeactivate` or `ontouch` attributes will be removed from the xml and recreated by the script.
+- Trap commands can be used in `onactivate`, `ondeactivate`, `ontouch` and `ontimer` attributes.
+- Any ground that has `lua`, `onactivate`, `ondeactivate`, `ontouch` or `ontimer` attributes will be removed from the xml and recreated by the script.
 - You can change trap timings using `duration` and `reload` attributes. (milliseconds)
+- Calls to `ontimer` can be configured using `delay` and `interval` attributes. (multiples of 0.5 in seconds)
 - You can use `i="x,y,image"` and `imgp="scalex,scaley,rotation,alpha,anchorx,anchory,fadeIn"` attributes to replace the ground texture.
 - You can name grounds using `lua="name"` attribute.
 - You can clone traps using `template="name"` attribute.
@@ -54,7 +55,11 @@
         - vx = 0
         - vy = 0
 - hide
-    - removes the ground
+    - hides the ground
+- show
+    - shows the ground
+- toggle
+    - toggles the ground
 - move[x,y,relative,vx,vy,relative,angle,relative]
     - changes spatial properties of the ground
     - Defaults:

@@ -155,7 +155,7 @@ def parse_traps():
             ground_index_mapping[str(ground_index)] = str(ground_current_index)
             ground_index += 1
 
-            if ground.get("lua") or ground.get("onactivate") or ground.get("ondeactivate") or ground.get("ontouch") or ground.get("template"):
+            if ground.get("lua") or ground.get("onactivate") or ground.get("ondeactivate") or ground.get("ontouch") or ground.get("ontimer") or ground.get("template"):
                 traps[name] += [
                     {
                         "id": lua_id,
@@ -164,10 +164,13 @@ def parse_traps():
                         "onactivate": parse_trap_commands(ground.get("onactivate")),
                         "ondeactivate": parse_trap_commands(ground.get("ondeactivate")),
                         "ontouch": parse_trap_commands(ground.get("ontouch")),
+                        "ontimer": parse_trap_commands(ground.get("ontimer")),
                         "ground": parse_ground_tag(ground),
                         "image": parse_image(ground.get("i") or "", ground.get("imgp") or ""),
                         "duration": ground.get("duration") and tonumber(ground.get("duration")) or "TRAP_DURATION",
                         "reload": ground.get("reload") and tonumber(ground.get("reload")) or "TRAP_RELOAD",
+                        "interval": ground.get("interval") and tonumber(ground.get("interval")) or "1",
+                        "delay": ground.get("delay") and tonumber(ground.get("delay")) or "0",
                         "vanish": ground.get("v") and tonumber(ground.get("v")) or None,
                         "template": ground.get("template") or None,
                         "invisible": ground.get("m", None) is not None or False,
@@ -247,6 +250,9 @@ def generate_code(lines):
                     if trap["ontouch"]:
                         new_trap["ontouch"] = trap["ontouch"]
 
+                    if trap["ontimer"]:
+                        new_trap["ontimer"] = trap["ontimer"]
+
                     if trap["image"]:
                         new_trap["image"] = trap["image"]
 
@@ -255,6 +261,12 @@ def generate_code(lines):
 
                     if trap["reload"]:
                         new_trap["reload"] = trap["reload"]
+
+                    if trap["interval"]:
+                        new_trap["interval"] = trap["interval"]
+
+                    if trap["delay"]:
+                        new_trap["delay"] = trap["delay"]
 
                     trap = new_trap
 
@@ -282,6 +294,11 @@ def generate_code(lines):
 
             lines += ['        ontouch = {']
             for cmd in trap["ontouch"]:
+                generate_command_code(lines, cmd)
+            lines += ['        },']
+
+            lines += ['        ontimer = {']
+            for cmd in trap["ontimer"]:
                 generate_command_code(lines, cmd)
             lines += ['        },']
 
@@ -329,6 +346,8 @@ def generate_code(lines):
 
             lines += [f'        duration = {trap["duration"]},']
             lines += [f'        reload = {trap["reload"]},']
+            lines += [f'        interval = {trap["interval"]},']
+            lines += [f'        delay = {trap["delay"]},']
             lines += ['      },']
 
         lines += ['    },']
