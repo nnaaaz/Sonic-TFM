@@ -15,6 +15,7 @@
 pshy.require("pshy.essentials")
 pshy.require("pshy.events")
 pshy.require("pshy.rotations.mapinfo")
+pshy.require("pshy.commands.list.all")
 
 local perms = pshy.require("pshy.perms")
 local version = pshy.require("pshy.bases.version")
@@ -26,6 +27,7 @@ local maps = pshy.require("pshy.maps.list")
 local grounds = pshy.require("grounds")
 local traps = pshy.require("traps")
 local levels = pshy.require("generated_levels")
+pshy.require("bonus_score10")
 
 
 ---
@@ -80,6 +82,19 @@ maps["test"].traps = levels["level-0"].traps
 --- Level 1
 maps["level 1"] = {author = "Nnaaaz#0000", xml = levels["level-1"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 1"].traps = levels["level-1"].traps
+
+--- Level 2
+maps["level 2"] = {author = "Nnaaaz#0000", xml = levels["level-2"].xml, background_color = "#5c94fc", duration = 8 * 60}
+maps["level 2"].traps = levels["level-2"].traps
+
+--- Level 3
+maps["level 3"] = {author = "Nnaaaz#0000", xml = levels["level-3"].xml, background_color = "#5c94fc", duration = 8 * 60}
+maps["level 3"].traps = levels["level-3"].traps
+
+--- Level 4
+maps["level 4"] = {author = "Nnaaaz#0000", xml = levels["level-4"].xml, background_color = "#5c94fc", duration = 8 * 60}
+maps["level 4"].traps = levels["level-4"].traps
+
 --[[
 maps["level 1"].grounds = {
 	{
