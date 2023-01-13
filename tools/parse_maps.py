@@ -318,6 +318,7 @@ def generate_code(lines):
             lines += [f'          miceCollision = {ground["miceCollision"]},']
             lines += [f'          groundCollision = {ground["groundCollision"]},']
             lines += [f'          dynamic = {ground["dynamic"]},']
+            lines += [f'          angle = {ground["angle"]},']
             lines += [f'          friction = {ground["friction"]},']
             lines += [f'          restitution = {ground["restitution"]},']
             lines += [f'          foreground = {ground["foreground"]},']
