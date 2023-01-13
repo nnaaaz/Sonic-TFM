@@ -24,9 +24,9 @@ local newgame = pshy.require("pshy.rotations.newgame")
 local Rotation = pshy.require("pshy.utils.rotation")
 local maps = pshy.require("pshy.maps.list")
 
-local grounds = pshy.require("grounds")
 local traps = pshy.require("traps")
 local levels = pshy.require("generated_levels")
+
 pshy.require("bonus_score10")
 
 
@@ -82,101 +82,22 @@ maps["test"].traps = levels["level-0"].traps
 --- Level 1
 maps["level 1"] = {author = "Nnaaaz#0000", xml = levels["level-1"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 1"].traps = levels["level-1"].traps
+table.insert(sonic_maps, "level 1")
 
 --- Level 2
 maps["level 2"] = {author = "Nnaaaz#0000", xml = levels["level-2"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 2"].traps = levels["level-2"].traps
+table.insert(sonic_maps, "level 2")
 
 --- Level 3
 maps["level 3"] = {author = "Nnaaaz#0000", xml = levels["level-3"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 3"].traps = levels["level-3"].traps
+table.insert(sonic_maps, "level 3")
 
 --- Level 4
 maps["level 4"] = {author = "Nnaaaz#0000", xml = levels["level-4"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 4"].traps = levels["level-4"].traps
-
---[[
-maps["level 1"].grounds = {
-	{
-		interval = 1, -- must be multiples of 0.5
-		hidden = true,
-
-		props = {
-			x = 50,
-			y = 250,
-			type = tfm.enum.ground.wood,
-			angle = 0,
-			width = 100,
-			height = 100,
-			friction = 0.3,
-			restitution = 0.1,
-			miceCollision = true,
-			groundCollision = true,
-		},
-
-		image = {
-			id = "149a49e4b38.jpg",
-			x = 0,
-			y = 0,
-			scaleX = 1,
-			scaleY = 1,
-			rotation = 0,
-			alpha = 1,
-			anchorX = 0.5,
-			anchorX = 0.5,
-			fadeIn = false,
-		},
-	},
-	{
-		interval = 3, -- must be multiples of 0.5
-		timerTick = 6,
-		hidden = false,
-
-		props = {
-			x = 300,
-			y = 250,
-			type = tfm.enum.ground.ice,
-			angle = -30,
-			width = 100,
-			height = 100,
-			friction = 0,
-			restitution = 0.1,
-			miceCollision = true,
-			groundCollision = true,
-			dynamic = false,
-		},
-
-		image = {
-			id = "174c530f384.png",
-		},
-	},
-	{
-		onContact = {
-			grounds.utils.cond('speed', 'gt', 5, grounds.actions.hide),
-		},
-
-		props = {
-			id = 500,
-			x = 300,
-			y = 350,
-			type = tfm.enum.ground.trampoline,
-			angle = -30,
-			width = 100,
-			height = 100,
-			friction = 0,
-			restitution = 0.1,
-			miceCollision = true,
-			groundCollision = true,
-			dynamic = false,
-		},
-
-		image = {
-			id = "174c530f384.png",
-		},
-	},
-}
---]]
-table.insert(sonic_maps, "level 1")
+table.insert(sonic_maps, "level 4")
 
 
 ---
