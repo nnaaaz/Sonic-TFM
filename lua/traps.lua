@@ -141,7 +141,7 @@ do
         img[2] or 0, img[3] or 0,
         nil,
         img[4] or 1, img[5] or 1,
-        img[6] or 0, img[7] or 1,
+        math.rad(options.angle or 0) + (img[6] or 0), img[7] or 1,
         img[8] or 0.5, img[9] or 0.5,
         img[10]
       )
