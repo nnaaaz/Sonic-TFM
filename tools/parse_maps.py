@@ -128,6 +128,16 @@ def parse_image(image, params):
 
     return ret + parts
 
+def parse_timing(text):
+    if not text:
+        return []
+
+    timings = text.split(",")
+
+    for i in range(len(timings)):
+        timings[i] = tonumber(timings[i])
+
+    return timings
 
 def read_xmls():
     for name in os.listdir("maps/"):
@@ -156,6 +166,8 @@ def parse_traps():
             ground_index += 1
 
             if ground.get("lua") or ground.get("onactivate") or ground.get("ondeactivate") or ground.get("ontouch") or ground.get("ontimer") or ground.get("template"):
+                durations = parse_timing(ground.get("duration"))
+                reloads = parse_timing(ground.get("reload"))
                 traps[name] += [
                     {
                         "id": lua_id,
@@ -167,8 +179,10 @@ def parse_traps():
                         "ontimer": parse_trap_commands(ground.get("ontimer")),
                         "ground": parse_ground_tag(ground),
                         "image": parse_image(ground.get("i") or "", ground.get("imgp") or ""),
-                        "duration": ground.get("duration") and tonumber(ground.get("duration")) or "TRAP_DURATION",
-                        "reload": ground.get("reload") and tonumber(ground.get("reload")) or "TRAP_RELOAD",
+                        "duration": len(durations) > 0 and durations[0] or "TRAP_DURATION",
+                        "reload": len(reloads) > 0 and reloads[0] or "TRAP_RELOAD",
+                        "timerDuration": len(durations) > 1 and durations[1] or "TRAP_DURATION",
+                        "timerReload": len(reloads) > 1 and reloads[1] or "TRAP_RELOAD",
                         "interval": ground.get("interval") and tonumber(ground.get("interval")) or "1",
                         "delay": ground.get("delay") and tonumber(ground.get("delay")) or "0",
                         "vanish": ground.get("v") and tonumber(ground.get("v")) or None,
@@ -262,6 +276,12 @@ def generate_code(lines):
                     if trap["reload"]:
                         new_trap["reload"] = trap["reload"]
 
+                    if trap["timerDuration"]:
+                        new_trap["timerDuration"] = trap["timerDuration"]
+
+                    if trap["timerReload"]:
+                        new_trap["timerReload"] = trap["timerReload"]
+
                     if trap["interval"]:
                         new_trap["interval"] = trap["interval"]
 
@@ -346,6 +366,8 @@ def generate_code(lines):
 
             lines += [f'        duration = {trap["duration"]},']
             lines += [f'        reload = {trap["reload"]},']
+            lines += [f'        timerDuration = {trap["timerDuration"]},']
+            lines += [f'        timerReload = {trap["timerReload"]},']
             lines += [f'        interval = {trap["interval"]},']
             lines += [f'        delay = {trap["delay"]},']
             lines += ['      },']

@@ -1051,13 +1051,55 @@ do
         end
       end
 
-      if trap.ontimer then
+      if trap.ontimer and #trap.ontimer > 0 then
         _timed[id] = trap.delay or 0
+
+        -- shadow trap
+        TrapSystem:register({
+          onactivate = {
+            _len = 1,
+            {
+              enable = function(_, player)
+                local timerEnable = trap.callbacks.timerEnable
+                local shouldUpdate = false
+
+                for i=1, timerEnable._len do
+                  shouldUpdate = timerEnable[i](trap.ground, player) or shouldUpdate
+                end
+
+                if shouldUpdate then
+                  GroundSystem:update(trap.ground)
+                end
+              end,
+
+              disable = function(_, player)
+                local timerDisable = trap.callbacks.timerDisable
+                local shouldUpdate = false
+
+                -- Disable commands in reverse order to remove effects in correct order
+                for i=timerDisable._len, 1, -1 do
+                  shouldUpdate = timerDisable[i](trap.ground, player) or shouldUpdate
+                end
+
+                if shouldUpdate then
+                  GroundSystem:update(trap.ground)
+                end
+              end,
+            }
+          },
+          name = "__" .. trap.id,
+          id = 2000 + trap.id,
+          reload = trap.timerReload,
+          duration = trap.timerDuration,
+        })
       end
 
       if trap.ground then
         local activateContact = trap.callbacks.activateContact
         local deactivateContact = trap.callbacks.deactivateContact
+        local timerContact = trap.callbacks.timerContact
+
+        timerContact = timerContact and #timerContact > 0 and timerContact
 
         trap.ground.lua = id
 
@@ -1101,6 +1143,12 @@ do
                 deactivateContact[i](name, contact)
               end
             end
+
+            if timerContact and _active[2000 + id] then
+              for i=1, timerContact._len do
+                timerContact[i](name, contact)
+              end
+            end
           end
         end
 
@@ -1133,6 +1181,8 @@ do
         reloadTime = _reloadtime[trap.id],
         duration = trap.duration,
         reload = trap.reload,
+        timerDuration = trap.timerDuration,
+        timerReload = trap.timerReload,
         x = trap.ground and trap.ground.x,
         y = trap.ground and trap.ground.y,
       }
@@ -1145,16 +1195,7 @@ do
         return
       end
 
-      local timerEnable = trap.callbacks.timerEnable
-      local shouldUpdate = false
-
-      for i=1, timerEnable._len do
-        shouldUpdate = timerEnable[i](trap.ground, nil) or shouldUpdate
-      end
-
-      if shouldUpdate then
-        GroundSystem:update(trap.ground)
-      end
+      self:activate(2000 + trapId, nil)
 
       _timed[trapId] = _timed[trapId] + trap.interval
     end,

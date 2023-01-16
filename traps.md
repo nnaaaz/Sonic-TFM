@@ -7,13 +7,19 @@
 - Trap commands can be used in `onactivate`, `ondeactivate`, `ontouch` and `ontimer` attributes.
 - Any ground that has `lua`, `onactivate`, `ondeactivate`, `ontouch` or `ontimer` attributes will be removed from the xml and recreated by the script.
 - You can change trap timings using `duration` and `reload` attributes. (milliseconds)
+    - Both attributes have two parameters seperated by a comma.
+    - First parameter affects `onactivate`.
+        - Example: `duration="1000"`
+    - Second parameter affects `ontimer`.
+        - Example: `duration="1000,2000"`
+        - Example 2: `duration=",2000"`
 - Calls to `ontimer` can be configured using `delay` and `interval` attributes. (multiples of 0.5 in seconds)
 - You can use `i="x,y,image"` and `imgp="scalex,scaley,rotation,alpha,anchorx,anchory,fadeIn"` attributes to replace the ground texture.
 - You can name grounds using `lua="name"` attribute.
 - You can clone traps using `template="name"` attribute.
 - You can specify groups using `groups="groupname,behaviour;groupname2;..."` attribute.
     - Available behaviours:
-        - `alway` : all traps will be activated when the group is activated (default)
+        - `always` : all traps will be activated when the group is activated (default)
         - `random` : a random combination of traps will be activated when the group is activated
         - `randomone` : only a random trap among the group will be activated when the group is activated
 
