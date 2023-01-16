@@ -1142,8 +1142,8 @@ do
           },
           name = "__" .. trap.id,
           id = 2000 + trap.id,
-          reload = trap.timerReload,
-          duration = trap.timerDuration,
+          reload = trap.timerReload or 0,
+          duration = trap.timerDuration or (trap.interval * 1000),
         })
       end
 
