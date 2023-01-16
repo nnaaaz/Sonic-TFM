@@ -1021,9 +1021,9 @@ do
         activateEnable = scanCallback(trap.onactivate, "enable"),
         activateDisable = scanCallback(trap.onactivate, "disable"),
 
-        deactivateContact = scanCallback(trap.ondeactive, "contact"),
-        deactivateEnable = scanCallback(trap.ondeactive, "enable"),
-        deactivateDisable = scanCallback(trap.ondeactive, "disable"),
+        deactivateContact = scanCallback(trap.ondeactivate, "contact"),
+        deactivateEnable = scanCallback(trap.ondeactivate, "enable"),
+        deactivateDisable = scanCallback(trap.ondeactivate, "disable"),
 
         touchContact = scanCallback(trap.ontouch, "contact"),
         touchEnable = scanCallback(trap.ontouch, "enable"),
