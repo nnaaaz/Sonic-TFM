@@ -3,7 +3,7 @@
   <Z>
     <S>
       <S T="0" X="398" Y="382" L="806" H="42" P="0,0,0.3,0.2,0,0,0,0" groups="bottom" onactivate="friction 5;restitution 5; "/>
-      <S T="5" X="155" Y="349" L="40" H="23" P="0,0,0.3,0.2,30,0,0,0" lua="jump" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png;height46;speed,-50"/>
+      <S T="5" X="560" Y="359" L="40" H="23" P="0,0,0.3,0.2,30,0,0,0" lua="jump" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png;height46;speed,-50"/>
       <S T="0" X="257" Y="337" L="53" H="46" P="0,0,0.3,0.2,0,0,0,0" ontouch="cheese;activate" onactivate="type 1"/>
       <S T="4" X="312" Y="338" L="58" H="47" P="0,0,20,0.2,0,0,0,0" ontouch="cheese no"/>
       <S T="5" X="408" Y="185" L="62" H="57" P="0,0,0.3,0.2,0,0,0,0" ontouch="dynamic;angle 20; fixed yes" onactivate="mass 500; fixed no"/>
@@ -23,8 +23,9 @@
       <S T="13" X="507" Y="329" L="10" P="0,0,0.3,0.2,0,0,0,0" o="324650" template="jump"/>
       <S T="8" X="129" Y="275" L="79" H="41" P="0,0,0.3,0.2,0,0,0,0" c="2" ontimer="hide" delay="1" interval="3" duration=",1000" reload=",3000"/>
       <S T="1" X="129" Y="290" L="79" H="10" P="0,0,0.3,0.2,0,0,0,0" ontimer="kill" delay="1" interval="3" duration=",1000" reload=",3000"/>
-      <S T="0" X="203" Y="306" L="10" H="76" P="0,0,0.3,0.2,0,0,0,0" lua="hidden" onactivate="hide"/>
-      <S T="7" X="86" Y="341" L="10" H="10" P="0,0,0.1,0.2,0,0,0,0" ontouch="activate@hidden"/>
+      <S T="11" X="691" Y="151" L="10" H="45" P="0,0,0.05,0.1,0,0,0,0" ontouch="music ch1"/>
+      <S T="11" X="637" Y="155" L="10" H="59" P="0,0,0.05,0.1,0,0,0,0" ontouch="music ch1,lua/music_event/individual/violins"/>
+      <S T="11" X="582" Y="155" L="10" H="53" P="0,0,0.05,0.1,0,0,0,0" ontouch="sound cite18/voix/en/marion-bonjour-4"/>
     </S>
     <D>
       <F X="255" Y="344" D=""/>

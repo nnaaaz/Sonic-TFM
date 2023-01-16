@@ -136,3 +136,9 @@
         - anchorx = 0.5
         - anchory = 0.5
         - fadeIn = no
+- sound(url), [volume, x, y]
+    - plays a sound
+    - if x is -, it'll be the same as ground x position
+    - if y is -, it'll be the same as ground y position
+- music(channel), [url, volume, loop, fade]
+    - plays the music if a url is given otherwise stops the music

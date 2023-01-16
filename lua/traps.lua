@@ -242,7 +242,6 @@ do
         return
       end
 
-
       ground.onContact(name, contactInfo)
     end,
   }
@@ -938,6 +937,60 @@ do
         end,
       }
     end,
+
+    sound = function(url, volume, sx, sy) -- play a sound
+      volume = tonumber(volume)
+
+      local x, y, ready
+
+      x = tonumber(sx)
+      y = tonumber(sy)
+
+      local function play(player, contact, ground)
+        if not ready then
+          if sx == '-' then
+            x = ground.x
+          end
+
+          if sy == '-' then
+            y = ground.y
+          end
+
+          ready = true
+        end
+
+        tfm.exec.playSound(url, volume, x, y, player)
+      end
+
+      return {
+        enable = function(ground, player)
+          play(player, nil, ground)
+        end,
+        contact = play,
+      }
+    end,
+
+    music = function(channel, url, volume, loop, fade) -- play a music
+      url = url ~= '' and url
+      volume = tonumber(volume)
+      loop = tobool(loop, false)
+      fade = tobool(fade, true)
+
+      local function play(ground, player)
+        if url then
+          tfm.exec.playMusic(url, channel, volume, loop, fade, player)
+        else
+          tfm.exec.stopMusic(channel, player)
+        end
+      end
+
+      return {
+        enable = play,
+        contact = function(name, contact)
+          play(nil, name)
+        end,
+      }
+    end,
   }
 
   TRAP_TYPES = types
@@ -1111,7 +1164,7 @@ do
             local shouldUpdate = false
 
             for i=1, touchContact._len do
-              touchContact[i](name, contact)
+              touchContact[i](name, contact, trap.ground)
             end
 
             for i=1, touchEnable._len do
@@ -1136,17 +1189,17 @@ do
 
             if active then
               for i=1, activateContact._len do
-                activateContact[i](name, contact)
+                activateContact[i](name, contact, trap.ground)
               end
             else
               for i=1, deactivateContact._len do
-                deactivateContact[i](name, contact)
+                deactivateContact[i](name, contact, trap.ground)
               end
             end
 
             if timerContact and _active[2000 + id] then
               for i=1, timerContact._len do
-                timerContact[i](name, contact)
+                timerContact[i](name, contact, trap.ground)
               end
             end
           end
