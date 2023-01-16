@@ -17,6 +17,7 @@
 - You can use `i="x,y,image"` and `imgp="scalex,scaley,rotation,alpha,anchorx,anchory,fadeIn"` attributes to replace the ground texture.
 - You can name grounds using `lua="name"` attribute.
 - You can clone traps using `template="name"` attribute.
+- You might want to use `noground` attribute when you want to use trap commands without spawning a ground.
 - You can specify groups using `groups="groupname,behaviour;groupname2;..."` attribute.
     - Available behaviours:
         - `always` : all traps will be activated when the group is activated (default)

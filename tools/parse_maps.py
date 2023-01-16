@@ -6,6 +6,26 @@ from os.path import splitext
 
 
 OUTPUT_FILE = 'lua/generated_levels.lua'
+GROUND_COMMANDS = [
+    'hide',
+    'show',
+    'toggle',
+    'move',
+    'height',
+    'width',
+    'damping',
+    'color',
+    'foreground',
+    'fixed',
+    'mass',
+    'restitution',
+    'friction',
+    'collision',
+    'angle',
+    'dynamic',
+    'type',
+    'image',
+]
 
 
 levelXML = {}
@@ -66,7 +86,7 @@ def parse_ground_tag(ground):
         "angularDamping": tofloat(props[7]) or 0,
     }
 
-def parse_trap_commands(text):
+def parse_trap_commands(text, noground):
     if not text:
         return []
 
@@ -79,12 +99,14 @@ def parse_trap_commands(text):
         if match:
             trap_type = match.group(1)
             params = match.group(2)
-            ret += [
-                {
-                    "type": trap_type,
-                    "params": params is not None and params.lstrip().split(","),
-                }
-            ]
+
+            if not noground or trap_type not in GROUND_COMMANDS:
+                ret += [
+                    {
+                        "type": trap_type,
+                        "params": params is not None and params.lstrip().split(","),
+                    }
+                ]
         else:
             print("Invalid trap command:", cmd)
 
@@ -177,16 +199,17 @@ def parse_traps():
             if ground.get("lua") or ground.get("onactivate") or ground.get("ondeactivate") or ground.get("ontouch") or ground.get("ontimer") or ground.get("template"):
                 durations = parse_timing(ground.get("duration"))
                 reloads = parse_timing(ground.get("reload"))
+                noground = ground.get("noground", None) != None
                 traps[name] += [
                     {
                         "id": lua_id,
                         "name": ground.get("lua", ""),
                         "groups": parse_groups(ground.get("groups")),
-                        "onactivate": parse_trap_commands(ground.get("onactivate")),
-                        "ondeactivate": parse_trap_commands(ground.get("ondeactivate")),
-                        "ontouch": parse_trap_commands(ground.get("ontouch")),
-                        "ontimer": parse_trap_commands(ground.get("ontimer")),
-                        "ground": parse_ground_tag(ground),
+                        "onactivate": parse_trap_commands(ground.get("onactivate"), noground),
+                        "ondeactivate": parse_trap_commands(ground.get("ondeactivate"), noground),
+                        "ontouch": parse_trap_commands(ground.get("ontouch"), noground),
+                        "ontimer": parse_trap_commands(ground.get("ontimer"), noground),
+                        "ground": not noground and parse_ground_tag(ground) or None,
                         "image": parse_image(ground.get("i") or "", ground.get("imgp") or ""),
                         "duration": len(durations) > 0 and durations[0] or "TRAP_DURATION",
                         "reload": len(reloads) > 0 and reloads[0] or "TRAP_RELOAD",
@@ -258,8 +281,10 @@ def generate_code(lines):
                     new_trap = dict(template_trap)
                     new_trap["id"] = trap["id"]
                     new_trap["name"] = trap["name"]
-                    new_trap["ground"]["x"] = trap["ground"]["x"]
-                    new_trap["ground"]["y"] = trap["ground"]["y"]
+
+                    if new_trap["ground"]:
+                        new_trap["ground"]["x"] = trap["ground"]["x"]
+                        new_trap["ground"]["y"] = trap["ground"]["y"]
 
                     if trap["groups"]:
                         new_trap["groups"] = trap["groups"]
@@ -332,46 +357,48 @@ def generate_code(lines):
             lines += ['        },']
 
             ground = trap["ground"]
-            lines += ['        ground = {']
-            lines += [f'          x = {ground["x"]},']
-            lines += [f'          y = {ground["y"]},']
 
-            if trap["invisible"]:
-                if ground["type"] == 14:
-                    lines += [f'          type = 14,']
+            if ground:
+                lines += ['        ground = {']
+                lines += [f'          x = {ground["x"]},']
+                lines += [f'          y = {ground["y"]},']
+
+                if trap["invisible"]:
+                    if ground["type"] == 14:
+                        lines += [f'          type = 14,']
+                    else:
+                        lines += ['          type = 12,']
                 else:
-                    lines += ['          type = 12,']
-            else:
-                lines += [f'          type = {ground["type"]},']
+                    lines += [f'          type = {ground["type"]},']
 
-            lines += [f'          width = {ground["width"]},']
-            lines += [f'          height = {ground["height"]},']
+                lines += [f'          width = {ground["width"]},']
+                lines += [f'          height = {ground["height"]},']
 
-            if "image" in trap and trap["image"]:
-                image = trap["image"]
-                params = ','.join(image[1:9])
+                if "image" in trap and trap["image"]:
+                    image = trap["image"]
+                    params = ','.join(image[1:9])
 
-                if len(image) >= 10:
-                    params += ',' + (params[9] == '1' and 'true' or 'false')
+                    if len(image) >= 10:
+                        params += ',' + (params[9] == '1' and 'true' or 'false')
 
-                lines += [f'          image = {{"{image[0]}",{params}}},']
+                    lines += [f'          image = {{"{image[0]}",{params}}},']
 
-            if trap["invisible"]:
-                lines += ['          color = 0,']
-            else:
-                lines += [f'          color = {ground["color"] is None and "nil" or hex(ground["color"])},']
+                if trap["invisible"]:
+                    lines += ['          color = 0,']
+                else:
+                    lines += [f'          color = {ground["color"] is None and "nil" or hex(ground["color"])},']
 
-            lines += [f'          miceCollision = {ground["miceCollision"]},']
-            lines += [f'          groundCollision = {ground["groundCollision"]},']
-            lines += [f'          dynamic = {ground["dynamic"]},']
-            lines += [f'          angle = {ground["angle"]},']
-            lines += [f'          friction = {ground["friction"]},']
-            lines += [f'          restitution = {ground["restitution"]},']
-            lines += [f'          foreground = {ground["foreground"]},']
-            lines += [f'          fixedRotation = {ground["fixedRotation"]},']
-            lines += [f'          linearDamping = {ground["linearDamping"]},']
-            lines += [f'          angularDamping = {ground["angularDamping"]},']
-            lines += ['        },']
+                lines += [f'          miceCollision = {ground["miceCollision"]},']
+                lines += [f'          groundCollision = {ground["groundCollision"]},']
+                lines += [f'          dynamic = {ground["dynamic"]},']
+                lines += [f'          angle = {ground["angle"]},']
+                lines += [f'          friction = {ground["friction"]},']
+                lines += [f'          restitution = {ground["restitution"]},']
+                lines += [f'          foreground = {ground["foreground"]},']
+                lines += [f'          fixedRotation = {ground["fixedRotation"]},']
+                lines += [f'          linearDamping = {ground["linearDamping"]},']
+                lines += [f'          angularDamping = {ground["angularDamping"]},']
+                lines += ['        },']
 
             lines += [f'        duration = {trap["duration"]},']
             lines += [f'        reload = {trap["reload"]},']

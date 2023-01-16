@@ -26,6 +26,7 @@
       <S T="11" X="691" Y="151" L="10" H="45" P="0,0,0.05,0.1,0,0,0,0" ontouch="music ch1"/>
       <S T="11" X="637" Y="155" L="10" H="59" P="0,0,0.05,0.1,0,0,0,0" ontouch="music ch1,lua/music_event/individual/violins"/>
       <S T="11" X="582" Y="155" L="10" H="53" P="0,0,0.05,0.1,0,0,0,0" ontouch="sound cite18/voix/en/marion-bonjour-4"/>
+      <S T="11" X="582" Y="155" L="10" H="53" P="0,0,0.05,0.1,0,0,0,0" noground="" ontimer="sound cite18/voix/en/marion-bonjour-4" interval="30" />
     </S>
     <D>
       <F X="255" Y="344" D=""/>

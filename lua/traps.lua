@@ -882,16 +882,16 @@ do
       local trapId, ready
 
       return {
-        enable = function(ground, player)
+        enable = function(ground, player, trap)
           if not ready then
             if target ~= "" then
-              local trap = getTrap(target)
+              local targetTrap = getTrap(target)
 
-              if trap then
-                trapId = trap.id
+              if targetTrap then
+                trapId = targetTrap.id
               end
             else
-              trapId = ground.lua
+              trapId = trap.id
             end
 
             ready = true
@@ -946,14 +946,16 @@ do
       x = tonumber(sx)
       y = tonumber(sy)
 
-      local function play(player, contact, ground)
+      local function play(player, contact, obj)
         if not ready then
-          if sx == '-' then
-            x = ground.x
-          end
+          if obj then
+            if sx == '-' then
+              x = obj.x
+            end
 
-          if sy == '-' then
-            y = ground.y
+            if sy == '-' then
+              y = obj.y
+            end
           end
 
           ready = true
@@ -963,8 +965,8 @@ do
       end
 
       return {
-        enable = function(ground, player)
-          play(player, nil, ground)
+        enable = function(ground, player, trap)
+          play(player, nil, trap)
         end,
         contact = play,
       }
@@ -1104,6 +1106,8 @@ do
         end
       end
 
+      local ground = trap.ground
+
       if trap.ontimer and #trap.ontimer > 0 then
         _timed[id] = trap.delay or 0
 
@@ -1117,11 +1121,11 @@ do
                 local shouldUpdate = false
 
                 for i=1, timerEnable._len do
-                  shouldUpdate = timerEnable[i](trap.ground, player) or shouldUpdate
+                  shouldUpdate = timerEnable[i](ground, player) or shouldUpdate
                 end
 
-                if shouldUpdate then
-                  GroundSystem:update(trap.ground)
+                if shouldUpdate and ground then
+                  GroundSystem:update(ground)
                 end
               end,
 
@@ -1131,11 +1135,11 @@ do
 
                 -- Disable commands in reverse order to remove effects in correct order
                 for i=timerDisable._len, 1, -1 do
-                  shouldUpdate = timerDisable[i](trap.ground, player) or shouldUpdate
+                  shouldUpdate = timerDisable[i](ground, player) or shouldUpdate
                 end
 
-                if shouldUpdate then
-                  GroundSystem:update(trap.ground)
+                if shouldUpdate and ground then
+                  GroundSystem:update(ground)
                 end
               end,
             }
@@ -1143,18 +1147,18 @@ do
           name = "__" .. trap.id,
           id = 2000 + trap.id,
           reload = trap.timerReload or 0,
-          duration = trap.timerDuration or (trap.interval * 1000),
+          duration = trap.timerDuration or (trap.interval * 1000 - 400),
         })
       end
 
-      if trap.ground then
+      if ground then
         local activateContact = trap.callbacks.activateContact
         local deactivateContact = trap.callbacks.deactivateContact
         local timerContact = trap.callbacks.timerContact
 
         timerContact = timerContact and #timerContact > 0 and timerContact
 
-        trap.ground.lua = id
+        ground.lua = id
 
         if trap.ontouch then
           local touchEnable = trap.callbacks.touchEnable
@@ -1164,15 +1168,15 @@ do
             local shouldUpdate = false
 
             for i=1, touchContact._len do
-              touchContact[i](name, contact, trap.ground)
+              touchContact[i](name, contact, ground)
             end
 
             for i=1, touchEnable._len do
-              shouldUpdate = touchEnable[i](trap.ground, name) or shouldUpdate
+              shouldUpdate = touchEnable[i](ground, name, trap) or shouldUpdate
             end
 
-            if shouldUpdate then
-              GroundSystem:update(trap.ground)
+            if shouldUpdate and ground then
+              GroundSystem:update(ground)
             end
           end
 
@@ -1184,39 +1188,39 @@ do
         end
 
         if activateContact._len > 0 or deactivateContact._len > 0 then
-          trap.ground.onContact = function(name, contact)
+          ground.onContact = function(name, contact)
             local active = _active[id] and true or false
 
             if active then
               for i=1, activateContact._len do
-                activateContact[i](name, contact, trap.ground)
+                activateContact[i](name, contact, ground)
               end
             else
               for i=1, deactivateContact._len do
-                deactivateContact[i](name, contact, trap.ground)
+                deactivateContact[i](name, contact, ground)
               end
             end
 
             if timerContact and _active[2000 + id] then
               for i=1, timerContact._len do
-                timerContact[i](name, contact, trap.ground)
+                timerContact[i](name, contact, ground)
               end
             end
           end
         end
 
-        GroundSystem:add(table_clone(trap.ground))
+        GroundSystem:add(table_clone(ground))
       end
 
       local deactivateEnable = trap.callbacks.deactivateEnable
       local shouldUpdate = false
 
       for i=1, deactivateEnable._len do
-        shouldUpdate = deactivateEnable[i](trap.ground) or shouldUpdate
+        shouldUpdate = deactivateEnable[i](ground, nil, trap) or shouldUpdate
       end
 
-      if shouldUpdate then
-        GroundSystem:update(trap.ground)
+      if shouldUpdate and ground then
+        GroundSystem:update(ground)
       end
     end,
 
@@ -1277,22 +1281,23 @@ do
       local deactivateDisable = trap.callbacks.deactivateDisable
       local touchDisable = trap.callbacks.touchDisable
       local shouldUpdate = false
+      local ground = trap.ground
 
       -- Disable commands in reverse order to remove effects in correct order
       for i=touchDisable._len, 1, -1 do
-        shouldUpdate = touchDisable[i](trap.ground, player) or shouldUpdate
+        shouldUpdate = touchDisable[i](ground, player, trap) or shouldUpdate
       end
 
       for i=deactivateDisable._len, 1, -1 do
-        shouldUpdate = deactivateDisable[i](trap.ground, player) or shouldUpdate
+        shouldUpdate = deactivateDisable[i](ground, player, trap) or shouldUpdate
       end
 
       for i=1, activateEnable._len do
-        shouldUpdate = activateEnable[i](trap.ground, player) or shouldUpdate
+        shouldUpdate = activateEnable[i](ground, player, trap) or shouldUpdate
       end
 
-      if shouldUpdate then
-        GroundSystem:update(trap.ground)
+      if shouldUpdate and ground then
+        GroundSystem:update(ground)
       end
     end,
 
@@ -1325,22 +1330,23 @@ do
         local deactivateEnable = trap.callbacks.deactivateEnable
         local touchDisable = trap.callbacks.touchDisable
         local shouldUpdate = false
+        local ground = trap.ground
 
         -- Disable commands in reverse order to remove effects in correct order
         for i=touchDisable._len, 1, -1 do
-          shouldUpdate = touchDisable[i](trap.ground, player) or shouldUpdate
+          shouldUpdate = touchDisable[i](ground, player, trap) or shouldUpdate
         end
 
         for i=activateDisable._len, 1, -1 do
-          shouldUpdate = activateDisable[i](trap.ground, player) or shouldUpdate
+          shouldUpdate = activateDisable[i](ground, player, trap) or shouldUpdate
         end
 
         for i=1, deactivateEnable._len do
-          shouldUpdate = deactivateEnable[i](trap.ground, player) or shouldUpdate
+          shouldUpdate = deactivateEnable[i](ground, player, trap) or shouldUpdate
         end
 
-        if shouldUpdate then
-          GroundSystem:update(trap.ground)
+        if shouldUpdate and ground then
+          GroundSystem:update(ground)
         end
       end
     end,
