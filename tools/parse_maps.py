@@ -32,6 +32,15 @@ def tonumber(val, base=10):
     except ValueError:
         return None
 
+def tofloat(val):
+    if not val:
+        return None
+
+    try:
+        return float(val)
+    except ValueError:
+        return None
+
 def parse_ground_tag(ground):
     props = ground.get("P", "").split(",")
     collision = tonumber(ground.get("c")) or default_collision(ground.get("T"))
@@ -48,13 +57,13 @@ def parse_ground_tag(ground):
         "groundCollision": collision < 3 and "true" or "false",
         "dynamic": tonumber(props[0]) != 0 and "true" or "false",
         "mass": tonumber(props[1]) or 0,
-        "friction": tonumber(props[2]) or 0,
-        "restitution": tonumber(props[3]) or 0,
+        "friction": tofloat(props[2]) or 0,
+        "restitution": tofloat(props[3]) or 0,
         "angle": tonumber(props[4]) or 0,
         "foreground": ground.get("N", default_foreground(ground.get("T"))) and "true" or "false",
         "fixedRotation": tonumber(props[5]) != 0 and "true" or "false",
-        "linearDamping": tonumber(props[6]) or 0,
-        "angularDamping": tonumber(props[7]) or 0,
+        "linearDamping": tofloat(props[6]) or 0,
+        "angularDamping": tofloat(props[7]) or 0,
     }
 
 def parse_trap_commands(text):
