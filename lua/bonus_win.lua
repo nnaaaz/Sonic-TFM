@@ -14,4 +14,4 @@ local function SonicWin(player_name, bonus)
 	tfm.exec.giveCheese(player_name)
 	tfm.exec.playerVictory(player_name)
 end
-bonus_types["SonicWin"] = {image = "1848a16ac45.png", func = SonicWin}
+bonus_types["SonicWin"] = {image = "1848a16ac45.png", func = SonicWin, behavior = bonuses.BEHAVIOR_REMAIN}
