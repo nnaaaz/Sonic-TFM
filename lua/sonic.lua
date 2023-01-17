@@ -137,6 +137,15 @@ local function TouchPlayer(name)
 end
 
 
+local function ApplyPlayerForce(name)
+    tfm.exec.setPlayerGravityScale(
+      name,
+      1,
+      holding_key[name] and holding_key[name] ~= 0 and holding_key[name] * 30 or 1
+    )
+end
+
+
 ---
 -- TFM Events
 ---
@@ -148,7 +157,12 @@ end
 
 function eventNewPlayer(name)
   TouchPlayer(name)
-  tfm.exec.respawnPlayer(player_name)
+  tfm.exec.respawnPlayer(name)
+end
+
+
+function eventPlayerRespawn(name)
+  ApplyPlayerForce(name)
 end
 
 
@@ -165,11 +179,7 @@ function eventKeyboard(name, key, down, x, y, vx, vy)
       holding_key[name] = 0
     end
     
-    tfm.exec.setPlayerGravityScale(
-      name,
-      1,
-      holding_key[name] and holding_key[name] ~= 0 and holding_key[name] * 30 or 1
-    )
+    ApplyPlayerForce(name)
   end
 end
 
