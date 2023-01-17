@@ -1372,6 +1372,7 @@ end
 function eventNewGame()
   local map = newgame.current_settings.map
 
+  TrapGroupSystem:reset()
   TrapSystem:reset()
 
 	if map and map.traps then
