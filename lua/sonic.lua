@@ -108,7 +108,15 @@ maps["level 4"] = {author = "Nnaaaz#0000", xml = levels["level-4"].xml, backgrou
 maps["level 4"].traps = levels["level-4"].traps
 table.insert(sonic_maps, "level 4")
 
+--- Level 5
+maps["level 5"] = {author = "Nnaaaz#0000", xml = levels["level-5"].xml, background_color = "#5c94fc", duration = 8 * 60}
+maps["level 5"].traps = levels["level-5"].traps
+table.insert(sonic_maps, "level 5")
 
+--- Level 6
+maps["level 6"] = {author = "Nnaaaz#0000", xml = levels["level-6"].xml, background_color = "#5c94fc", duration = 8 * 60}
+maps["level 6"].traps = levels["level-6"].traps
+table.insert(sonic_maps, "level 6")
 ---
 -- Variables
 ---
