@@ -6,8 +6,8 @@ local image_list = pshy.require("pshy.images.list")
 
 
 --- BonusScore10.
-image_list["181f3329429.png"] = {bonus = true, w = 20, h = 20, desc = "+10 points bonus"}
-local function BonusScore10Callback(player_name, bonus)
+image_list["185bbbc0145.png"] = {bonus = true, w = 30, h = 30, desc = "+10 points bonus"}
+local function SonicScore10Callback(player_name, bonus)
 	tfm.exec.setPlayerScore(player_name, 10, true)
 end
-bonus_types["BonusScore10"] = {image = "181f3329429.png", func = BonusScore10Callback}
+bonus_types["SonicScore10"] = {image = "185bbbc0145.png", func = SonicScore10Callback}

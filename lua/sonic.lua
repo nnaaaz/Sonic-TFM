@@ -23,11 +23,15 @@ local rotations = pshy.require("pshy.rotations.list")
 local newgame = pshy.require("pshy.rotations.newgame")
 local Rotation = pshy.require("pshy.utils.rotation")
 local maps = pshy.require("pshy.maps.list")
+pshy.require("pshy.bonuses")
+pshy.require("pshy.bonuses.mapext")
 
 local traps = pshy.require("traps")
 local levels = pshy.require("generated_levels")
 
+pshy.require("bonus_score1")
 pshy.require("bonus_score10")
+pshy.require("bonus_win")
 
 
 ---
@@ -82,6 +86,11 @@ maps["test"].traps = levels["level-0"].traps
 --- Level 1
 maps["level 1"] = {author = "Nnaaaz#0000", xml = levels["level-1"].xml, background_color = "#5c94fc", duration = 8 * 60}
 maps["level 1"].traps = levels["level-1"].traps
+maps["level 1"].bonuses = {
+	{type = "SonicScore1", x = 409, y = 1076};
+	{type = "SonicScore10", x = 509, y = 1076};
+	{type = "SonicWin", x = 609, y = 1076};
+}
 table.insert(sonic_maps, "level 1")
 
 --- Level 2
