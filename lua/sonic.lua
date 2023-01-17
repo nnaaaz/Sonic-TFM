@@ -160,9 +160,9 @@ end
 function eventKeyboard(name, key, down, x, y, vx, vy)
   if key == 2 or key == 0 then
     if down then
-      holding_key[name] = (holding_key[name] or 0) + key - 1
+      holding_key[name] = key - 1
     elseif holding_key[name] then
-      holding_key[name] = holding_key[name] - key + 1
+      holding_key[name] = 0
     end
     
     tfm.exec.setPlayerGravityScale(
