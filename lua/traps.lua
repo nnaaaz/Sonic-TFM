@@ -1092,7 +1092,7 @@ do
       if trap.groups then
         for i=1, #trap.groups do
           group = trap.groups[i]
-          behaviour = TrapGroupSystem.ENABLE_ALWAYS
+          local behaviour = TrapGroupSystem.ENABLE_ALWAYS
 
           if group.behaviour == 'random' then
             behaviour = TrapGroupSystem.ENABLE_RANDOM
