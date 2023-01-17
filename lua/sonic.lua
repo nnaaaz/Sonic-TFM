@@ -131,6 +131,7 @@ end
 
 function eventNewPlayer(name)
   TouchPlayer(name)
+  tfm.exec.respawnPlayer(player_name)
 end
 
 
