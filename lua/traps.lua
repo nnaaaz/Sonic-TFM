@@ -1374,6 +1374,7 @@ function eventNewGame()
 
   TrapGroupSystem:reset()
   TrapSystem:reset()
+  GroundSystem:reset()
 
 	if map and map.traps then
     local trapList = map.traps
