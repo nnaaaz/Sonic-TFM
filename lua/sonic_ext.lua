@@ -6,9 +6,10 @@
 -- @author TFM:authorname#0000 DC:authorname#8263
 pshy.require("sonic")
 pshy.require("pshy.essentials_plus")
+pshy.require("pshy.debug")
 
 
 
 function eventInit()
-	print("This is the extended pshy_merge template example.")
+	print("<r>/!\\ You are running the debug version of this script!")
 end
