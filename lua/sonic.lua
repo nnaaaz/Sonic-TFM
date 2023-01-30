@@ -32,6 +32,7 @@ local levels = pshy.require("generated_levels")
 pshy.require("bonus_score1")
 pshy.require("bonus_score10")
 pshy.require("bonus_win")
+pshy.require("bonus_checkpoint")
 
 
 ---
@@ -96,6 +97,8 @@ for i_coin, coin in ipairs(coins) do
 coin.type = "SonicScore1"
 table.insert(maps["level 1"].bonuses, coin)
 end
+table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 445, y = 1076})
+table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 545, y = 1076})
 table.insert(sonic_maps, "level 1")
 
 --- Level 2
