@@ -29,10 +29,10 @@ pshy.require("pshy.bonuses.mapext")
 local traps = pshy.require("traps")
 local levels = pshy.require("generated_levels")
 
-pshy.require("bonus_score1")
-pshy.require("bonus_score10")
-pshy.require("bonus_win")
-pshy.require("bonus_checkpoint")
+pshy.require("bonuses.score1")
+pshy.require("bonuses.score10")
+pshy.require("bonuses.win")
+pshy.require("bonuses.checkpoint")
 
 
 ---
