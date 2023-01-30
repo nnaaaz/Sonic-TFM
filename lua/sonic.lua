@@ -61,8 +61,8 @@ tfm.exec.disablePhysicalConsumables(true)
 --local newgame = pshy.require("pshy.rotations.newgame")
 --newgame.update_map_name_on_new_player = true					-- Enable or disable updating UI informations for new players.
 
-perms.authors[5419276] = "Lays#1146"
-perms.authors[70224600] = "Nnaaaz#0000"
+perms.authors["Lays#1146"] = true
+perms.authors["Nnaaaz#0000"] = true
 perms.admins["Lays#1146"] = true
 perms.admins["Nnaaaz#0000"] = true
 perms.perms_auto_admin_authors = true
