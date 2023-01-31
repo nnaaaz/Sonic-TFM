@@ -228,7 +228,7 @@ local function ApplyPlayerForce(name)
     tfm.exec.setPlayerGravityScale(
       name,
       1,
-      holding_key[name] and holding_key[name] ~= 0 and holding_key[name] * 30 or 1
+      holding_key[name] and holding_key[name] * 30 or 0
     )
 end
 
@@ -236,11 +236,6 @@ end
 ---
 -- TFM Events
 ---
-
-function eventNewGame()
-  tfm.exec.setWorldGravity(0.1, 10)
-end
-
 
 function eventNewPlayer(name)
   TouchPlayer(name)
