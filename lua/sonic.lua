@@ -258,6 +258,7 @@ table.insert(sonic_maps, "level 8")
 
 local holding_key = {}
 local boost_enabled = true
+local pending_respawn_players = {}
 
 
 ---
@@ -291,11 +292,13 @@ end
 function eventNewGame()
   local map = newgame.current_settings.map
   boost_enabled = not map or not map.disable_boost
+  tfm.exec.setWorldGravity(0.1, 10)
+  pending_respawn_players = {}
 end
 
 function eventNewPlayer(name)
   TouchPlayer(name)
-  tfm.exec.respawnPlayer(name)
+  pending_respawn_players[name] = true
 end
 
 
@@ -323,12 +326,20 @@ end
 
 
 function eventPlayerDied(name)
-  tfm.exec.respawnPlayer(name)
+  pending_respawn_players[name] = true
 end
 
 
 function eventPlayerWon(name)
-  tfm.exec.respawnPlayer(name)
+  pending_respawn_players[name] = true
+end
+
+
+function eventLoop()
+  for player_name in pairs(pending_respawn_players) do
+    tfm.exec.respawnPlayer(player_name)
+  end
+  pending_respawn_players = {}
 end
 
 
