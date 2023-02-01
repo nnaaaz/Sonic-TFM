@@ -83,6 +83,7 @@ local sonic_maps = rotations["sonic"].items
 --- Trap Test map
 maps["test"] = {author = "Lays#1146", xml = levels["level-0"].xml, duration = 8 * 60}
 maps["test"].traps = levels["level-0"].traps
+maps["test"].disable_boost = true
 
 --- Level 1
 maps["level 1"] = {author = "Nnaaaz#0000", xml = levels["level-1"].xml, background_color = "#2400b6", duration = 8 * 60}
@@ -209,6 +210,7 @@ table.insert(sonic_maps, "level 7")
 ---
 
 local holding_key = {}
+local boost_enabled = true
 
 
 ---
@@ -225,17 +227,24 @@ end
 
 
 local function ApplyPlayerForce(name)
+  if boost_enabled then
     tfm.exec.setPlayerGravityScale(
       name,
       1,
       holding_key[name] and holding_key[name] * 30 or 0
     )
+  end
 end
 
 
 ---
 -- TFM Events
 ---
+
+function eventNewGame()
+  local map = newgame.current_settings.map
+  boost_enabled = not map or not map.disable_boost
+end
 
 function eventNewPlayer(name)
   TouchPlayer(name)
