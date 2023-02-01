@@ -32,6 +32,7 @@ local levels = pshy.require("generated_levels")
 pshy.require("bonus_score1")
 pshy.require("bonus_score10")
 pshy.require("bonus_win")
+pshy.require("bonus_checkpoint")
 
 
 ---
@@ -82,6 +83,7 @@ local sonic_maps = rotations["sonic"].items
 --- Trap Test map
 maps["test"] = {author = "Lays#1146", xml = levels["level-0"].xml, duration = 8 * 60}
 maps["test"].traps = levels["level-0"].traps
+maps["test"].disable_boost = true
 
 --- level Test map
 maps["test map"] = {author = "Nnaaaz#0000", xml = levels["level-test"].xml, background_color = "#00b4b4", duration = 8 * 60}
@@ -109,6 +111,8 @@ for i_coin, coin in ipairs(coins) do
 coin.type = "SonicScore1"
 table.insert(maps["level 1"].bonuses, coin)
 end
+table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 445, y = 1076})
+table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 545, y = 1076})
 table.insert(sonic_maps, "level 1")
 
 --- Level 2
@@ -253,6 +257,7 @@ table.insert(sonic_maps, "level 8")
 ---
 
 local holding_key = {}
+local boost_enabled = true
 
 
 ---
@@ -269,11 +274,13 @@ end
 
 
 local function ApplyPlayerForce(name)
+  if boost_enabled then
     tfm.exec.setPlayerGravityScale(
       name,
       1,
-      holding_key[name] and holding_key[name] ~= 0 and holding_key[name] * 30 or 1
+      holding_key[name] and holding_key[name] * 30 or 0
     )
+  end
 end
 
 
@@ -282,9 +289,9 @@ end
 ---
 
 function eventNewGame()
-  tfm.exec.setWorldGravity(0.1, 10)
+  local map = newgame.current_settings.map
+  boost_enabled = not map or not map.disable_boost
 end
-
 
 function eventNewPlayer(name)
   TouchPlayer(name)

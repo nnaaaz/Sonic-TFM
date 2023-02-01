@@ -503,6 +503,17 @@ do
       }
     end,
 
+    freeze = function(enabled, displayIce) -- freeze on touch
+      enabled = tobool(enabled, true)
+      displayIce = tobool(displayIce, true)
+
+      return {
+        contact = function(name, contact)
+          TFM.freezePlayer(name, enabled, displayIce)
+        end,
+      }
+    end,
+
     friction = function(value) -- change friction
       local _prev
       value = tonumber(value)
@@ -1121,7 +1132,7 @@ do
                 local shouldUpdate = false
 
                 for i=1, timerEnable._len do
-                  shouldUpdate = timerEnable[i](ground, player) or shouldUpdate
+                  shouldUpdate = timerEnable[i](ground, player, trap) or shouldUpdate
                 end
 
                 if shouldUpdate and ground then

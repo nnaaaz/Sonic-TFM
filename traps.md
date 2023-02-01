@@ -143,3 +143,8 @@
     - if y is -, it'll be the same as ground y position
 - music(channel), [url, volume, loop, fade]
     - plays the music if a url is given otherwise stops the music
+- freeze[enabled,displayIce]
+    - freeze on touch
+    - Defaults:
+        - enabled = true
+        - displayIce = true
