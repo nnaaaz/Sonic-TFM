@@ -200,6 +200,10 @@ def parse_traps():
                 durations = parse_timing(ground.get("duration"))
                 reloads = parse_timing(ground.get("reload"))
                 noground = ground.get("noground", None) != None
+                trapReload = reloads[0] if len(reloads) > 0 else None
+                trapReload = "TRAP_RELOAD" if trapReload == None else trapReload
+                timerReload = reloads[1] if len(reloads) > 1 else None
+                timerReload = "nil" if timerReload == None else timerReload
                 traps[name] += [
                     {
                         "id": lua_id,
@@ -212,9 +216,9 @@ def parse_traps():
                         "ground": not noground and parse_ground_tag(ground) or None,
                         "image": parse_image(ground.get("i") or "", ground.get("imgp") or ""),
                         "duration": len(durations) > 0 and durations[0] or "TRAP_DURATION",
-                        "reload": len(reloads) > 0 and reloads[0] or "TRAP_RELOAD",
+                        "reload": trapReload,
                         "timerDuration": len(durations) > 1 and durations[1] or "nil",
-                        "timerReload": len(reloads) > 1 and reloads[1] or "nil",
+                        "timerReload": timerReload,
                         "interval": ground.get("interval") and tonumber(ground.get("interval")) or "1",
                         "delay": ground.get("delay") and tonumber(ground.get("delay")) or "0",
                         "vanish": ground.get("v") and tonumber(ground.get("v")) or None,
