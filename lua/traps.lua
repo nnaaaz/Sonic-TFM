@@ -1121,7 +1121,7 @@ do
                 local shouldUpdate = false
 
                 for i=1, timerEnable._len do
-                  shouldUpdate = timerEnable[i](ground, player) or shouldUpdate
+                  shouldUpdate = timerEnable[i](ground, player, trap) or shouldUpdate
                 end
 
                 if shouldUpdate and ground then
