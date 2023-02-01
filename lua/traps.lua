@@ -503,6 +503,17 @@ do
       }
     end,
 
+    freeze = function(enabled, displayIce) -- freeze on touch
+      enabled = tobool(enabled, true)
+      displayIce = tobool(displayIce, true)
+
+      return {
+        contact = function(name, contact)
+          TFM.freezePlayer(name, enabled, displayIce)
+        end,
+      }
+    end,
+
     friction = function(value) -- change friction
       local _prev
       value = tonumber(value)
