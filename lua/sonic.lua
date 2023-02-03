@@ -290,7 +290,7 @@ end
 ---
 
 function eventNewGame()
-  local map = newgame.current_settings.map
+  local map = newgame.current_map
   boost_enabled = not map or not map.disable_boost
   tfm.exec.setWorldGravity(0.1, 10)
   pending_respawn_players = {}
