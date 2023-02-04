@@ -111,8 +111,7 @@ for i_coin, coin in ipairs(coins) do
 coin.type = "SonicScore1"
 table.insert(maps["level 1"].bonuses, coin)
 end
-table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 445, y = 1076})
-table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 545, y = 1076})
+table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 6520, y = 995})
 table.insert(sonic_maps, "level 1")
 
 --- Level 2
@@ -128,6 +127,7 @@ for i_coin, coin in ipairs(coins) do
 coin.type = "SonicScore1"
 table.insert(maps["level 2"].bonuses, coin)
 end
+table.insert(maps["level 2"].bonuses, {type = "SonicCheckpoint", x = 4449, y = 555})
 table.insert(sonic_maps, "level 2")
 
 --- Level 3
@@ -147,6 +147,17 @@ table.insert(maps["level 3"].bonuses, coin)
 end
 table.insert(sonic_maps, "level 3")
 
+--- special Stage 1
+maps["special stage 1"] = {author = "Nnaaaz#0000", xml = levels["special-stage-1"].xml, background_color = "#00b4b4", duration = 90 }
+maps["special stage 1"].traps = levels["special-stage-1"].traps
+maps["special stage 1"].bonuses = {}
+
+local coins = {{x = 242, y = 187}, {x = 271, y = 257}, {x = 407, y = 298}, {x = 479, y = 388}, {x = 482, y = 578}, {x = 482, y = 647}, {x = 272, y = 187}, {x = 301, y = 257}, {x = 437, y = 298}, {x = 511, y = 388}, {x = 514, y = 578}, {x = 514, y = 647}, {x = 494, y = 754}, {x = 494, y = 794}, {x = 494, y = 834}, {x = 638, y = 613}, {x = 678, y = 613}, {x = 718, y = 613}, {x = 137, y = 501}, {x = 137, y = 810}, {x = 137, y = 461}, {x = 137, y = 770}, {x = 137, y = 421}, {x = 137, y = 730}, {x = 89, y = 648}, {x = 89, y = 568}, {x = 187, y = 532}, {x = 187, y = 692}, {x = 273, y = 568}, {x = 273, y = 648}}
+for i_coin, coin in ipairs(coins) do
+coin.type = "SonicScore1"
+table.insert(maps["special stage 1"].bonuses, coin)
+end
+table.insert(sonic_maps, "special Stage 1")
 --- Level 4
 maps["level 4"] = {author = "Nnaaaz#0000", xml = levels["level-4"].xml, background_color = "#0000b6", duration = 8 * 60}
 maps["level 4"].traps = levels["level-4"].traps
@@ -202,6 +213,17 @@ table.insert(maps["level 6"].bonuses, coin)
 end
 table.insert(sonic_maps, "level 6")
 
+--- special stage 2
+maps["special stage 2"] = {author = "Nnaaaz#0000", xml = levels["special-stage-2"].xml, background_color = "#00b4b4", duration = 90}
+maps["special stage 2"].traps = levels["special-stage-2"].traps
+maps["special stage 2"].bonuses = {}
+
+local coins = {{x = 242, y = 187}, {x = 271, y = 257}, {x = 407, y = 298}, {x = 479, y = 388}, {x = 482, y = 578}, {x = 482, y = 647}, {x = 272, y = 187}, {x = 301, y = 257}, {x = 437, y = 298}, {x = 511, y = 388}, {x = 514, y = 578}, {x = 514, y = 647}, {x = 494, y = 754}, {x = 494, y = 794}, {x = 494, y = 834}, {x = 638, y = 613}, {x = 678, y = 613}, {x = 718, y = 613}, {x = 137, y = 501}, {x = 137, y = 810}, {x = 137, y = 461}, {x = 137, y = 770}, {x = 137, y = 421}, {x = 137, y = 730}, {x = 89, y = 648}, {x = 89, y = 568}, {x = 187, y = 532}, {x = 187, y = 692}, {x = 273, y = 568}, {x = 273, y = 648}}
+for i_coin, coin in ipairs(coins) do
+coin.type = "SonicScore1"
+table.insert(maps["special stage 2"].bonuses, coin)
+end
+table.insert(sonic_maps, "special stage 2")
 --- Level 7
 maps["level 7"] = {author = "Nnaaaz#0000", xml = levels["level-7"].xml, background_color = "#6d246d", duration = 8 * 60}
 maps["level 7"].traps = levels["level-7"].traps
@@ -251,7 +273,19 @@ for i_coin, coin in ipairs(coins) do
 coin.type = "SonicScore1"
 table.insert(maps["level 9"].bonuses, coin)
 end
-table.insert(sonic_maps, "level 8")
+table.insert(sonic_maps, "level 9")
+
+--- special stage 3
+maps["special stage 3"] = {author = "Nnaaaz#0000", xml = levels["special-stage-3"].xml, background_color = "#00b4b4", autorespawn = false, duration = 90}
+maps["special stage 3"].traps = levels["special-stage-3"].traps
+maps["special stage 3"].bonuses = {}
+local coins = {{x = 242, y = 187}, {x = 271, y = 257}, {x = 407, y = 298}, {x = 479, y = 388}, {x = 482, y = 578}, {x = 482, y = 647}, {x = 272, y = 187}, {x = 301, y = 257}, {x = 437, y = 298}, {x = 511, y = 388}, {x = 514, y = 578}, {x = 514, y = 647}, {x = 494, y = 754}, {x = 494, y = 794}, {x = 494, y = 834}, {x = 638, y = 613}, {x = 678, y = 613}, {x = 718, y = 613}, {x = 137, y = 501}, {x = 137, y = 810}, {x = 137, y = 461}, {x = 137, y = 770}, {x = 137, y = 421}, {x = 137, y = 730}, {x = 89, y = 648}, {x = 89, y = 568}, {x = 187, y = 532}, {x = 187, y = 692}, {x = 273, y = 568}, {x = 273, y = 648}}
+for i_coin, coin in ipairs(coins) do
+coin.type = "SonicScore1"
+table.insert(maps["special stage 3"].bonuses, coin)
+end
+table.insert(sonic_maps, "special stage 3")
+
 ---
 -- Variables
 ---
