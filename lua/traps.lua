@@ -1381,7 +1381,7 @@ end
 
 --- Events
 function eventNewGame()
-  local map = newgame.current_settings.map
+  local map = newgame.current_map
 
   TrapGroupSystem:reset()
   TrapSystem:reset()

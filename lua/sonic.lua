@@ -29,10 +29,10 @@ pshy.require("pshy.bonuses.mapext")
 local traps = pshy.require("traps")
 local levels = pshy.require("generated_levels")
 
-pshy.require("bonus_score1")
-pshy.require("bonus_score10")
-pshy.require("bonus_win")
-pshy.require("bonus_checkpoint")
+pshy.require("bonuses.score1")
+pshy.require("bonuses.score10")
+pshy.require("bonuses.win")
+pshy.require("bonuses.checkpoint")
 
 
 ---
@@ -61,8 +61,8 @@ tfm.exec.disablePhysicalConsumables(true)
 --local newgame = pshy.require("pshy.rotations.newgame")
 --newgame.update_map_name_on_new_player = true					-- Enable or disable updating UI informations for new players.
 
-perms.authors[5419276] = "Lays#1146"
-perms.authors[70224600] = "Nnaaaz#0000"
+perms.authors["Lays#1146"] = true
+perms.authors["Nnaaaz#0000"] = true
 perms.admins["Lays#1146"] = true
 perms.admins["Nnaaaz#0000"] = true
 perms.perms_auto_admin_authors = true
@@ -292,6 +292,7 @@ table.insert(sonic_maps, "special stage 3")
 
 local holding_key = {}
 local boost_enabled = true
+local pending_respawn_players = {}
 
 
 ---
@@ -323,13 +324,15 @@ end
 ---
 
 function eventNewGame()
-  local map = newgame.current_settings.map
+  local map = newgame.current_map
   boost_enabled = not map or not map.disable_boost
+  tfm.exec.setWorldGravity(0.1, 10)
+  pending_respawn_players = {}
 end
 
 function eventNewPlayer(name)
   TouchPlayer(name)
-  tfm.exec.respawnPlayer(name)
+  pending_respawn_players[name] = true
 end
 
 
@@ -357,12 +360,20 @@ end
 
 
 function eventPlayerDied(name)
-  tfm.exec.respawnPlayer(name)
+  pending_respawn_players[name] = true
 end
 
 
 function eventPlayerWon(name)
-  tfm.exec.respawnPlayer(name)
+  pending_respawn_players[name] = true
+end
+
+
+function eventLoop()
+  for player_name in pairs(pending_respawn_players) do
+    tfm.exec.respawnPlayer(player_name)
+  end
+  pending_respawn_players = {}
 end
 
 
