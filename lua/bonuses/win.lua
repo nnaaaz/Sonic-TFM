@@ -10,7 +10,7 @@ local addimage = pshy.require("pshy.images.addimage")
 image_list["1848a16ac45.png"] = {bonus = true, w = 48, h = 48}
 image_list["1848a165271.png"] = {bonus = true, w = 50, h = 50}
 local function SonicWin(player_name, bonus)
-	addimage.AddImage("1848a165271.png", "!99", bonus.x, bonus.y, player_name, nil, nil, 0.0, 1.0)
+	addimage.AddImage("1848a165271.png", "!9999999", bonus.x, bonus.y, player_name, nil, nil, 0.0, 1.0)
 	tfm.exec.giveCheese(player_name)
 	tfm.exec.playerVictory(player_name)
 end
