@@ -128,7 +128,7 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 2"].bonuses, coin)
 end
-table.insert(maps["level 2"].bonuses, {type = "SonicCheckpoint", x = 4449, y = 555})
+table.insert(maps["level 2"].bonuses, {type = "SonicCheckpoint", x = 4449, y = 585})
 table.insert(sonic_maps, "level 2")
 
 --- Level 3
