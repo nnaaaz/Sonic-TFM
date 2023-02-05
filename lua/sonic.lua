@@ -111,6 +111,7 @@ for i_coin, coin in ipairs(coins) do
 coin.type = "SonicScore1"
 table.insert(maps["level 1"].bonuses, coin)
 end
+table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 292, y = 1076})
 table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 6520, y = 995})
 table.insert(sonic_maps, "level 1")
 
@@ -148,7 +149,7 @@ end
 table.insert(sonic_maps, "level 3")
 
 --- special Stage 1
-maps["special stage 1"] = {author = "Nnaaaz#0000", xml = levels["special-stage-1"].xml, background_color = "#00b4b4", duration = 90 }
+maps["special stage 1"] = {author = "Nnaaaz#0000", xml = levels["special-stage-1"].xml, background_color = "#00b4b4", duration = 90, autorespawn = false}
 maps["special stage 1"].traps = levels["special-stage-1"].traps
 maps["special stage 1"].bonuses = {}
 
@@ -214,7 +215,7 @@ end
 table.insert(sonic_maps, "level 6")
 
 --- special stage 2
-maps["special stage 2"] = {author = "Nnaaaz#0000", xml = levels["special-stage-2"].xml, background_color = "#00b4b4", duration = 90}
+maps["special stage 2"] = {author = "Nnaaaz#0000", xml = levels["special-stage-2"].xml, background_color = "#00b4b4", duration = 90, autorespawn = false}
 maps["special stage 2"].traps = levels["special-stage-2"].traps
 maps["special stage 2"].bonuses = {}
 
@@ -276,7 +277,7 @@ end
 table.insert(sonic_maps, "level 9")
 
 --- special stage 3
-maps["special stage 3"] = {author = "Nnaaaz#0000", xml = levels["special-stage-3"].xml, background_color = "#00b4b4", autorespawn = false, duration = 90}
+maps["special stage 3"] = {author = "Nnaaaz#0000", xml = levels["special-stage-3"].xml, background_color = "#00b4b4", duration = 90, autorespawn = false}
 maps["special stage 3"].traps = levels["special-stage-3"].traps
 maps["special stage 3"].bonuses = {}
 local coins = {{x = 333, y = 169}, {x = 330, y = 720}, {x = 383, y = 169}, {x = 380, y = 720}, {x = 433, y = 169}, {x = 430, y = 720}, {x = 483, y = 169}, {x = 480, y = 720}, {x = 128, y = 373}, {x = 681, y = 373}, {x = 128, y = 423}, {x = 681, y = 423}, {x = 128, y = 473}, {x = 681, y = 473}, {x = 128, y = 523}, {x = 681, y = 523}, {x = 194, y = 635}, {x = 194, y = 248}, {x = 580, y = 635}, {x = 580, y = 248}, {x = 234, y = 635}, {x = 234, y = 248}, {x = 620, y = 635}, {x = 620, y = 248}, {x = 370, y = 564}, {x = 370, y = 322}, {x = 335, y = 380}, {x = 475, y = 378}, {x = 475, y = 508}, {x = 335, y = 508}, {x = 410, y = 564}, {x = 410, y = 322}, {x = 450, y = 564}, {x = 450, y = 322}}
@@ -369,8 +370,10 @@ end
 
 
 function eventLoop()
-  for player_name in pairs(pending_respawn_players) do
-    tfm.exec.respawnPlayer(player_name)
+  if newgame.current_map and newgame.current_map.autorespawn ~= false then
+    for player_name in pairs(pending_respawn_players) do
+      tfm.exec.respawnPlayer(player_name)
+    end
   end
   pending_respawn_players = {}
 end
