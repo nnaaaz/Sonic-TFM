@@ -20,9 +20,9 @@ local function SonicCheckpoint(player_name, bonus)
 	if player_checkpoint_images[player_name] then
 		tfm.exec.removeImage(player_checkpoint_images[player_name])
 	end
-	player_checkpoint_images[player_name] = addimage.AddImage("185fe23af80.png", "!9999999", bonus.x, bonus.y, player_name, nil, nil, 0.0, 1.0)
+	player_checkpoint_images[player_name] = addimage.AddImage("185fe23af80.png", "_9999999", bonus.x, bonus.y, player_name, nil, nil, 0.0, 1.0)
 end
-bonus_types["SonicCheckpoint"] = {image = "185fe23fbb5.png", foreground = true, func = SonicCheckpoint, behavior = bonuses.BEHAVIOR_REMAIN}
+bonus_types["SonicCheckpoint"] = {image = "185fe23fbb5.png", foreground = false, func = SonicCheckpoint, behavior = bonuses.BEHAVIOR_REMAIN}
 
 
 
