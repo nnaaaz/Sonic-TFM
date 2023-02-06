@@ -33,6 +33,7 @@ pshy.require("bonuses.score1")
 pshy.require("bonuses.score10")
 pshy.require("bonuses.win")
 pshy.require("bonuses.checkpoint")
+pshy.require ("pshy.alternatives.chat")
 pshy.require ("pshy.alternatives.timers")
 splashscreen = pshy.require("pshy.bases.splashscreen")
 splashscreen.image="18626ac8cb2.png"
