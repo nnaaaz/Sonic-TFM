@@ -46,7 +46,6 @@ splashscreen.image="18626ac8cb2.png"
 
 system.disableChatCommandDisplay(nil, true)
 tfm.exec.disableAfkDeath(true)
-tfm.exec.disableAutoNewGame(true)
 tfm.exec.disableAutoScore(true)
 tfm.exec.disableAutoShaman(true)
 tfm.exec.disableAutoTimeLeft(true)
