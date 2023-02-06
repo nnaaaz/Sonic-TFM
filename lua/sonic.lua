@@ -33,6 +33,9 @@ pshy.require("bonuses.score1")
 pshy.require("bonuses.score10")
 pshy.require("bonuses.win")
 pshy.require("bonuses.checkpoint")
+pshy.require ("pshy.alternatives.timers")
+splashscreen = pshy.require("pshy.bases.splashscreen")
+splashscreen.image="18626ac8cb2.png"
 
 
 ---
@@ -71,6 +74,8 @@ version.days_before_update_suggested = 14						-- How old the script should be b
 version.days_before_update_advised = 30							-- How old the script should be before requesting an update (`nil` to disable).
 version.days_before_update_required = nil						-- How old the script should be before refusing to start (`nil` to disable).
 
+splashscreen.y = 40                    -- y location
+splashscreen.duration = 8 * 1000       -- duration of the splashscreen in milliseconds
 
 ---
 -- Maps
