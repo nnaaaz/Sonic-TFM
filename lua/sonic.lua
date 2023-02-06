@@ -77,7 +77,7 @@ version.days_before_update_advised = 30							-- How old the script should be be
 version.days_before_update_required = nil						-- How old the script should be before refusing to start (`nil` to disable).
 
 splashscreen.y = 40                    -- y location
-splashscreen.duration = 1 * 1000       -- duration of the splashscreen in milliseconds
+splashscreen.duration = 6 * 1000       -- duration of the splashscreen in milliseconds
 
 ---
 -- Maps
