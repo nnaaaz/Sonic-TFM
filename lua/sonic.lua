@@ -358,6 +358,7 @@ end
 
 
 function eventPlayerWon(name)
+  tfm.exec.chatMessage(string.format("<v>[<bv>SONIC</bv>]</v> <ch>%s completed the level!</ch>", name))
   pending_respawn_players[name] = true
 end
 
