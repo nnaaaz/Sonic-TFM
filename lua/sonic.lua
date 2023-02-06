@@ -76,7 +76,7 @@ version.days_before_update_advised = 30							-- How old the script should be be
 version.days_before_update_required = nil						-- How old the script should be before refusing to start (`nil` to disable).
 
 splashscreen.y = 40                    -- y location
-splashscreen.duration = 8 * 1000       -- duration of the splashscreen in milliseconds
+splashscreen.duration = 1 * 1000       -- duration of the splashscreen in milliseconds
 
 ---
 -- Maps
@@ -104,8 +104,7 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 1"].bonuses, coin)
 end
-table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 292, y = 1076})
-table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 6520, y = 995})
+table.insert(maps["level 1"].bonuses, {type = "SonicCheckpoint", x = 6520, y = 1010})
 table.insert(sonic_maps, "level 1")
 
 --- Level 2
@@ -121,7 +120,7 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 2"].bonuses, coin)
 end
-table.insert(maps["level 2"].bonuses, {type = "SonicCheckpoint", x = 4449, y = 585})
+table.insert(maps["level 2"].bonuses, {type = "SonicCheckpoint", x = 4445, y = 570})
 table.insert(sonic_maps, "level 2")
 
 --- Level 3
@@ -139,6 +138,7 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 3"].bonuses, coin)
 end
+table.insert(maps["level 3"].bonuses, {type = "SonicCheckpoint", x = 4900, y = 813})
 table.insert(sonic_maps, "level 3")
 
 --- special Stage 1
@@ -168,6 +168,7 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 4"].bonuses, coin)
 end
+table.insert(maps["level 4"].bonuses, {type = "SonicCheckpoint", x = 2677, y = 1226})
 table.insert(sonic_maps, "level 4")
 
 --- Level 5
@@ -186,6 +187,8 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 5"].bonuses, coin)
 end
+table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 2015, y = 1225})
+table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 3585, y = 300})
 table.insert(sonic_maps, "level 5")
 
 --- Level 6
@@ -205,6 +208,9 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 6"].bonuses, coin)
 end
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 360, y = 1698})
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 2372, y = 1953})
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 5248, y = 1665})
 table.insert(sonic_maps, "level 6")
 
 --- special stage 2
@@ -232,6 +238,7 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 7"].bonuses, coin)
 end
+table.insert(maps["level 7"].bonuses, {type = "SonicCheckpoint", x = 2820, y = 915})
 table.insert(sonic_maps, "level 7")
 
 --- Level 8
@@ -250,6 +257,7 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 8"].bonuses, coin)
 end
+table.insert(maps["level 8"].bonuses, {type = "SonicCheckpoint", x = 5786, y = 708})
 table.insert(sonic_maps, "level 8")
 
 --- Level 9
@@ -267,6 +275,8 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 9"].bonuses, coin)
 end
+table.insert(maps["level 9"].bonuses, {type = "SonicCheckpoint", x = 3375, y = 708})
+table.insert(maps["level 9"].bonuses, {type = "SonicCheckpoint", x = 6877, y = 1428})
 table.insert(sonic_maps, "level 9")
 
 --- special stage 3

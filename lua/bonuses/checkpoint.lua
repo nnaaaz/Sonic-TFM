@@ -13,8 +13,8 @@ local player_checkpoint_images = {}
 
 
 --- SonicCheckpoint.
-image_list["185fe23fbb5.png"] = {bonus = true, w = 16, h = 64, ay = 0.95}
-image_list["185fe23af80.png"] = {bonus = true, w = 16, h = 64, ay = 0.95}
+image_list["185fe23fbb5.png"] = {bonus = true, w = 16, h = 64, ay = 0.80}
+image_list["185fe23af80.png"] = {bonus = true, w = 16, h = 64, ay = 0.80}
 local function SonicCheckpoint(player_name, bonus)
 	checkpoints.SetPlayerCheckpoint(player_name, bonus.x, bonus.y)
 	if player_checkpoint_images[player_name] then
