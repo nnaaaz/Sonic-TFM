@@ -262,11 +262,11 @@ def find_trap(traps, name):
     return None
 
 def generate_command_code(lines, cmd):
-    lines += [f'          TRAP_TYPES["{cmd["type"]}"]({concat_command_params(cmd["params"])}),']
+    lines += [f'          commands["{cmd["type"]}"]({concat_command_params(cmd["params"])}),']
 
 def generate_code(lines):
     lines += ['local traps = pshy.require("traps")']
-    lines += ['local TRAP_TYPES = traps.TRAP_TYPES']
+    lines += ['local commands = traps.commands']
     lines += ['local TRAP_RELOAD = traps.TRAP_RELOAD']
     lines += ['local TRAP_DURATION = traps.TRAP_DURATION']
     lines += ['return {']

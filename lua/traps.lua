@@ -11,10 +11,9 @@ local TRAP_RELOAD = 5000
 --- Aliases
 local TFM, ROOM, ui, system = tfm.exec, tfm.get.room, ui, system
 local tonumber, pairs, ipairs = tonumber, pairs, ipairs
-local table_foreach, unpack = table.foreach, table.unpack
+local unpack = table.unpack
 local random, max, floor, ceil, abs = math.random, math.max, math.floor, math.ceil, math.abs
 local lshift, btest = bit32.lshift, bit32.btest
-local string_match = string.match
 local os_time = os.time
 
 
@@ -38,74 +37,14 @@ local function table_clone(t)
   return ret
 end
 
-local function table_keys(t, skip_key)
-  local ret = {}
-  local i = 0
-
-  for key in pairs(t) do
-    if key ~= skip_key then
-      i = 1 + i
-      ret[i] = key
-    end
-  end
-
-  return ret, i
-end
-
-local function table_randomize(t)
-  local len = t._len or #t
-  local j
-
-  for i=1,len do
-    j = random(i)
-    t[j], t[i] = t[i], t[j]
-  end
-end
-
-local function string_trim(str)
-  local content = str:match('^%s*(.+)%s*$')
-  return content or ''
-end
-
-local function pythag(x1, y1, x2, y2, dist)
-  return (x1 - x2) ^ 2 + (y1 - y2) ^ 2 <= dist ^ 2
-end
-
-local function find_tag(tags, target)
-  for i=1,tags._len do
-    if tags[i]._name == target then
-      return tags[i]
-    end
-  end
-end
-
-local function gradient(i, n)
-  -- TODO use HSV/HSL for rainbow
-  return floor(0xffffff / n * i)
-end
-
 
 --- Ground System
 do
-  local RESERVED_START = 10000
-
   local _grounds = {}
   local _lastOpts = {}
   local _imgIds = {}
-  local _reservedLast
-
-  local function _reserve(self)
-    local idx = _reservedLast or RESERVED_START
-    _reservedLast = 1 + idx
-
-    return idx
-  end
 
   local function _createGround(options)
-    if options.onContact then
-      options.contactListener = true
-    end
-
     local id = options.lua
 
     _lastOpts[id] = options
@@ -148,44 +87,33 @@ do
     end
   end
 
+  function GroundSystem_eventNewPlayer(playerName)
+    local opt
+    for id, ground in next, _grounds do
+      opt = _lastOpts[id]
+      if opt then
+        if not opt.dynamic or (opt.mass and opt.mass < 0) or opt.hide then
+          if opt.hide then
+            TFM.removePhysicObject(id)
+          else
+            _createGround(opt)
+          end
+        end
+      else
+        TFM.removePhysicObject(id)
+      end
+    end
+  end
+
   GroundSystem = {
     reset = function(self)
       _grounds = {}
-      _reservedLast = nil
-    end,
-
-    reload = function(self)
-      local opt
-      for id, ground in pairs(_grounds) do
-        opt = _lastOpts[id]
-        if opt then
-          if not opt.dynamic or (opt.mass and opt.mass < 0) or opt.hide then
-            if opt.hide then
-              TFM.removePhysicObject(id)
-            else
-              _createGround(opt)
-            end
-          end
-        else
-          TFM.removePhysicObject(id)
-        end
-      end
     end,
 
     add = function(self, options)
       local id = options.lua
-
-      if id == nil then
-        id = _reserve()
-        options.lua = id
-      elseif id >= RESERVED_START then
-        return
-      end
-
       _grounds[id] = options
       _createGround(options)
-
-      return id
     end,
 
     update = function(self, options)
@@ -205,44 +133,6 @@ do
       options.y = options.y or ground.y
 
       _createGround(options)
-    end,
-
-    revert = function(self, id)
-      if not id then
-        return
-      end
-
-      local ground = _grounds[id]
-
-      if ground == nil then
-        return
-      end
-
-      _createGround(ground)
-    end,
-
-    remove = function(self, id)
-      local ground = _grounds[id]
-
-      if not ground then
-        return
-      end
-
-      TFM.removePhysicObject(id)
-    end,
-
-    onContact = function(self, name, id, contactInfo)
-      local ground = _grounds[id]
-
-      if not ground then
-        return
-      end
-
-      if not ground.onContact then
-        return
-      end
-
-      ground.onContact(name, contactInfo)
     end,
   }
 end
@@ -363,7 +253,7 @@ do
 end
 
 
-local TRAP_TYPES = {}
+local commands
 
 --- Trap Parser
 do
@@ -408,7 +298,7 @@ do
     return value == "yes" or value == "true" or value == "1"
   end
 
-  local types = {
+  commands = {
     type = function(value) -- change type
       local _prev
       value = tonumber(value)
@@ -1005,32 +895,6 @@ do
       }
     end,
   }
-
-  TRAP_TYPES = types
-
-  TrapParser = {
-    parse = function(self, trapStr)
-      if not trapStr then
-        return
-      end
-
-      local traps = string_split(trapStr, ";")
-      local ret = { _len = 0 }
-      local trapType, params, processor
-
-      for i=1, traps._len do
-        trapType, params = traps[i]:match('^(%a+)(.-)$')
-        processor = types[trapType]
-
-        if processor then
-          ret._len = 1 + ret._len
-          ret[ret._len] = processor(params or "")
-        end
-      end
-
-      return ret
-    end,
-  }
 end
 
 
@@ -1057,6 +921,36 @@ do
     end
 
     return ret
+  end
+
+  function TrapSystem_eventContactListener(name, id, contact)
+    local trap = _traps[id]
+
+    if not trap then
+      return
+    end
+
+    local activateContact = trap.callbacks.activateContact
+    local deactivateContact = trap.callbacks.deactivateContact
+    local timerContact = trap.callbacks.timerContact
+    local active = _active[id] and true or false
+    local ground = trap.ground
+
+    if active then
+      for i=1, activateContact._len do
+        activateContact[i](name, contact, ground)
+      end
+    else
+      for i=1, deactivateContact._len do
+        deactivateContact[i](name, contact, ground)
+      end
+    end
+
+    if timerContact and _active[2000 + id] then
+      for i=1, timerContact._len do
+        timerContact[i](name, contact, ground)
+      end
+    end
   end
 
   TrapSystem = {
@@ -1167,9 +1061,13 @@ do
         local deactivateContact = trap.callbacks.deactivateContact
         local timerContact = trap.callbacks.timerContact
 
-        timerContact = timerContact and #timerContact > 0 and timerContact
+        if timerContact then
+          timerContact._len = #timerContact
+        end
 
         ground.lua = id
+        ground.id = id
+        ground.contactListener = true
 
         if trap.ontouch then
           local touchEnable = trap.callbacks.touchEnable
@@ -1196,28 +1094,6 @@ do
 
           deactivateContact._len = 1 + deactivateContact._len
           deactivateContact[deactivateContact._len] = callback
-        end
-
-        if activateContact._len > 0 or deactivateContact._len > 0 then
-          ground.onContact = function(name, contact)
-            local active = _active[id] and true or false
-
-            if active then
-              for i=1, activateContact._len do
-                activateContact[i](name, contact, ground)
-              end
-            else
-              for i=1, deactivateContact._len do
-                deactivateContact[i](name, contact, ground)
-              end
-            end
-
-            if timerContact and _active[2000 + id] then
-              for i=1, timerContact._len do
-                timerContact[i](name, contact, ground)
-              end
-            end
-          end
         end
 
         GroundSystem:add(table_clone(ground))
@@ -1333,10 +1209,6 @@ do
       local trap = _traps[trapId]
 
       if trap then
-        -- if trap.ground then
-        --   GroundSystem:revert(trapId)
-        -- end
-
         local activateDisable = trap.callbacks.activateDisable
         local deactivateEnable = trap.callbacks.deactivateEnable
         local touchDisable = trap.callbacks.touchDisable
@@ -1361,21 +1233,21 @@ do
         end
       end
     end,
-
-    onLoop = function(self)
-      for trapId in next, _active do
-        self:deactivate(trapId)
-      end
-
-      for trapId, tick in next, _timed do
-        if timerTick == tick then
-          self:tick(trapId)
-        end
-      end
-
-      timerTick = 0.5 + timerTick
-    end,
   }
+
+  function TrapSystem_eventLoop(elapsed, remaining)
+    for trapId in next, _active do
+      TrapSystem:deactivate(trapId)
+    end
+
+    for trapId, tick in next, _timed do
+      if timerTick == tick then
+        TrapSystem:tick(trapId)
+      end
+    end
+
+    timerTick = 0.5 + timerTick
+  end
 end
 
 
@@ -1398,27 +1270,13 @@ function eventNewGame()
   TrapGroupSystem:register()
 end
 
-function eventLoop(elapsed, remaining)
-  TrapSystem:onLoop()
-end
-
-function eventNewPlayer(name)
-  GroundSystem:reload()
-end
-
-function eventPlayerRespawn(name)
-  TFM.setAieMode(false, 0, name)
-  TFM.setPlayerGravityScale(name, 1, 1)
-end
-
-function eventContactListener(name, id, contactInfo)
-  GroundSystem:onContact(name, id, contactInfo)
-end
-
+eventLoop = TrapSystem_eventLoop
+eventNewPlayer = GroundSystem_eventNewPlayer
+eventContactListener = TrapSystem_eventContactListener
 
 return {
-  TRAP_TYPES = TRAP_TYPES,
   TRAP_DURATION = TRAP_DURATION,
   TRAP_RELOAD = TRAP_DURATION,
-}
 
+  commands = commands,
+}
