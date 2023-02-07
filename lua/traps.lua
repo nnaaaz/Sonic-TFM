@@ -976,23 +976,25 @@ do
         nameMapping[trap.name] = id
       end
 
-      trap.callbacks = {
-        activateContact = scanCallback(trap.onactivate, "contact"),
-        activateEnable = scanCallback(trap.onactivate, "enable"),
-        activateDisable = scanCallback(trap.onactivate, "disable"),
+      if not trap.callbacks then
+        trap.callbacks = {
+          activateContact = scanCallback(trap.onactivate, "contact"),
+          activateEnable = scanCallback(trap.onactivate, "enable"),
+          activateDisable = scanCallback(trap.onactivate, "disable"),
 
-        deactivateContact = scanCallback(trap.ondeactivate, "contact"),
-        deactivateEnable = scanCallback(trap.ondeactivate, "enable"),
-        deactivateDisable = scanCallback(trap.ondeactivate, "disable"),
+          deactivateContact = scanCallback(trap.ondeactivate, "contact"),
+          deactivateEnable = scanCallback(trap.ondeactivate, "enable"),
+          deactivateDisable = scanCallback(trap.ondeactivate, "disable"),
 
-        touchContact = scanCallback(trap.ontouch, "contact"),
-        touchEnable = scanCallback(trap.ontouch, "enable"),
-        touchDisable = scanCallback(trap.ontouch, "disable"),
+          touchContact = scanCallback(trap.ontouch, "contact"),
+          touchEnable = scanCallback(trap.ontouch, "enable"),
+          touchDisable = scanCallback(trap.ontouch, "disable"),
 
-        timerContact = scanCallback(trap.ontimer, "contact"),
-        timerEnable = scanCallback(trap.ontimer, "enable"),
-        timerDisable = scanCallback(trap.ontimer, "disable"),
-      }
+          timerContact = scanCallback(trap.ontimer, "contact"),
+          timerEnable = scanCallback(trap.ontimer, "enable"),
+          timerDisable = scanCallback(trap.ontimer, "disable"),
+        }
+      end
 
       if trap.groups then
         for i=1, #trap.groups do
@@ -1008,6 +1010,14 @@ do
           end
 
           TrapGroupSystem:add(trap, group.name, behaviour)
+        end
+      end
+
+      if trap.ground then
+        if trap._ground then
+          trap.ground = table_clone(trap._ground)
+        else
+          trap._ground = table_clone(trap.ground)
         end
       end
 
@@ -1096,7 +1106,7 @@ do
           deactivateContact[deactivateContact._len] = callback
         end
 
-        GroundSystem:add(table_clone(ground))
+        GroundSystem:add(ground)
       end
 
       local deactivateEnable = trap.callbacks.deactivateEnable
