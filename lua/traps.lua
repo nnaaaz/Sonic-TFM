@@ -942,7 +942,9 @@ do
         nameMapping[trap.name] = id
       end
 
-      if not trap.callbacks then
+      local initCallbacks = not trap.callbacks
+
+      if initCallbacks then
         trap.callbacks = {
           activateContact = scanCallback(trap.onactivate, "contact"),
           activateEnable = scanCallback(trap.onactivate, "enable"),
@@ -1045,7 +1047,7 @@ do
         ground.id = id
         ground.contactListener = true
 
-        if trap.ontouch then
+        if trap.ontouch and initCallbacks then
           local touchEnable = trap.callbacks.touchEnable
           local touchContact = trap.callbacks.touchContact
 
