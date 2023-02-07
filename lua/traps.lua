@@ -41,13 +41,12 @@ end
 --- Ground System
 do
   local _grounds = {}
-  local _lastOpts = {}
   local _imgIds = {}
 
-  local function _createGround(options)
+  function saveGround(options)
     local id = options.lua
 
-    _lastOpts[id] = options
+    _grounds[id] = options
 
     if options.hide then
       if _imgIds[id] then
@@ -87,54 +86,21 @@ do
     end
   end
 
-  function GroundSystem_eventNewPlayer(playerName)
-    local opt
+  function reloadGrounds()
     for id, ground in next, _grounds do
-      opt = _lastOpts[id]
-      if opt then
-        if not opt.dynamic or (opt.mass and opt.mass < 0) or opt.hide then
-          if opt.hide then
-            TFM.removePhysicObject(id)
-          else
-            _createGround(opt)
-          end
+      if not ground.dynamic or (ground.mass and ground.mass < 0) or ground.hide then
+        if ground.hide then
+          TFM.removePhysicObject(id)
+        else
+          _createGround(ground)
         end
-      else
-        TFM.removePhysicObject(id)
       end
     end
   end
 
-  GroundSystem = {
-    reset = function(self)
-      _grounds = {}
-    end,
-
-    add = function(self, options)
-      local id = options.lua
-      _grounds[id] = options
-      _createGround(options)
-    end,
-
-    update = function(self, options)
-      local id = options.lua
-
-      if id == nil then
-        return
-      end
-
-      local ground = _grounds[id]
-
-      if ground == nil then
-        return
-      end
-
-      options.x = options.x or ground.x
-      options.y = options.y or ground.y
-
-      _createGround(options)
-    end,
-  }
+  function resetGrounds()
+    _grounds = {}
+  end
 end
 
 
@@ -1040,7 +1006,7 @@ do
                 end
 
                 if shouldUpdate and ground then
-                  GroundSystem:update(ground)
+                  saveGround(ground)
                 end
               end,
 
@@ -1054,7 +1020,7 @@ do
                 end
 
                 if shouldUpdate and ground then
-                  GroundSystem:update(ground)
+                  saveGround(ground)
                 end
               end,
             }
@@ -1095,7 +1061,7 @@ do
             end
 
             if shouldUpdate and ground then
-              GroundSystem:update(ground)
+              saveGround(ground)
             end
           end
 
@@ -1106,7 +1072,7 @@ do
           deactivateContact[deactivateContact._len] = callback
         end
 
-        GroundSystem:add(ground)
+        saveGround(ground)
       end
 
       local deactivateEnable = trap.callbacks.deactivateEnable
@@ -1117,7 +1083,7 @@ do
       end
 
       if shouldUpdate and ground then
-        GroundSystem:update(ground)
+        saveGround(ground)
       end
     end,
 
@@ -1194,7 +1160,7 @@ do
       end
 
       if shouldUpdate and ground then
-        GroundSystem:update(ground)
+        saveGround(ground)
       end
     end,
 
@@ -1239,7 +1205,7 @@ do
         end
 
         if shouldUpdate and ground then
-          GroundSystem:update(ground)
+          saveGround(ground)
         end
       end
     end,
@@ -1267,7 +1233,7 @@ function eventNewGame()
 
   TrapGroupSystem:reset()
   TrapSystem:reset()
-  GroundSystem:reset()
+  resetGrounds()
 
 	if map and map.traps then
     local trapList = map.traps
@@ -1281,7 +1247,7 @@ function eventNewGame()
 end
 
 eventLoop = TrapSystem_eventLoop
-eventNewPlayer = GroundSystem_eventNewPlayer
+eventNewPlayer = reloadGrounds
 eventContactListener = TrapSystem_eventContactListener
 
 return {
