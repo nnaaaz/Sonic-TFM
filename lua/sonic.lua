@@ -308,7 +308,6 @@ local function TouchPlayer(name)
   tfm.exec.bindKeyboard(name, 0, false, true)
   tfm.exec.bindKeyboard(name, 2, true, true)
   tfm.exec.bindKeyboard(name, 2, false, true)
-  system.bindMouse(name, true)
 end
 
 
@@ -341,11 +340,6 @@ end
 
 function eventPlayerRespawn(name)
   ApplyPlayerForce(name)
-end
-
-
-function eventMouse(name, x, y)
-  tfm.exec.movePlayer(name, x, y)
 end
 
 
