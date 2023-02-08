@@ -17,27 +17,6 @@ local lshift, btest = bit32.lshift, bit32.btest
 local os_time = os.time
 
 
---- Common Functions
-local function string_split(str, delimiter)
-  local delimiter = delimiter or ','
-  local array, n = {}, 0
-  for part in str:gmatch('[^'..delimiter..']+') do
-    n = 1 + n
-    array[n] = part
-  end
-  array._len = n
-  return array
-end
-
-local function table_clone(t)
-  local ret = {}
-  for k,v in next,t do
-    ret[k] = v
-  end
-  return ret
-end
-
-
 --- Ground System
 do
   local _grounds = {}
@@ -981,15 +960,12 @@ do
         end
       end
 
-      if trap.ground then
-        if trap._ground then
-          trap.ground = table_clone(trap._ground)
-        else
-          trap._ground = table_clone(trap.ground)
-        end
-      end
+      local ground
 
-      local ground = trap.ground
+      if trap.getGround then
+        ground = trap.getGround()
+        trap.ground = ground
+      end
 
       if trap.ontimer and #trap.ontimer > 0 then
         _timed[id] = trap.delay or 0

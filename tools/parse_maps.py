@@ -363,7 +363,8 @@ def generate_code(lines):
             ground = trap["ground"]
 
             if ground:
-                lines += ['        ground = {']
+                lines += ['        getGround = function()']
+                lines += ['          return {']
                 lines += [f'          x = {ground["x"]},']
                 lines += [f'          y = {ground["y"]},']
 
@@ -402,7 +403,8 @@ def generate_code(lines):
                 lines += [f'          fixedRotation = {ground["fixedRotation"]},']
                 lines += [f'          linearDamping = {ground["linearDamping"]},']
                 lines += [f'          angularDamping = {ground["angularDamping"]},']
-                lines += ['        },']
+                lines += ['          }']
+                lines += ['        end,']
 
             lines += [f'        duration = {trap["duration"]},']
             lines += [f'        reload = {trap["reload"]},']
