@@ -71,7 +71,7 @@ do
         if ground.hide then
           TFM.removePhysicObject(id)
         else
-          _createGround(ground)
+          saveGround(ground)
         end
       end
     end
