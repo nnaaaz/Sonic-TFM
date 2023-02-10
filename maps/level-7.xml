@@ -199,16 +199,16 @@
       <S T="12" X="6778" Y="-4" L="4000" H="19" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="2623" Y="365" L="25" H="10" P="0,0,0,0.2,20,0,0,0"/>
       <S T="12" X="1337" Y="619" L="25" H="10" P="0,0,0,0.2,21,0,0,0"/>
-      <S T="12" X="2680" Y="271" L="64" H="30" P="0,0,0.3,0.2,0,0,0,0"  i="0,-1,185dea520ad.png"/>
-      <S T="12" X="7033" Y="526" L="64" H="30" P="0,0,0.3,0.2,0,0,0,0"  i="0,-1,185dea520ad.png"/>
-      <S T="12" X="7286" Y="526" L="64" H="30" P="0,0,0.3,0.2,0,0,0,0"  i="0,-1,185dea520ad.png"/>
+      <S T="12" X="2680" Y="271" L="64" H="30" P="0,0,0.3,0.2,0,0,0,0" i="0,-1,185dea520ad.png"/>
+      <S T="12" X="7033" Y="526" L="64" H="30" P="0,0,0.3,0.2,0,0,0,0" i="0,-1,185dea520ad.png"/>
+      <S T="12" X="7286" Y="526" L="64" H="30" P="0,0,0.3,0.2,0,0,0,0" i="0,-1,185dea520ad.png"/>
       <S T="12" X="1481" Y="619" L="25" H="10" P="0,0,0,0.2,-21,0,0,0"/>
       <S T="12" X="712" Y="972" L="25" H="10" P="0,0,0,0.2,-21,0,0,0"/>
       <S T="12" X="4935" Y="602" L="25" H="10" P="0,0,0,0.2,-21,0,0,0"/>
       <S T="12" X="1081" Y="130" L="25" H="10" P="0,0,0,0.2,-201,0,0,0"/>
       <S T="12" X="6552" Y="604" L="50" H="10" P="0,0,0,0.2,16,0,0,0"/>
       <S T="19" X="2101" Y="714" L="28" H="27" P="1,0,0.3,0,0,1,0,0" i="-10,-10,185dea439b2.png"/>
-      <S T="19" X="2306" Y="734" L="28" H="27" P="1,0,0.3,0,0,1,0,0" i="-10,-10,185dea439b2.png"/>
+      <S T="19" X="2306" Y="743" L="28" H="27" P="1,0,0.3,0,0,1,0,0" i="-10,-10,185dea439b2.png"/>
       <S T="12" X="6512" Y="590" L="50" H="10" P="0,0,0,0.2,25,0,0,0"/>
       <S T="12" X="6471" Y="559" L="78" H="10" P="0,0,0,0.2,45,0,0,0"/>
       <S T="12" X="6996" Y="629" L="25" H="10" P="0,0,0,0.2,9,0,0,0"/>
@@ -267,14 +267,14 @@
       <S T="12" X="6775" Y="989" L="113" H="92" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="6536" Y="975" L="113" H="92" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="1978" Y="865" L="42" H="34" P="0,0,0.3,0.2,0,0,0,0"/>
-      <S T="12" X="1385" Y="611" L="32" H="18" P="0,0,0.3,0.2,-90,0,0,0" lua="jumpyl" i="0,0,185f87d44b7.png" ontouch="activate;speed-200,,yes,yes" onactivate="image185f87d91b1.png,-10,;width70" duration="1000" reload="1000"/>
+      <S T="12" X="1385" Y="611" L="32" H="18" P="0,0,0.3,0.2,-90,0,0,0" lua="jumpyl" i="0,0,185f87d44b7.png" ontouch="activate;speed-200,,yes,yes;sound lua/sonic/spring" onactivate="image185f87d91b1.png,-10,;width70" duration="1000" reload="1000"/>
       <S T="12" X="2647" Y="912" L="32" H="18" P="0,0,0.3,0.2,-90,0,0,0" duration="1000" reload="1000" template="jumpyl"/>
-      <S T="12" X="1040" Y="583" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" i="0,0,185f87d44b7.png" ontouch="activate;speed,-220,yes,yes" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
-      <S T="12" X="5867" Y="455" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0"  i="0,0,185f87d44b7.png" ontouch="activate;speed,-60,yes,yes" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
-      <S T="12" X="3071" Y="968" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" lua="jumpr" i="0,0,185f87d44b7.png" ontouch="activate;speed,-175,yes,yes" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
+      <S T="12" X="1040" Y="583" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" i="0,0,185f87d44b7.png" ontouch="activate;speed,-220,yes,yes;sound lua/sonic/spring" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
+      <S T="12" X="5867" Y="455" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" i="0,0,185f87d44b7.png" ontouch="activate;speed,-60,yes,yes;sound lua/sonic/spring" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
+      <S T="12" X="3071" Y="968" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" lua="jumpr" i="0,0,185f87d44b7.png" ontouch="activate;speed,-175,yes,yes;sound lua/sonic/spring" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
       <S T="12" X="7460" Y="712" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="7973" Y="712" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
-      <S T="12" X="6302" Y="968" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0"  duration="1000" reload="1000" template="jumpr"/>
+      <S T="12" X="6302" Y="968" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="7580" Y="712" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="8093" Y="712" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="5421" Y="968" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
@@ -284,17 +284,17 @@
       <S T="12" X="8153" Y="712" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="5501" Y="968" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="5581" Y="968" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
-      <S T="12" X="1432" Y="611" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed200,,yes,yes" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
-      <S T="12" X="541" Y="962" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed250,,yes,yes" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
-      <S T="12" X="6765" Y="484" L="32" H="18" P="0,0,0.3,0.2,180,0,0,0"  lua="jumpd" i="0,0,185f87cab55.png" ontouch="activate;speed,300,yes,yes" onactivate="image185f87cf7cd.png,,10" duration="1000" reload="1000"/>
-      <S T="12" X="4975" Y="485" L="32" H="18" P="0,0,0.3,0.2,180,0,0,0"  duration="1000" reload="1000" template="jumpd"/>
-      <S T="12" X="8233" Y="705" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed120,,yes,yes;teleport8450,700,no" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
-      <S T="12" X="5528" Y="1172" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0"  i="0,0,185f87cab55.png" ontouch="activate;speed200,,yes,yes" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
-      <S T="13" X="1072" Y="255" L="12" P="0,0,0,3,0,0,0,0" lua="bumper" i="0,0,185dea5bab3.png" ontouch="activate" onactivate="image185dea3ecb2.png,,;width16;restitution5" duration="500" reload="500"/>
+      <S T="12" X="1432" Y="611" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed200,,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
+      <S T="12" X="541" Y="962" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed250,,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
+      <S T="12" X="6765" Y="484" L="32" H="18" P="0,0,0.3,0.2,180,0,0,0" lua="jumpd" i="0,0,185f87cab55.png" ontouch="activate;speed,300,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,,10" duration="1000" reload="1000"/>
+      <S T="12" X="4975" Y="485" L="32" H="18" P="0,0,0.3,0.2,180,0,0,0" duration="1000" reload="1000" template="jumpd"/>
+      <S T="12" X="8233" Y="705" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed120,,yes,yes;teleport8450,700,no;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
+      <S T="12" X="5528" Y="1172" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed200,,yes,yes" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
+      <S T="13" X="1072" Y="255" L="12" P="0,0,0,3,0,0,0,0" lua="bumper" i="0,0,185dea5bab3.png" ontouch="activate;sound lua/sonic/bumper" onactivate="image185dea3ecb2.png,,;width16;restitution5" duration="500" reload="500"/>
       <S T="13" X="1135" Y="188" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumper"/>
       <S T="13" X="1315" Y="204" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumper"/>
       <S T="13" X="1443" Y="412" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumper"/>
-      <S T="13" X="3972" Y="640" L="12" P="0,0,0,2,0,0,0,0"  duration="500" reload="500" template="bumper"/>
+      <S T="13" X="3972" Y="640" L="12" P="0,0,0,2,0,0,0,0" duration="500" reload="500" template="bumper"/>
       <S T="13" X="1425" Y="218" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumper"/>
       <S T="13" X="1534" Y="207" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumper"/>
       <S T="13" X="1139" Y="349" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumper"/>

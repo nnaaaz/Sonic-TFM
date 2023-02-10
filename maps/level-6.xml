@@ -290,7 +290,7 @@
       <S T="19" X="5391" Y="1471" L="10" H="32" P="0,0,0.3,0,90,0,0,0" i="1,0,185bb1d3726.png" ontimer="toggle" interval="3" duration=",2000" reload=",2000"/>
       <S T="12" X="577" Y="1215" L="130" H="32" P="0,0,0.3,0.2,0,0,0,0" c="3" i="0,0,184fe77282b.png" ontouch="activate" onactivate="hide" reload="1000"/>
       <S T="12" X="577" Y="896" L="130" H="32" P="0,0,0.3,0.2,0,0,0,0" c="3" i="0,0,184fe77282b.png" ontouch="activate" onactivate="hide" reload="1000"/>
-      <S T="12" X="1462" Y="1644" L="40" H="25" P="0,0,0.3,0.2,0,0,0,0" i="0,0,1848a18b16c.png" ontouch="activate" onactivate="image1848a1585ba.png,0,-14;height70;speed,-120,yes,yes" duration="1000" reload="1000"/>
+      <S T="12" X="1462" Y="1644" L="40" H="25" P="0,0,0.3,0.2,0,0,0,0" i="0,0,1848a18b16c.png" ontouch="activate;speed,-120,yes,yessound lua/sonic/spring" onactivate="image1848a1585ba.png,0,-14;height70" duration="1000" reload="1000"/>
       <S T="12" X="1420" Y="991" L="32" H="32" P="0,0,5,0.2,0,0,0,0" lua="g1" i="0,0,1853c898d59.png" onactivate="dynamic;fixed;mass9999" reload="1000" duration="3000" ontouch="activate@g2"/>
       <S T="12" X="1291" Y="991" L="32" H="32" P="0,0,5,0.2,0,0,0,0" lua="g2" i="0,0,1853c898d59.png" onactivate="dynamic;fixed;mass9999" reload="1000" duration="3000" ontouch="activate@g3"/>
       <S T="12" X="1160" Y="991" L="32" H="32" P="0,0,5,0.2,0,0,0,0" lua="g3" i="0,0,1853c898d59.png" onactivate="dynamic;fixed;mass9999" reload="1000" duration="3000"/>

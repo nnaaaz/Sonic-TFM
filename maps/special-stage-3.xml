@@ -41,7 +41,7 @@
       <S T="13" X="695" Y="37" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
       <S T="13" X="838" Y="685" L="12" P="0,0,0.3,0,90,0,0,0" o="324650" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
       <S T="13" X="70" Y="205" L="12" P="0,0,0.3,0,90,0,0,0" o="324650" c="4" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
-      <S T="13" X="693" Y="109" L="14" P="0,0,0,3,0,0,0,0" o="324650" lua="bumpers1" i="0,0,185dea5bab3.png" ontouch="activate" onactivate="image185dea3ecb2.png,,;width16;restitution5" duration="500" reload="500"/>
+      <S T="13" X="693" Y="109" L="14" P="0,0,0,3,0,0,0,0" o="324650" lua="bumpers1" i="0,0,185dea5bab3.png" ontouch="activate;sound lua/sonic/bumper" onactivate="image185dea3ecb2.png,,;width16;restitution5" duration="500" reload="500"/>
       <S T="13" X="70" Y="157" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
       <S T="13" X="285" Y="205" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
       <S T="13" X="525" Y="205" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>

@@ -210,8 +210,8 @@
       <S T="12" X="1608" Y="857" L="25" H="10" P="0,0,0,0.2,-21,0,0,0"/>
       <S T="19" X="1081" Y="1225" L="28" H="27" P="1,0,0.3,0,0,1,0,0" nosync="" i="-10,-10,185dea439b2.png"/>
       <S T="19" X="5951" Y="725" L="28" H="27" P="1,0,0.3,0,-10,1,0,0" nosync="" i="-10,-10,185dea439b2.png"/>
-      <S T="19" X="1286" Y="1245" L="28" H="27" P="1,0,0.3,0,0,1,0,0" nosync="" i="-10,-10,185dea439b2.png"/>
-      <S T="19" X="6156" Y="745" L="28" H="27" P="1,0,0.3,0,-10,1,0,0" nosync="" i="-10,-10,185dea439b2.png"/>
+      <S T="19" X="1286" Y="1255" L="28" H="27" P="1,0,0.3,0,0,1,0,0" nosync="" i="-10,-10,185dea439b2.png"/>
+      <S T="19" X="6156" Y="755" L="28" H="27" P="1,0,0.3,0,-10,1,0,0" nosync="" i="-10,-10,185dea439b2.png"/>
       <S T="12" X="1876" Y="885" L="25" H="10" P="0,0,0,0.2,9,0,0,0"/>
       <S T="12" X="2204" Y="885" L="25" H="10" P="0,0,0,0.2,-9,0,0,0"/>
       <S T="12" X="940" Y="1397" L="25" H="10" P="0,0,0,0.2,-9,0,0,0"/>
@@ -261,10 +261,10 @@
       <S T="12" X="8791" Y="973" L="108" H="15" P="0,0,0,0.2,-25,0,0,0"/>
       <S T="12" X="8899" Y="944" L="125" H="15" P="0,0,0,0.2,-6,0,0,0"/>
       <S T="12" X="1044" Y="1264" L="42" H="34" P="0,0,0.3,0.2,0,0,0,0"/>
-      <S T="12" X="6312" Y="451" L="32" H="18" P="0,0,0.3,0.2,-90,0,0,0" lua="jumpyl" i="0,0,185f87d44b7.png" ontouch="activate;speed-500,,yes,yes" onactivate="image185f87d91b1.png,-10,;width70" duration="1000" reload="1000"/>
-      <S T="12" X="2981" Y="1481" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" i="0,0,185f87d44b7.png" ontouch="activate;speed,-220,yes,yes" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
-      <S T="12" X="9888" Y="1224" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" i="0,0,185f87d44b7.png" ontouch="activate;speed,-100,yes,yes" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
-      <S T="12" X="2348" Y="760" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" lua="jumpr" i="0,0,185f87cab55.png" ontouch="activate;speed,-175,yes,yes" onactivate="image185f87cf7cd.png,,-10;height70" duration="1000" reload="1000"/>
+      <S T="12" X="6312" Y="451" L="32" H="18" P="0,0,0.3,0.2,-90,0,0,0" lua="jumpyl" i="0,0,185f87d44b7.png" ontouch="activate;speed-500,,yes,yes;sound lua/sonic/spring" onactivate="image185f87d91b1.png,-10,;width70" duration="1000" reload="1000"/>
+      <S T="12" X="2981" Y="1481" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" i="0,0,185f87d44b7.png" ontouch="activate;speed,-220,yes,yes;sound lua/sonic/spring" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
+      <S T="12" X="9888" Y="1224" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" i="0,0,185f87d44b7.png" ontouch="activate;speed,-100,yes,yes;sound lua/sonic/spring" onactivate="image185f87d91b1.png,,-10;height70" duration="1000" reload="1000"/>
+      <S T="12" X="2348" Y="760" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" lua="jumpr" i="0,0,185f87cab55.png" ontouch="activate;speed,-175,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,,-10;height70" duration="1000" reload="1000"/>
       <S T="12" X="3364" Y="757" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="5147" Y="1271" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="3484" Y="757" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
@@ -276,12 +276,12 @@
       <S T="12" X="3544" Y="757" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="6816" Y="984" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
       <S T="12" X="5249" Y="1463" L="32" H="18" P="0,0,0.3,0.2,0,0,0,0" duration="1000" reload="1000" template="jumpr"/>
-      <S T="12" X="11" Y="447" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed250,,yes,yes" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
-      <S T="12" X="3748" Y="1410" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed250,,yes,yes" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
-      <S T="12" X="5740" Y="739" L="32" H="18" P="0,0,0.3,0.2,180,0,0,0" lua="jumpd" i="0,0,185f87cab55.png" ontouch="activate;speed,500,yes,yes" onactivate="image185f87cf7cd.png,,10" duration="1000" reload="1000"/>
+      <S T="12" X="11" Y="447" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed250,,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
+      <S T="12" X="3748" Y="1410" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed250,,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
+      <S T="12" X="5740" Y="739" L="32" H="18" P="0,0,0.3,0.2,180,0,0,0" lua="jumpd" i="0,0,185f87cab55.png" ontouch="activate;speed,500,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,,10" duration="1000" reload="1000"/>
       <S T="12" X="1648" Y="740" L="32" H="18" P="0,0,0.3,0.2,180,0,0,0" duration="1000" reload="1000" template="jumpd"/>
-      <S T="12" X="8969" Y="961" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed120,,yes,yes" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
-      <S T="13" X="809" Y="433" L="12" P="0,0,0,3,0,0,0,0" lua="bumper" i="0,0,185dea5bab3.png" ontouch="activate" onactivate="image185dea3ecb2.png,,;width16;restitution2" duration="500" reload="500"/>
+      <S T="12" X="8969" Y="961" L="32" H="18" P="0,0,0.3,0.2,90,0,0,0" i="0,0,185f87cab55.png" ontouch="activate;speed120,,yes,yes;sound lua/sonic/spring" onactivate="image185f87cf7cd.png,10,;width70" duration="1000" reload="1000"/>
+      <S T="13" X="809" Y="433" L="12" P="0,0,0,3,0,0,0,0" lua="bumper" i="0,0,185dea5bab3.png" ontouch="activate'sound lua/sonic/bumper" onactivate="image185dea3ecb2.png,,;width16;restitution2" duration="500" reload="500"/>
       <S T="13" X="5186" Y="875" L="12" P="0,0,0,1.5,0,0,0,0" duration="500" reload="500" template="bumper"/>
       <S T="13" X="5292" Y="1023" L="12" P="0,0,0,1.5,0,0,0,0" duration="500" reload="500" template="bumper"/>
       <S T="13" X="5245" Y="947" L="12" P="0,0,0,1.5,0,0,0,0" duration="500" reload="500" template="bumper"/>
