@@ -46,6 +46,7 @@ splashscreen.image="18626ac8cb2.png"
 
 system.disableChatCommandDisplay(nil, true)
 tfm.exec.disableAfkDeath(true)
+tfm.exec.disableAutoNewGame(true)
 tfm.exec.disableAutoScore(true)
 tfm.exec.disableAutoShaman(true)
 tfm.exec.disableAutoTimeLeft(true)
@@ -297,6 +298,7 @@ table.insert(sonic_maps, "special stage 3")
 local holding_key = {}
 local boost_enabled = true
 local pending_respawn_players = {}
+local newgame_called = false
 
 
 ---
@@ -330,6 +332,7 @@ function eventNewGame()
   local map = newgame.current_map
   boost_enabled = not map or not map.disable_boost
   pending_respawn_players = {}
+  newgame_called = false
 end
 
 function eventNewPlayer(name)
@@ -367,13 +370,17 @@ function eventPlayerWon(name)
 end
 
 
-function eventLoop()
+function eventLoop(time, time_remaining)
   if newgame.current_map and newgame.current_map.autorespawn ~= false then
     for player_name in pairs(pending_respawn_players) do
       tfm.exec.respawnPlayer(player_name)
     end
   end
   pending_respawn_players = {}
+  if not newgame_called and time_remaining <= 0 then
+    tfm.exec.newGame("sonic")
+    newgame_called = true
+  end
 end
 
 
