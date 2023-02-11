@@ -310,6 +310,7 @@ local function TouchPlayer(name)
   tfm.exec.bindKeyboard(name, 0, false, true)
   tfm.exec.bindKeyboard(name, 2, true, true)
   tfm.exec.bindKeyboard(name, 2, false, true)
+  tfm.exec.bindKeyboard(name, 1, true, true)
 end
 
 
@@ -355,6 +356,12 @@ function eventKeyboard(name, key, down, x, y, vx, vy)
     end
     
     ApplyPlayerForce(name)
+  elseif key == 1 then
+    local player = tfm.get.room.playerList[name]
+    if down and not player.isJumping and (not player.averageLatency or player.averageLatency < 150) then
+      tfm.exec.playSound('lua/sonic/jump', 100, nil, nil, name)
+      tfm.exec.movePlayer(name, 0, 0, true, 0, -10, true)
+    end
   end
 end
 
