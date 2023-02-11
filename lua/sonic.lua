@@ -354,13 +354,14 @@ function eventKeyboard(name, key, down, x, y, vx, vy)
     elseif holding_key[name] then
       holding_key[name] = 0
     end
-    
+
     ApplyPlayerForce(name)
-  elseif key == 1 then
+  elseif key == 1 and boost_enabled then
     local player = tfm.get.room.playerList[name]
-    if down and not player.isJumping and (not player.averageLatency or player.averageLatency < 150) then
+    if down and math.abs(vy) < 10 and not player.isJumping and (not player.averageLatency or player.averageLatency < 150) then
       tfm.exec.playSound('lua/sonic/jump', 100, nil, nil, name)
       tfm.exec.movePlayer(name, 0, 0, true, 0, -10, true)
+      tfm.exec.displayParticle(26, x, y, vx / 30, vy / 30, 0, 0, name)
     end
   end
 end
