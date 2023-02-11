@@ -394,6 +394,12 @@ function eventLoop(time, time_remaining)
   end
 end
 
+function eventContactListener(name, groundId, contact)
+  if groundId == 3000 then
+    tfm.exec.playSound('lua/sonic/deathspike', 100, nil, nil, name)
+  end
+end
+
 
 ---
 -- Other Events
