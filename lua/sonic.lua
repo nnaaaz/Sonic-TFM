@@ -146,6 +146,7 @@ table.insert(sonic_maps, "level 3")
 maps["special stage 1"] = {author = "<strike><b><bv>SONIC</bv></b></strike>", xml = levels["special-stage-1"].xml, title = "<strike><n>Special Stage</n></strike> <j>1</j>", background_color = "#00b4b4", duration = 90, autorespawn = false}
 maps["special stage 1"].traps = levels["special-stage-1"].traps
 maps["special stage 1"].bonuses = {}
+maps["special stage 1"].disable_boost = true
 
 local coins = {{x = 242, y = 187}, {x = 271, y = 257}, {x = 407, y = 298}, {x = 479, y = 388}, {x = 482, y = 578}, {x = 482, y = 647}, {x = 272, y = 187}, {x = 301, y = 257}, {x = 437, y = 298}, {x = 511, y = 388}, {x = 514, y = 578}, {x = 514, y = 647}, {x = 494, y = 754}, {x = 494, y = 794}, {x = 494, y = 834}, {x = 638, y = 613}, {x = 678, y = 613}, {x = 718, y = 613}, {x = 137, y = 501}, {x = 137, y = 810}, {x = 137, y = 461}, {x = 137, y = 770}, {x = 137, y = 421}, {x = 137, y = 730}, {x = 89, y = 648}, {x = 89, y = 568}, {x = 187, y = 532}, {x = 187, y = 692}, {x = 273, y = 568}, {x = 273, y = 648}}
 for i_coin, coin in ipairs(coins) do
@@ -218,6 +219,7 @@ table.insert(sonic_maps, "level 6")
 maps["special stage 2"] = {author = "<strike><b><bv>SONIC</bv></b></strike>", xml = levels["special-stage-2"].xml, title = "<strike><n>Special Stage</n></strike> <j>2</j>", background_color = "#00b4b4", duration = 90, autorespawn = false}
 maps["special stage 2"].traps = levels["special-stage-2"].traps
 maps["special stage 2"].bonuses = {}
+maps["special stage 2"].disable_boost = true
 
 local coins = {{x = 283, y = 130}, {x = 430, y = 309}, {x = 575, y = 450}, {x = 285, y = 450}, {x = 283, y = 882}, {x = 583, y = 882}, {x = 573, y = 130}, {x = 283, y = 170}, {x = 430, y = 349}, {x = 575, y = 490}, {x = 285, y = 490}, {x = 283, y = 922}, {x = 583, y = 922}, {x = 573, y = 170}, {x = 323, y = 130}, {x = 470, y = 309}, {x = 615, y = 450}, {x = 325, y = 450}, {x = 323, y = 882}, {x = 623, y = 882}, {x = 613, y = 130}, {x = 323, y = 170}, {x = 470, y = 349}, {x = 615, y = 490}, {x = 325, y = 490}, {x = 323, y = 922}, {x = 623, y = 922}, {x = 613, y = 170}}
 for i_coin, coin in ipairs(coins) do
@@ -284,6 +286,7 @@ table.insert(sonic_maps, "level 9")
 maps["special stage 3"] = {author = "<strike><b><bv>SONIC</bv></b></strike>", xml = levels["special-stage-3"].xml, title = "<strike><n>Special Stage</n></strike> <j>3</j>", background_color = "#00b4b4", duration = 90, autorespawn = false}
 maps["special stage 3"].traps = levels["special-stage-3"].traps
 maps["special stage 3"].bonuses = {}
+maps["special stage 3"].disable_boost = true
 local coins = {{x = 333, y = 169}, {x = 330, y = 720}, {x = 383, y = 169}, {x = 380, y = 720}, {x = 433, y = 169}, {x = 430, y = 720}, {x = 483, y = 169}, {x = 480, y = 720}, {x = 128, y = 373}, {x = 681, y = 373}, {x = 128, y = 423}, {x = 681, y = 423}, {x = 128, y = 473}, {x = 681, y = 473}, {x = 128, y = 523}, {x = 681, y = 523}, {x = 194, y = 635}, {x = 194, y = 248}, {x = 580, y = 635}, {x = 580, y = 248}, {x = 234, y = 635}, {x = 234, y = 248}, {x = 620, y = 635}, {x = 620, y = 248}, {x = 370, y = 564}, {x = 370, y = 322}, {x = 335, y = 380}, {x = 475, y = 378}, {x = 475, y = 508}, {x = 335, y = 508}, {x = 410, y = 564}, {x = 410, y = 322}, {x = 450, y = 564}, {x = 450, y = 322}}
 for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
