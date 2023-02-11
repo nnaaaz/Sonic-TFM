@@ -8,8 +8,14 @@ NAME_MAIN_EXT			= $(OUT_DIR)/sonic_ext.tfm.lua.txt
 ALL_NAMES				= lua/generated_levels.lua $(NAME_MAIN) $(NAME_MAIN_EXT)
 ALL_TESTS				= $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(TEST_RESULTS_DIR)/%.stdout.txt, $(ALL_NAMES))
 
+OPTIONS					= --werror --test-init --minify
+
 # Rules:
 all: $(ALL_NAMES)
+
+.PHONY: clip
+clip: OPTIONS += --clip
+clip: $(NAME_MAIN)
 
 test: $(ALL_TESTS)
 
@@ -24,7 +30,7 @@ lua/generated_levels.lua: maps/*.xml
 $(OUT_DIR)/%.tfm.lua.txt: | $(OUT_DIR)/ $(DEPS_DIR)/
 	@printf "\e[92m Generating %s\n" $@ || true
 	@printf "\e[94m" || true
-	./pshy_merge/combine.py --werror --test-init --minify --deps $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(DEPS_DIR)/%.tfm.lua.txt.d, $@) --out $@ -- $(patsubst $(OUT_DIR)/%.tfm.lua.txt, %, $@)
+	./pshy_merge/combine.py $(OPTIONS) --deps $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(DEPS_DIR)/%.tfm.lua.txt.d, $@) --out $@ -- $(patsubst $(OUT_DIR)/%.tfm.lua.txt, %, $@)
 	@printf "\e[0m" || true
 
 $(TEST_RESULTS_DIR)/%.stdout.txt: $(OUT_DIR)/%.tfm.lua.txt $(NAME_TFMEMULATOR) | $(TEST_RESULTS_DIR)/
