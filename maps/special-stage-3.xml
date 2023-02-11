@@ -1,12 +1,12 @@
 <C>
-  <P H="850" G="0,0" DS="m;499,117,306,115,73,352,69,542,307,776,499,776,737,541,736,349" />
+  <P H="870" G="0,0" DS="m;499,117,306,115,73,352,69,542,307,776,499,776,737,541,736,349" MEDATA=";;;;-0;0::0,1,2,3:1-"/>
   <Z>
     <S>
       <S T="12" X="405" Y="85" L="258" H="23" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="400" Y="445" L="20" H="20" P="1,0,0.3,0.2,0,0,0,0" c="4" nosync="" i="-2000,-2000,186099273c2.png"/>
       <S T="12" X="398" Y="-82" L="14" H="19" P="1,99999,0.3,0.2,0,0,0,0"/>
       <S T="12" X="395" Y="13" L="14" H="19" P="1,999,0.3,0.2,0,1,0,0"/>
-      <S T="12" X="0" Y="20" L="10" H="10" P="0,0,0.3,0.2,0,0,0,0" o="324650" c="4" i="10,10,1860d2619d1.png"/>
+      <S T="12" X="0" Y="20" L="10" H="10" P="0,0,0.3,0.2,0,0,0,0" c="4" i="10,10,1860d2619d1.png"/>
       <S T="12" X="572" Y="110" L="73" H="26" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="597" Y="63" L="24" H="72" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="693" Y="61" L="24" H="72" P="0,0,0.3,0.2,0,0,0,0"/>
@@ -37,26 +37,26 @@
       <S T="12" X="129" Y="158" L="95" H="26" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="188" Y="134" L="22" H="26" P="0,0,0.3,0.2,0,0,0,0"/>
       <S T="12" X="240" Y="109" L="69" H="26" P="0,0,0.3,0.2,0,0,0,0"/>
-      <S T="13" X="214" Y="853" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="" duration="1000" reload="1000" delay="1"/>
-      <S T="13" X="695" Y="37" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
-      <S T="13" X="838" Y="685" L="12" P="0,0,0.3,0,90,0,0,0" o="324650" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
-      <S T="13" X="70" Y="205" L="12" P="0,0,0.3,0,90,0,0,0" o="324650" c="4" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
-      <S T="13" X="693" Y="109" L="14" P="0,0,0,3,0,0,0,0" o="324650" lua="bumpers1" i="0,0,185dea5bab3.png" ontouch="activate" onactivate="image185dea3ecb2.png,,;width16;restitution5" duration="500" reload="500"/>
-      <S T="13" X="70" Y="157" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="285" Y="205" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="525" Y="205" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="645" Y="325" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="173" Y="325" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="165" Y="565" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="645" Y="565" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="525" Y="685" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="285" Y="685" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="741" Y="445" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="741" Y="733" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="214" Y="853" L="12" P="0,0,0.3,0,0,0,0,0" i="-48,0,1860d49efb2.png" ontimer="toggle;sound cite18/bouton2" interval="3" duration="1000" reload="1000" delay="1"/>
+      <S T="13" X="695" Y="37" L="12" P="0,0,0.3,0,0,0,0,0" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
+      <S T="13" X="838" Y="685" L="12" P="0,0,0.3,0,90,0,0,0" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
+      <S T="13" X="70" Y="205" L="12" P="0,0,0.3,0,90,0,0,0" c="4" i="-48,0,1860d49efb2.png" ontimer="toggle" interval="3" duration="1000" reload="1000" delay="1"/>
+      <S T="13" X="693" Y="109" L="14" P="0,0,0,3,0,0,0,0" lua="bumpers1" i="0,0,185dea5bab3.png" ontouch="activate;sound lua/sonic/bumper" onactivate="image185dea3ecb2.png,,;width16;restitution5" duration="500" reload="500"/>
+      <S T="13" X="70" Y="157" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="285" Y="205" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="525" Y="205" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="645" Y="325" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="173" Y="325" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="165" Y="565" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="645" Y="565" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="525" Y="685" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="285" Y="685" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="741" Y="445" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="741" Y="733" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
       <S T="13" X="405" Y="781" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="117" Y="781" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="69" Y="445" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
-      <S T="13" X="405" Y="109" L="12" P="0,0,0,3,0,0,0,0" o="324650" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="117" Y="781" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="69" Y="445" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
+      <S T="13" X="405" Y="109" L="12" P="0,0,0,3,0,0,0,0" duration="500" reload="500" template="bumpers1"/>
       <S T="13" X="141" Y="229" L="12" P="0,0,0.3,1,0,0,0,0"/>
       <S T="13" X="621" Y="181" L="12" P="0,0,0.3,1,0,0,0,0"/>
       <S T="13" X="621" Y="421" L="12" P="0,0,0.3,1,0,0,0,0"/>
@@ -73,60 +73,60 @@
       <S T="12" X="285" Y="564" L="85" H="22" P="0,0,0.3,1,405,0,0,0"/>
       <S T="12" X="525" Y="325" L="85" H="22" P="0,0,0.3,1,46,0,0,0"/>
       <S T="12" X="525" Y="565" L="85" H="22" P="0,0,0.3,1,495,0,0,0"/>
-      <S T="12" X="505" Y="430" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" i="0,0,1860d4908b6.png" ontouch="activate" duration="2000" reload="1000" onactivate="hide"/>
-      <S T="12" X="346" Y="296" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d2" i="0,0,1860d4955b3.png" ontouch="activate" duration="2000" reload="1000" onactivate="hide"/>
-      <S T="12" X="357" Y="401" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d3" i="0,0,1860d49a2b3.png" ontouch="activate" duration="2000" reload="1000" onactivate="hide"/>
-      <S T="12" X="504" Y="458" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="308" Y="458" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="330" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="487" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="369" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="409" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="449" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="504" Y="488" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="308" Y="488" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="504" Y="518" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="308" Y="518" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="504" Y="398" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="308" Y="398" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="389" Y="401" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="389" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="369" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="330" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="359" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="359" Y="461" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="409" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="359" Y="431" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="449" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="419" Y="401" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="486" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="419" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="449" Y="400" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="449" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="449" Y="461" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="449" Y="431" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" duration="2000" reload="1000" template="d3"/>
-      <S T="12" X="308" Y="428" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="504" Y="368" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="308" Y="368" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d1"/>
-      <S T="12" X="257" Y="414" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="554" Y="389" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="377" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="376" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="346" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="407" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="406" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="437" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="436" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="467" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="466" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="257" Y="379" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="554" Y="419" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="257" Y="446" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="554" Y="449" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="257" Y="478" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="554" Y="479" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="257" Y="510" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
-      <S T="12" X="554" Y="509" L="15" H="15" P="0,0,0.3,1,0,0,0,0" o="324650" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="505" Y="430" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" i="0,0,1860d4908b6.png" ontouch="activate" duration="2000" reload="1000" onactivate="hide"/>
+      <S T="12" X="346" Y="296" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d2" i="0,0,1860d4955b3.png" ontouch="activate" duration="2000" reload="1000" onactivate="hide"/>
+      <S T="12" X="357" Y="401" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d3" i="0,0,1860d49a2b3.png" ontouch="activate" duration="2000" reload="1000" onactivate="hide"/>
+      <S T="12" X="504" Y="458" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="308" Y="458" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="330" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="487" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="369" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="409" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="449" Y="350" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="504" Y="488" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="308" Y="488" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="504" Y="518" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="308" Y="518" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="504" Y="398" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="308" Y="398" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="389" Y="401" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="389" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="369" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="330" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="359" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="359" Y="461" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="409" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="359" Y="431" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="449" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="419" Y="401" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="486" Y="540" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="419" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="449" Y="400" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="449" Y="491" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="449" Y="461" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="449" Y="431" L="15" H="15" P="0,0,0.3,1,0,0,0,0" duration="2000" reload="1000" template="d3"/>
+      <S T="12" X="308" Y="428" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="504" Y="368" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="308" Y="368" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d1"/>
+      <S T="12" X="257" Y="414" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="554" Y="389" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="377" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="376" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="346" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="407" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="406" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="437" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="436" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="467" Y="295" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="466" Y="593" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="257" Y="379" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="554" Y="419" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="257" Y="446" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="554" Y="449" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="257" Y="478" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="554" Y="479" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="257" Y="510" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
+      <S T="12" X="554" Y="509" L="15" H="15" P="0,0,0.3,1,0,0,0,0" lua="d1" duration="2000" reload="1000" template="d2"/>
       <S T="19" X="20" Y="204" L="23" H="121" P="0,0,0.3,0.2,0,0,0,0" m=""/>
       <S T="19" X="790" Y="683" L="23" H="121" P="0,0,0.3,0.2,0,0,0,0" m=""/>
       <S T="19" X="163" Y="853" L="23" H="121" P="0,0,0.3,0.2,-90,0,0,0" m=""/>
@@ -144,20 +144,20 @@
       <S T="13" X="741" Y="493" L="12" P="0,0,0.3,0.2,90,0,0,0" duration="1000" reload="1000" template="up"/>
       <S T="13" X="69" Y="397" L="12" P="0,0,0.3,0.2,90,0,0,0" duration="1000" reload="1000" template="up"/>
       <S T="13" X="620" Y="444" L="12" P="0,0,0.3,0.2,90,0,0,0" duration="1000" reload="1000" template="right"/>
-      <S T="13" X="453" Y="781" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" lua="sign" i="0,0,1860d4a3cb7.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1"/>
-      <S T="13" X="357" Y="781" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
-      <S T="13" X="69" Y="493" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
-      <S T="13" X="741" Y="493" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
-      <S T="13" X="69" Y="397" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
-      <S T="13" X="741" Y="397" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
-      <S T="13" X="357" Y="109" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
-      <S T="13" X="453" Y="109" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
+      <S T="13" X="453" Y="781" L="12" P="0,0,0.3,0,0,0,0,0" c="4" lua="sign" i="0,0,1860d4a3cb7.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1"/>
+      <S T="13" X="357" Y="781" L="12" P="0,0,0.3,0,0,0,0,0" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
+      <S T="13" X="69" Y="493" L="12" P="0,0,0.3,0,0,0,0,0" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
+      <S T="13" X="741" Y="493" L="12" P="0,0,0.3,0,0,0,0,0" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
+      <S T="13" X="69" Y="397" L="12" P="0,0,0.3,0,0,0,0,0" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
+      <S T="13" X="741" Y="397" L="12" P="0,0,0.3,0,0,0,0,0" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
+      <S T="13" X="357" Y="109" L="12" P="0,0,0.3,0,0,0,0,0" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
+      <S T="13" X="453" Y="109" L="12" P="0,0,0.3,0,0,0,0,0" c="4" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1" template="sign"/>
       <S T="13" X="189" Y="445" L="12" P="0,0,0.3,1,0,0,0,0" c="4" i="-12,-12,1860eaff2ad.png"/>
       <S T="13" X="405" Y="661" L="12" P="0,0,0.3,1,0,0,0,0" c="4" i="-12,-12,1860eaff2ad.png"/>
-      <S T="13" X="405" Y="661" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" i="0,0,1860eafa5e9.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="2"/>
-      <S T="13" X="190" Y="445" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" i="0,0,1860eafa5e9.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="2"/>
-      <S T="13" X="620" Y="444" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" i="0,0,1860d4ad6b4.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1"/>
-      <S T="13" X="405" Y="229" L="12" P="0,0,0.3,0,0,0,0,0" o="324650" c="4" i="0,0,1860d4ad6b4.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1"/>
+      <S T="13" X="405" Y="661" L="12" P="0,0,0.3,0,0,0,0,0" c="4" i="0,0,1860eafa5e9.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="2"/>
+      <S T="13" X="190" Y="445" L="12" P="0,0,0.3,0,0,0,0,0" c="4" i="0,0,1860eafa5e9.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="2"/>
+      <S T="13" X="620" Y="444" L="12" P="0,0,0.3,0,0,0,0,0" c="4" i="0,0,1860d4ad6b4.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1"/>
+      <S T="13" X="405" Y="229" L="12" P="0,0,0.3,0,0,0,0,0" c="4" i="0,0,1860d4ad6b4.png" ontimer="toggle" interval="2" duration="1000" reload="1000" delay="1"/>
     </S>
     <D>
       <F X="405" Y="454"/>
