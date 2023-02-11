@@ -40,5 +40,6 @@ function eventPlayerWon(player_name)
 	if player_checkpoint_images[player_name] then
 		tfm.exec.removeImage(player_checkpoint_images[player_name])
 	end
+	checkpoint_coords[player_name] = nil
 	checkpoints.UnsetPlayerCheckpoint(player_name)
 end
