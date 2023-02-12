@@ -26,6 +26,9 @@ test: $(ALL_TESTS)
 
 lua/generated_levels.lua: maps/*.xml
 	python3 tools/parse_maps.py
+	mv lua/generated_levels.lua lua/generated_levels.lua.tmp
+	luamin -f lua/generated_levels.lua.tmp > lua/generated_levels.lua
+	echo "" >> lua/generated_levels.lua
 
 $(OUT_DIR)/%.tfm.lua.txt: | $(OUT_DIR)/ $(DEPS_DIR)/
 	@printf "\e[92m Generating %s\n" $@ || true
