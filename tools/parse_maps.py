@@ -2,10 +2,10 @@ import xml.etree.ElementTree as ET
 import os
 import re
 
-from os.path import splitext
+from os.path import splitext, join
 
 
-OUTPUT_FILE = 'lua/generated_levels.lua'
+OUTPUT_DIR = 'lua/levels'
 GROUND_COMMANDS = [
     'hide',
     'show',
@@ -30,7 +30,6 @@ GROUND_COMMANDS = [
 
 levelXML = {}
 traps = {}
-lines = [] # output file
 
 
 def default_collision(t):
@@ -264,168 +263,180 @@ def find_trap(traps, name):
 def generate_command_code(lines, cmd):
     lines += [f'          commands["{cmd["type"]}"]({concat_command_params(cmd["params"])}),']
 
-def generate_code(lines):
-    lines += ['local traps = pshy.require("traps")']
-    lines += ['local commands = traps.commands']
-    lines += ['local TRAP_RELOAD = traps.TRAP_RELOAD']
-    lines += ['local TRAP_DURATION = traps.TRAP_DURATION']
-    lines += ['return {']
+def generate_levels():
+    level_requires = []
 
     for (name, xml) in levelXML.items():
-        lines += [f'  ["{splitext(name)[0]}"] = {{']
-        lines += [f'    xml = [[{ET.tostring(xml.getroot(), encoding="unicode")}]],']
-        lines += ['    traps = {']
+        lines = []
+        filename = splitext(name)[0]
+        generate_code(lines, name, xml)
+        save_lua(join(OUTPUT_DIR, filename + '.lua'), lines)
+        level_requires += [f'  ["{filename}"] = pshy.require("levels.{filename}")(commands, TRAP_RELOAD, TRAP_DURATION),']
 
-        for original_trap in traps[name]:
-            trap = original_trap
-
-            if trap["template"] is not None:
-                template_trap = find_trap(traps[name], trap["template"])
-                if template_trap is not None:
-                    new_trap = dict(template_trap)
-                    new_trap["id"] = trap["id"]
-                    new_trap["name"] = trap["name"]
-
-                    if new_trap["ground"]:
-                        new_trap["ground"]["x"] = trap["ground"]["x"]
-                        new_trap["ground"]["y"] = trap["ground"]["y"]
-
-                    if trap["groups"]:
-                        new_trap["groups"] = trap["groups"]
-
-                    if trap["onactivate"]:
-                        new_trap["onactivate"] = trap["onactivate"]
-
-                    if trap["ondeactivate"]:
-                        new_trap["ondeactivate"] = trap["ondeactivate"]
-
-                    if trap["ontouch"]:
-                        new_trap["ontouch"] = trap["ontouch"]
-
-                    if trap["ontimer"]:
-                        new_trap["ontimer"] = trap["ontimer"]
-
-                    if trap["image"]:
-                        new_trap["image"] = trap["image"]
-
-                    if trap["duration"]:
-                        new_trap["duration"] = trap["duration"]
-
-                    if trap["reload"]:
-                        new_trap["reload"] = trap["reload"]
-
-                    if trap["timerDuration"]:
-                        new_trap["timerDuration"] = trap["timerDuration"]
-
-                    if trap["timerReload"]:
-                        new_trap["timerReload"] = trap["timerReload"]
-
-                    if trap["interval"]:
-                        new_trap["interval"] = trap["interval"]
-
-                    if trap["delay"]:
-                        new_trap["delay"] = trap["delay"]
-
-                    trap = new_trap
-
-            lines += ['      {']
-            lines += [f'        id = {trap["id"]},']
-            lines += [f'        name = "{trap["name"].replace("#", "")}",']
-
-            lines += ['        groups = {']
-            for group in trap["groups"]:
-                lines += ['        {']
-                lines += [f'          name = "{group["name"]}",']
-                lines += [f'          behaviour = {group["behaviour"]},']
-                lines += ['        },']
-            lines += ['        },']
-
-            lines += ['        onactivate = {']
-            for cmd in trap["onactivate"]:
-                generate_command_code(lines, cmd)
-            lines += ['        },']
-
-            lines += ['        ondeactivate = {']
-            for cmd in trap["ondeactivate"]:
-                generate_command_code(lines, cmd)
-            lines += ['        },']
-
-            lines += ['        ontouch = {']
-            for cmd in trap["ontouch"]:
-                generate_command_code(lines, cmd)
-            lines += ['        },']
-
-            lines += ['        ontimer = {']
-            for cmd in trap["ontimer"]:
-                generate_command_code(lines, cmd)
-            lines += ['        },']
-
-            ground = trap["ground"]
-
-            if ground:
-                lines += ['        getGround = function()']
-                lines += ['          return {']
-                lines += [f'          x = {ground["x"]},']
-                lines += [f'          y = {ground["y"]},']
-
-                if trap["invisible"]:
-                    if ground["type"] == 14:
-                        lines += [f'          type = 14,']
-                    else:
-                        lines += ['          type = 12,']
-                else:
-                    lines += [f'          type = {ground["type"]},']
-
-                lines += [f'          width = {ground["width"]},']
-                lines += [f'          height = {ground["height"]},']
-
-                if "image" in trap and trap["image"]:
-                    image = trap["image"]
-                    params = ','.join(image[1:9])
-
-                    if len(image) >= 10:
-                        params += ',' + (params[9] == '1' and 'true' or 'false')
-
-                    lines += [f'          image = {{"{image[0]}",{params}}},']
-
-                if trap["invisible"]:
-                    lines += ['          color = 0,']
-                else:
-                    lines += [f'          color = {ground["color"] is None and "nil" or hex(ground["color"])},']
-
-                lines += [f'          miceCollision = {ground["miceCollision"]},']
-                lines += [f'          groundCollision = {ground["groundCollision"]},']
-                lines += [f'          dynamic = {ground["dynamic"]},']
-                lines += [f'          angle = {ground["angle"]},']
-                lines += [f'          friction = {ground["friction"]},']
-                lines += [f'          restitution = {ground["restitution"]},']
-                lines += [f'          foreground = {ground["foreground"]},']
-                lines += [f'          fixedRotation = {ground["fixedRotation"]},']
-                lines += [f'          linearDamping = {ground["linearDamping"]},']
-                lines += [f'          angularDamping = {ground["angularDamping"]},']
-                lines += ['          }']
-                lines += ['        end,']
-
-            lines += [f'        duration = {trap["duration"]},']
-            lines += [f'        reload = {trap["reload"]},']
-            lines += [f'        timerDuration = {trap["timerDuration"]},']
-            lines += [f'        timerReload = {trap["timerReload"]},']
-            lines += [f'        interval = {trap["interval"]},']
-            lines += [f'        delay = {trap["delay"]},']
-            lines += ['      },']
-
-        lines += ['    },']
-        lines += ['  },']
-
+    lines = [
+        'local traps = pshy.require("traps")',
+        'local commands = traps.commands',
+        'local TRAP_RELOAD = traps.TRAP_RELOAD',
+        'local TRAP_DURATION = traps.TRAP_DURATION',
+        'return {',
+    ]
+    lines += level_requires
     lines += ['}']
+    save_lua(join(OUTPUT_DIR, 'init.lua'), lines)
 
-def save_lua(lines):
-    with open(OUTPUT_FILE, 'w', encoding="utf8") as luafile:
+def generate_code(lines, name, xml):
+    lines += ['return function(commands, TRAP_RELOAD, TRAP_DURATION)']
+    lines += [f'  return {{']
+    lines += [f'    xml = [[{ET.tostring(xml.getroot(), encoding="unicode")}]],']
+    lines += ['    traps = {']
+
+    for original_trap in traps[name]:
+        trap = original_trap
+
+        if trap["template"] is not None:
+            template_trap = find_trap(traps[name], trap["template"])
+            if template_trap is not None:
+                new_trap = dict(template_trap)
+                new_trap["id"] = trap["id"]
+                new_trap["name"] = trap["name"]
+
+                if new_trap["ground"]:
+                    new_trap["ground"]["x"] = trap["ground"]["x"]
+                    new_trap["ground"]["y"] = trap["ground"]["y"]
+
+                if trap["groups"]:
+                    new_trap["groups"] = trap["groups"]
+
+                if trap["onactivate"]:
+                    new_trap["onactivate"] = trap["onactivate"]
+
+                if trap["ondeactivate"]:
+                    new_trap["ondeactivate"] = trap["ondeactivate"]
+
+                if trap["ontouch"]:
+                    new_trap["ontouch"] = trap["ontouch"]
+
+                if trap["ontimer"]:
+                    new_trap["ontimer"] = trap["ontimer"]
+
+                if trap["image"]:
+                    new_trap["image"] = trap["image"]
+
+                if trap["duration"]:
+                    new_trap["duration"] = trap["duration"]
+
+                if trap["reload"]:
+                    new_trap["reload"] = trap["reload"]
+
+                if trap["timerDuration"]:
+                    new_trap["timerDuration"] = trap["timerDuration"]
+
+                if trap["timerReload"]:
+                    new_trap["timerReload"] = trap["timerReload"]
+
+                if trap["interval"]:
+                    new_trap["interval"] = trap["interval"]
+
+                if trap["delay"]:
+                    new_trap["delay"] = trap["delay"]
+
+                trap = new_trap
+
+        lines += ['      {']
+        lines += [f'        id = {trap["id"]},']
+        lines += [f'        name = "{trap["name"].replace("#", "")}",']
+
+        lines += ['        groups = {']
+        for group in trap["groups"]:
+            lines += ['        {']
+            lines += [f'          name = "{group["name"]}",']
+            lines += [f'          behaviour = {group["behaviour"]},']
+            lines += ['        },']
+        lines += ['        },']
+
+        lines += ['        onactivate = {']
+        for cmd in trap["onactivate"]:
+            generate_command_code(lines, cmd)
+        lines += ['        },']
+
+        lines += ['        ondeactivate = {']
+        for cmd in trap["ondeactivate"]:
+            generate_command_code(lines, cmd)
+        lines += ['        },']
+
+        lines += ['        ontouch = {']
+        for cmd in trap["ontouch"]:
+            generate_command_code(lines, cmd)
+        lines += ['        },']
+
+        lines += ['        ontimer = {']
+        for cmd in trap["ontimer"]:
+            generate_command_code(lines, cmd)
+        lines += ['        },']
+
+        ground = trap["ground"]
+
+        if ground:
+            lines += ['        getGround = function()']
+            lines += ['          return {']
+            lines += [f'          x = {ground["x"]},']
+            lines += [f'          y = {ground["y"]},']
+
+            if trap["invisible"]:
+                if ground["type"] == 14:
+                    lines += [f'          type = 14,']
+                else:
+                    lines += ['          type = 12,']
+            else:
+                lines += [f'          type = {ground["type"]},']
+
+            lines += [f'          width = {ground["width"]},']
+            lines += [f'          height = {ground["height"]},']
+
+            if "image" in trap and trap["image"]:
+                image = trap["image"]
+                params = ','.join(image[1:9])
+
+                if len(image) >= 10:
+                    params += ',' + (params[9] == '1' and 'true' or 'false')
+
+                lines += [f'          image = {{"{image[0]}",{params}}},']
+
+            if trap["invisible"]:
+                lines += ['          color = 0,']
+            else:
+                lines += [f'          color = {ground["color"] is None and "nil" or hex(ground["color"])},']
+
+            lines += [f'          miceCollision = {ground["miceCollision"]},']
+            lines += [f'          groundCollision = {ground["groundCollision"]},']
+            lines += [f'          dynamic = {ground["dynamic"]},']
+            lines += [f'          angle = {ground["angle"]},']
+            lines += [f'          friction = {ground["friction"]},']
+            lines += [f'          restitution = {ground["restitution"]},']
+            lines += [f'          foreground = {ground["foreground"]},']
+            lines += [f'          fixedRotation = {ground["fixedRotation"]},']
+            lines += [f'          linearDamping = {ground["linearDamping"]},']
+            lines += [f'          angularDamping = {ground["angularDamping"]},']
+            lines += ['          }']
+            lines += ['        end,']
+
+        lines += [f'        duration = {trap["duration"]},']
+        lines += [f'        reload = {trap["reload"]},']
+        lines += [f'        timerDuration = {trap["timerDuration"]},']
+        lines += [f'        timerReload = {trap["timerReload"]},']
+        lines += [f'        interval = {trap["interval"]},']
+        lines += [f'        delay = {trap["delay"]},']
+        lines += ['      },']
+
+    lines += ['    },']
+    lines += ['  }']
+    lines += ['end']
+
+def save_lua(filename, lines):
+    with open(filename, 'w', encoding="utf8") as luafile:
         luafile.write('\n'.join(lines))
-        print("Generated lua code for levels successfully!")
-
+        print(f"Generated lua code for {filename} successfully!")
 
 read_xmls()
 parse_traps()
-generate_code(lines)
-save_lua(lines)
+generate_levels()

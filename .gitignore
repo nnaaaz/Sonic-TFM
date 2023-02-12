@@ -16,4 +16,5 @@ deps/
 # Thirdparty scripts:
 pshy_merge/lua/other/
 
+lua/levels/*.lua
 generated_*.lua

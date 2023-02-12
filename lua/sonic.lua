@@ -28,7 +28,7 @@ pshy.require("pshy.bonuses")
 pshy.require("pshy.bonuses.mapext")
 
 local traps = pshy.require("traps")
-local levels = pshy.require("generated_levels")
+local levels = pshy.require("levels")
 
 pshy.require("bonuses.score1")
 pshy.require("bonuses.score10")
