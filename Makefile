@@ -5,7 +5,7 @@ DEPS_DIR				= deps
 # Modulepacks names:
 NAME_MAIN				= $(OUT_DIR)/sonic.tfm.lua.txt
 NAME_MAIN_EXT			= $(OUT_DIR)/sonic_ext.tfm.lua.txt
-ALL_NAMES				= lua/generated_levels.lua $(NAME_MAIN) $(NAME_MAIN_EXT)
+ALL_NAMES				= lua/levels/init.lua $(NAME_MAIN) $(NAME_MAIN_EXT)
 ALL_TESTS				= $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(TEST_RESULTS_DIR)/%.stdout.txt, $(ALL_NAMES))
 
 OPTIONS					= --werror --test-init --minify
@@ -24,11 +24,11 @@ test: $(ALL_TESTS)
 
 -include $(DEPS_DIR)/*.tfm.lua.txt.d
 
-lua/generated_levels.lua: maps/*.xml
+lua/levels/init.lua: maps/*.xml
 	python3 tools/parse_maps.py
-	mv lua/generated_levels.lua lua/generated_levels.lua.tmp
-	luamin -f lua/generated_levels.lua.tmp > lua/generated_levels.lua
-	echo "" >> lua/generated_levels.lua
+	#mv lua/generated_levels.lua lua/generated_levels.lua.tmp
+	#luamin -f lua/generated_levels.lua.tmp > lua/generated_levels.lua
+	#echo "" >> lua/generated_levels.lua
 
 $(OUT_DIR)/%.tfm.lua.txt: | $(OUT_DIR)/ $(DEPS_DIR)/
 	@printf "\e[92m Generating %s\n" $@ || true
@@ -50,7 +50,7 @@ $(TEST_RESULTS_DIR)/%.stdout.txt: $(OUT_DIR)/%.tfm.lua.txt $(NAME_TFMEMULATOR) |
 .PHONY: clean
 clean:
 	@printf "\e[91m" || true
-	rm -f lua/generated_levels.lua
+	rm -f lua/levels/init.lua
 	rm -rf $(DEPS_DIR)/*.tfm.lua.txt.d
 	rmdir $(DEPS_DIR) || true
 	rm -rf $(TEST_RESULTS_DIR)/*.stdout.txt
