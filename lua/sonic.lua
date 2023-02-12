@@ -139,6 +139,8 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 3"].bonuses, coin)
 end
+table.insert(maps["level 3"].bonuses, {type = "SonicCheckpoint", x = 2477, y = 488})
+table.insert(maps["level 3"].bonuses, {type = "SonicCheckpoint", x = 2986, y = 1287})
 table.insert(maps["level 3"].bonuses, {type = "SonicCheckpoint", x = 4900, y = 813})
 table.insert(sonic_maps, "level 3")
 
@@ -170,7 +172,10 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 4"].bonuses, coin)
 end
+table.insert(maps["level 4"].bonuses, {type = "SonicCheckpoint", x = 2565, y = 556})
+table.insert(maps["level 4"].bonuses, {type = "SonicCheckpoint", x = 3695, y = 840})
 table.insert(maps["level 4"].bonuses, {type = "SonicCheckpoint", x = 2677, y = 1226})
+table.insert(maps["level 4"].bonuses, {type = "SonicCheckpoint", x = 4075, y = 1226})
 table.insert(sonic_maps, "level 4")
 
 --- Level 5
@@ -189,8 +194,12 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 5"].bonuses, coin)
 end
+table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 1490, y = 969})
+table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 590, y = 1162})
 table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 2015, y = 1227})
+table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 3729, y = 1002})
 table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 3585, y = 300})
+table.insert(maps["level 5"].bonuses, {type = "SonicCheckpoint", x = 4110, y = 1258})
 table.insert(sonic_maps, "level 5")
 
 --- Level 6
@@ -210,9 +219,14 @@ for i_coin, coin in ipairs(coins) do
   coin.type = "SonicScore1"
   table.insert(maps["level 6"].bonuses, coin)
 end
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 1600, y = 1058})
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 415, y = 802})
 table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 360, y = 1698})
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 2030, y = 1441})
 table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 2372, y = 1953})
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 3391, y = 1730})
 table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 5154, y = 1667})
+table.insert(maps["level 6"].bonuses, {type = "SonicCheckpoint", x = 4015, y = 1250})
 table.insert(sonic_maps, "level 6")
 
 --- special stage 2
@@ -242,6 +256,7 @@ for i_coin, coin in ipairs(coins) do
   table.insert(maps["level 7"].bonuses, coin)
 end
 table.insert(maps["level 7"].bonuses, {type = "SonicCheckpoint", x = 2820, y = 915})
+table.insert(maps["level 7"].bonuses, {type = "SonicCheckpoint", x = 6369, y = 498})
 table.insert(sonic_maps, "level 7")
 
 --- Level 8
