@@ -17,6 +17,10 @@ all: $(ALL_NAMES)
 clip: OPTIONS += --clip
 clip: $(NAME_MAIN)
 
+.PHONY: luaminall
+luaminall: OPTIONS += --minify-luamin
+luaminall: all
+
 test: $(ALL_TESTS)
 
 %/:
