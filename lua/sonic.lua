@@ -313,6 +313,7 @@ table.insert(sonic_maps, "special stage 3")
 -- Variables
 ---
 
+local help_image_id = {}
 local holding_key = {}
 local boost_enabled = true
 local pending_respawn_players = {}
@@ -323,12 +324,21 @@ local newgame_called = false
 -- Functions
 ---
 
+local function showHelpButton(name, onlyOverlay)
+  if not onlyOverlay then
+    tfm.exec.addImage("1865fecf4f3.png", "~0", 10, 30, name)
+  end
+
+	ui.addTextArea(1865, "<font size='70'><a href='event:helpsonic'>\t\t\t\t", name, 10, 25, 30, 45, 1, 0, 0, true)
+end
+
 local function TouchPlayer(name)
   tfm.exec.bindKeyboard(name, 0, true, true)
   tfm.exec.bindKeyboard(name, 0, false, true)
   tfm.exec.bindKeyboard(name, 2, true, true)
   tfm.exec.bindKeyboard(name, 2, false, true)
   tfm.exec.bindKeyboard(name, 1, true, true)
+  showHelpButton(name)
 end
 
 
@@ -412,6 +422,20 @@ end
 function eventContactListener(name, groundId, contact)
   if groundId == 3000 then
     tfm.exec.playSound('lua/sonic/deathspike', 100, nil, nil, name)
+  end
+end
+
+function eventTextAreaCallback(id, name, callback)
+  if callback == "helpsonic" then
+    help_image_id[name] = tfm.exec.addImage("1865fed4ac3.png", ":1", 170, 66, name)
+    ui.addTextArea(1865, '<font size="70"><a href="event:closehelp">\t\t\t', name, 590, 85, 20, 20, 1, 0, 0, true)
+  elseif callback == "closehelp" then
+    if help_image_id[name] then
+      tfm.exec.removeImage(help_image_id[name])
+      help_image_id[name] = nil
+    end
+
+    showHelpButton(name, true)
   end
 end
 
