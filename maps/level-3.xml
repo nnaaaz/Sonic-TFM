@@ -321,7 +321,7 @@
       <S T="12" X="6749" Y="736" L="40" H="25" P="0,0,0.3,0.2,0,0,0,0" template="jump3" duration="1000" reload="1000"/>
       <S T="12" X="3145" Y="1284" L="12" H="20" P="0,0,0.3,0.2,0,0,0,0" lua="jumpredside3" i="0,0,1853a5f86e5.png" ontouch="activate;speed-1300,,yes,yes;sound lua/sonic/spring" onactivate="image1853a5fd3bf.png,-6,0;width40" duration="1500" reload="1500"/>
       <S T="12" X="3828" Y="838" L="14" H="10" P="0,0,0,0.2,50,0,0,0" ontouch="teleport3973,873,no;speed130,,no"/>
-      <S T="12" X="5230" Y="651" L="62" H="25" P="0,0,0.3,0.2,0,0,0,0" lua="platform3" i="-1,-5,1848a05026b.png" ontouch="activate'sound deadmaze/bruit/sac2" onactivate="dynamic;collision0,0" duration="2000" reload="2000"/>
+      <S T="12" X="5230" Y="651" L="62" H="25" P="0,0,0.3,0.2,0,0,0,0" lua="platform3" i="-1,-5,1848a05026b.png" ontouch="activate;sound deadmaze/bruit/sac2" onactivate="dynamic;collision0,0" duration="2000" reload="2000"/>
       <S T="12" X="5400" Y="651" L="62" H="25" P="0,0,0.3,0.2,0,0,0,0" duration="2000" reload="2000" template="platform3"/>
       <S T="12" X="5560" Y="651" L="62" H="25" P="0,0,0.3,0.2,0,0,0,0" duration="2000" reload="2000" template="platform3"/>
       <S T="12" X="248" Y="880" L="46" H="26" P="0,0,0.3,0.2,0,0,0,0"/>
@@ -333,7 +333,7 @@
       <S T="12" X="1371" Y="520" L="98" H="38" P="0,0,0.3,0.2,-10,0,0,0" ontouch="activate;activate@c4;sound deadmaze/bruit/sac2" onactivate="dynamic;collision0,0" duration="3000" reload="1000"/>
       <S T="12" X="4201" Y="520" L="98" H="38" P="0,0,0.3,0.2,-10,0,0,0" ontouch="activate;activate@c5;sound deadmaze/bruit/sac2" onactivate="dynamic;collision0,0" duration="3000" reload="1000"/>
       <S T="12" X="6794" Y="520" L="98" H="38" P="0,0,0.3,0.2,-10,0,0,0" ontouch="activate;activate@c6;sound deadmaze/bruit/sac2" onactivate="dynamic;collision0,0" duration="3000" reload="1000"/>
-      <S T="12" X="7796" Y="887" L="98" H="38" P="0,0,0.3,0.2,-10,0,0,0" ontouch="activate;activate@c7" onactivate="dynamic;collision0,0" duration="3000" reload="1000"/>
+      <S T="12" X="7796" Y="887" L="98" H="38" P="0,0,0.3,0.2,-10,0,0,0" ontouch="activate;activate@c7;sound deadmaze/bruit/sac2" onactivate="dynamic;collision0,0" duration="3000" reload="1000"/>
       <S T="12" X="423" Y="768" L="96" H="37" P="0,0,0.3,0.2,0,0,0,0" c="3" lua="c1" i="0,-10,1848a0675d0.png" onactivate="dynamic" duration="3000" reload="1000"/>
       <S T="12" X="718" Y="668" L="96" H="37" P="0,0,0.3,0.2,0,0,0,0" c="3" lua="c2" i="0,-10,1848a0675d0.png" onactivate="dynamic" duration="3000" reload="1000"/>
       <S T="12" X="660" Y="534" L="96" H="37" P="0,0,0.3,0.2,0,0,0,0" c="3" lua="c3" i="0,-10,1848a0675d0.png" onactivate="dynamic" duration="3000" reload="1000"/>
