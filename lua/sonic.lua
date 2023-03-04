@@ -16,7 +16,7 @@ pshy.require("pshy.essentials")
 pshy.require("pshy.events")
 local mapinfo = pshy.require("pshy.rotations.mapinfo")
 mapinfo.max_grounds = 0
-pshy.require("pshy.commands.list.all")
+pshy.require("pshy.commands.list.modules")
 
 local perms = pshy.require("pshy.perms")
 local version = pshy.require("pshy.bases.version")
@@ -34,8 +34,6 @@ pshy.require("bonuses.score1")
 pshy.require("bonuses.score10")
 pshy.require("bonuses.win")
 pshy.require("bonuses.checkpoint")
-pshy.require ("pshy.alternatives.chat")
-pshy.require ("pshy.alternatives.timers")
 splashscreen = pshy.require("pshy.bases.splashscreen")
 splashscreen.image="18626ac8cb2.png"
 

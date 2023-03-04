@@ -4,8 +4,9 @@ DEPS_DIR				= deps
 
 # Modulepacks names:
 NAME_MAIN				= $(OUT_DIR)/sonic.tfm.lua.txt
-NAME_MAIN_EXT			= $(OUT_DIR)/sonic_ext.tfm.lua.txt
-ALL_NAMES				= lua/levels/init.lua $(NAME_MAIN) $(NAME_MAIN_EXT)
+NAME_TRIBEHOUSE			= $(OUT_DIR)/sonic_tribehouse.tfm.lua.txt
+NAME_FUNCORP			= $(OUT_DIR)/sonic_funcorp.tfm.lua.txt
+ALL_NAMES				= lua/levels/init.lua $(NAME_MAIN) $(NAME_TRIBEHOUSE) $(NAME_FUNCORP)
 ALL_TESTS				= $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(TEST_RESULTS_DIR)/%.stdout.txt, $(ALL_NAMES))
 
 OPTIONS					= --werror --test-init --minify
