@@ -14,8 +14,6 @@
 
 pshy.require("pshy.essentials")
 pshy.require("pshy.events")
-local mapinfo = pshy.require("pshy.rotations.mapinfo")
-mapinfo.max_grounds = 0
 pshy.require("pshy.commands.list.modules")
 
 local perms = pshy.require("pshy.perms")
