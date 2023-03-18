@@ -6,6 +6,9 @@
 --
 -- @author TFM:Nnaaaz#0000 (map, concept)
 -- @author TFM:Lays#1146 (lua)
+if __IS_MAIN_MODULE__ and tfm.get.room.isTribeHouse then
+	error("<r>You ran the Host variant of this script in the tribehouse. Please use the TribeHouse variant instead.</r>")
+end
 
 
 ---
