@@ -9,7 +9,7 @@ NAME_FUNCORP			= $(OUT_DIR)/sonic_funcorp.tfm.lua.txt
 ALL_NAMES				= lua/levels/init.lua $(NAME_MAIN) $(NAME_TRIBEHOUSE) $(NAME_FUNCORP)
 ALL_TESTS				= $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(TEST_RESULTS_DIR)/%.stdout.txt, $(ALL_NAMES))
 
-OPTIONS					= --werror --test-init --minify
+OPTIONS					= --werror --test-init --minify --old-physics
 
 # Rules:
 all: $(ALL_NAMES)
