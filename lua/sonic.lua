@@ -19,6 +19,8 @@ pshy.require("pshy.essentials")
 pshy.require("pshy.events")
 pshy.require("pshy.commands.list.modules")
 
+pshy.require("patch.event.scoreupdate")
+
 local perms = pshy.require("pshy.perms")
 local version = pshy.require("pshy.bases.version")
 local rotations = pshy.require("pshy.rotations.list")
@@ -37,6 +39,15 @@ pshy.require("bonuses.win")
 pshy.require("bonuses.checkpoint")
 local splashscreen = pshy.require("pshy.bases.splashscreen")
 splashscreen.image="18626ac8cb2.png"
+
+local counterui = pshy.require("counterui")
+local scoreCounter = counterui.create({
+  text = '<J><font size="24" face="Soopafresh">%s',
+  shadow = '<font color="#000000" size="24" face="Soopafresh">%s',
+  image = "1848a17e166.png",
+  imageX = 700, imageY = 365,
+  x = 730, y = 360,
+})
 
 
 ---
@@ -338,6 +349,7 @@ local function TouchPlayer(name)
   tfm.exec.bindKeyboard(name, 2, false, true)
   tfm.exec.bindKeyboard(name, 1, true, true)
   showHelpButton(name)
+  scoreCounter.add(name)
 end
 
 
@@ -368,6 +380,9 @@ function eventNewPlayer(name)
   pending_respawn_players[name] = true
 end
 
+function eventPlayerLeft(name)
+  scoreCounter.remove(name)
+end
 
 function eventPlayerRespawn(name)
   ApplyPlayerForce(name)
@@ -450,4 +465,8 @@ function eventInit()
   
 	newgame.SetRotation("sonic")
 	tfm.exec.newGame("sonic")
+end
+
+function eventScoreUpdate(name, score)
+  scoreCounter.update(name, score)
 end
