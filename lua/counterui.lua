@@ -15,6 +15,7 @@ local function create(options)
     local shadowOffset = options.shadowOffset or 1
     local image = options.image
     local imageIds = {}
+    local width = options.width
 
     options = nil
 
@@ -36,7 +37,7 @@ local function create(options)
                 shadow:format(0),
                 name,
                 textX + shadowOffset, textY + shadowOffset,
-                nil, nil,
+                width, nil,
                 0, 0, 0,
                 true
             )
@@ -47,7 +48,7 @@ local function create(options)
             template:format(0),
             name,
             textX, textY,
-            nil, nil,
+            width, nil,
             0, 0, 0,
             true
         )

@@ -42,11 +42,12 @@ splashscreen.image="18626ac8cb2.png"
 
 local counterui = pshy.require("counterui")
 local scoreCounter = counterui.create({
-  text = '<J><font size="24" face="Soopafresh">%s',
+  text = '<font color="#ffd307" size="24" face="Soopafresh">%s',
   shadow = '<font color="#000000" size="24" face="Soopafresh">%s',
   image = "1848a17e166.png",
-  imageX = 700, imageY = 365,
-  x = 730, y = 360,
+  imageX = 700, imageY = 40,
+  x = 730, y = 35,
+  width = 100,
 })
 
 
