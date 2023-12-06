@@ -1,4 +1,5 @@
 pshy.require("pshy.events")
+pshy.require("pshy.rotations.mapinfo")
 
 local newgame = pshy.require("pshy.rotations.newgame")
 

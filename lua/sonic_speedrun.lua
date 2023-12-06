@@ -1,16 +1,13 @@
 --- sonic_speedrun
 --
 -- Spedrun variant of Sonic The Mouse.
+pshy.require("pshy.alternatives.chat")
+pshy.require("pshy.alternatives.timers")
 pshy.require("sonic")
-pshy.require("pshy.commands.list.all")
-
-pshy.require("pshy.essentials.funcorp")
--- pshy.require("pshy.alternatives.chat")
--- pshy.require("pshy.alternatives.timers")
-
 pshy.require("pshy.bases.checkpoints")
-pshy.require("pshy.commands.list.tp")
 pshy.require("pshy.commands")
+pshy.require("pshy.commands.list.all")
+pshy.require("pshy.commands.list.tp")
 pshy.require("pshy.help")
 
 
