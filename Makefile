@@ -6,7 +6,8 @@ DEPS_DIR				= deps
 NAME_MAIN				= $(OUT_DIR)/sonic.tfm.lua.txt
 NAME_TRIBEHOUSE			= $(OUT_DIR)/sonic_tribehouse.tfm.lua.txt
 NAME_FUNCORP			= $(OUT_DIR)/sonic_funcorp.tfm.lua.txt
-ALL_NAMES				= lua/levels/init.lua $(NAME_MAIN) $(NAME_TRIBEHOUSE) $(NAME_FUNCORP)
+NAME_SPEEDRUN			= $(OUT_DIR)/sonic_speedrun.tfm.lua.txt
+ALL_NAMES				= lua/levels/init.lua $(NAME_MAIN) $(NAME_TRIBEHOUSE) $(NAME_FUNCORP) $(NAME_SPEEDRUN)
 ALL_TESTS				= $(patsubst $(OUT_DIR)/%.tfm.lua.txt, $(TEST_RESULTS_DIR)/%.stdout.txt, $(ALL_NAMES))
 
 OPTIONS					= --werror --test-init --minify --old-physics
