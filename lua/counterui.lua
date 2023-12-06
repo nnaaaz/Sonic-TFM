@@ -1,12 +1,12 @@
 local ids = pshy.require("pshy.utils.ids")
 
-local pointsTextAreaId = ids.AllocTextAreaId()
-local shadowTextAreaId = ids.AllocTextAreaId()
-
 local function create(options)
     if type(options) ~= "table" then
         error("counterui: options must be a table")
     end
+
+    local pointsTextAreaId = ids.AllocTextAreaId()
+    local shadowTextAreaId = ids.AllocTextAreaId()
 
     local imageX, imageY = options.imageX or 0, options.imageY or 40
     local textX, textY = options.x or 50, options.y or 40
