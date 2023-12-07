@@ -43,6 +43,10 @@ local function TouchPlayer(name)
   speedrunTimer.add(name)
 end
 
+local function convertTime2f(time)
+  return string.format('%.2f', math.floor(time / 10) / 100)
+end
+
 
 function eventNewGame()
   for name in next, tfm.get.room.playerList do
@@ -54,7 +58,7 @@ end
 
 function eventLoop(time, time_remaining)
     for name, time in next, spawn_time do
-      speedrunTimer.update(name, (os.time() - time) / 1000)
+      speedrunTimer.update(name, convertTime2f(os.time() - time))
     end
 end
 
@@ -85,7 +89,7 @@ function eventPlayerWon(name)
   if not rec_time[name] or rec_time[name] > completion then
     rec_time[name] = completion
     recordTimer.add(name)
-    recordTimer.update(name, completion / 1000)
+    recordTimer.update(name, convertTime2f(completion))
   end
 end
 
