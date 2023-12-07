@@ -11,6 +11,7 @@ pshy.require("pshy.commands.list.tp")
 pshy.require("pshy.help")
 
 
+local command_list = pshy.require("pshy.commands.list")
 local counterui = pshy.require("counterui")
 
 local speedrunTimer = counterui.create({
@@ -28,6 +29,14 @@ local recordTimer = counterui.create({
 
 local spawn_time = {}
 local rec_time = {}
+
+
+--- !redo
+local function ChatCommandRedo(user)
+	spawn_time[user] = nil
+  tfm.exec.killPlayer(user)
+end
+command_list["redo"] = {func = ChatCommandRedo, desc = "die and restart the speedrun timer", argc_min = 0, argc_max = 0}
 
 
 local function TouchPlayer(name)
