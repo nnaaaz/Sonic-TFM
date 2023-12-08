@@ -12,6 +12,7 @@ pshy.require("pshy.help")
 
 
 local command_list = pshy.require("pshy.commands.list")
+local checkpoints = pshy.require("pshy.bases.checkpoints")
 local counterui = pshy.require("counterui")
 
 local speedrunTimer = counterui.create({
@@ -33,7 +34,8 @@ local rec_time = {}
 
 --- !redo
 local function ChatCommandRedo(user)
-	spawn_time[user] = nil
+  spawn_time[user] = nil
+  checkpoints.UnsetPlayerCheckpoint(user)
   tfm.exec.killPlayer(user)
 end
 command_list["redo"] = {func = ChatCommandRedo, desc = "die and restart the speedrun timer", argc_min = 0, argc_max = 0}
